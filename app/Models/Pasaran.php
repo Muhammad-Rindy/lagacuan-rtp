@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,4 +28,11 @@ class Pasaran extends Model
     {
         return $this->hasMany(Prediksi::class);
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        $carbonDate = Carbon::parse($value);
+        return $carbonDate->format('l, d / m / Y  -  H:i' );
+    }
+
 }

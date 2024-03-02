@@ -74,4 +74,7 @@ class PasaranController extends Controller
         return view('paito');
     }
 
+
+
+
 }

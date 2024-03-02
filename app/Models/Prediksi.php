@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,7 @@ class Prediksi extends Model
 {
     use HasFactory;
 
-    protected $table = 'table_pasaran';
+    protected $table = 'table_prediksi';
 
     protected $fillable = [
         'id',
@@ -26,5 +27,11 @@ class Prediksi extends Model
     public function pasarans()
     {
         return $this->belongsTo(Pasaran::class);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        $carbonDate = Carbon::parse($value);
+        return $carbonDate->format('l, d / m / Y  -  H:i' );
     }
 }

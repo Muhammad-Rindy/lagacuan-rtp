@@ -4,11 +4,13 @@
 
 <head>
     <base href="../" />
+    <meta charset="UTF-8">
     <title>
         JEDERWD - Dashboard
     </title>
-    <meta charset="utf-8" />
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="description" content="JEDERWD - Link Alternatif Resmi Jeder WD, Official Login Jeder WD" />
     <meta name="keywords" content="JEDERWD - Link Alternatif Resmi Jeder WD, Official Login Jeder WD" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,30 +22,38 @@
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link rel="icon" type="image/x-icon" href="favicon.png">
-    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
-        type="text/css" />
+
     <link href="{{ asset('assets/plugins/custom/vis-timeline/vis-timeline.bundle.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
+    {{-- fontawesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     {{-- Datatables --}}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
-    {{-- Jquery --}}
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
     {{-- Bootstrap --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+
+
+
+
 </head>
 
 <body id="kt_app_body" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true"
@@ -135,7 +145,18 @@
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <li class="breadcrumb-item text-gray-600 fw-bold lh-1">
-                                    Dashboards
+
+                                    @if (request()->is('index-data'))
+                                        Lottery
+                                    @elseif(request()->is('index-result'))
+                                        Result
+                                    @elseif(request()->is('index-prediksi'))
+                                        Prediction
+                                    @elseif(request()->is('index-bukti'))
+                                        Testimony
+                                    @endif
+
+
                                 </li>
                                 <!--end::Item-->
                             </ul>
@@ -975,8 +996,8 @@
                                     <!--begin::Heading-->
                                     <div class="d-flex flex-column bgi-no-repeat rounded-top"
                                         style="
-                                                background-image: url('assets/media/misc/menu-header-bg.jpg');
-                                            ">
+    background-image: url('assets/media/misc/menu-header-bg.jpg');
+    ">
                                         <!--begin::Title-->
                                         <h3 class="text-white fw-semibold px-9 mt-10 mb-6">
                                             Notifications
@@ -1678,34 +1699,13 @@
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
-                                    <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                                        data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
-                                        <a href="#" class="menu-link px-5">
-                                            <span class="menu-title position-relative">Language
-                                                <span
-                                                    class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-                                                    <img class="w-15px h-15px rounded-1 ms-2"
-                                                        src="assets/media/flags/united-states.svg"
-                                                        alt="" /></span></span>
-                                        </a>
-                                        <!--begin::Menu sub-->
-                                        <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="account/settings.html" class="menu-link d-flex px-5 active">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1"
-                                                            src="assets/media/flags/united-states.svg"
-                                                            alt="" /> </span>English</a>
-                                            </div>
-                                        </div>
-                                    </div>
+
 
                                     <div class="menu-item px-5">
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <a onclick="event.preventDefault();
-                                        this.closest('form').submit();"
+                        this.closest('form').submit();"
                                                 class="menu-link px-5">Sign Out</a>
                                         </form>
                                     </div>
@@ -1757,7 +1757,7 @@
                                     <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                                         <!--begin:Menu link-->
                                         <span class="menu-link">
-                                            <span class="menu-title">Dashboards</span>
+                                            <span class="menu-title">Dashboard</span>
                                             <span class="menu-arrow"></span>
                                         </span>
                                         <!--end:Menu link-->
@@ -1769,14 +1769,51 @@
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a class="menu-link active" href="dashboards/ecommerce.html">
+                                                <a @if (request()->is('index-result')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-result') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Home</span>
+                                                    <span class="menu-title">Result Lottery</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
+
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('index-data')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-data') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">List Lottery</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('index-prediksi')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-prediksi') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Prediction Lottery</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('index-bukti')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-bukti') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Testimony Jackpot</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+
                                             <!--end:Menu item-->
                                             <!--begin:Menu item-->
                                         </div>
@@ -2212,7 +2249,8 @@
                                                     <!--begin:Menu item-->
                                                     <div class="menu-item">
                                                         <!--begin:Menu link-->
-                                                        <a class="menu-link" href="utilities/wizards/create-app.html">
+                                                        <a class="menu-link"
+                                                            href="utilities/wizards/create-app.html">
                                                             <span class="menu-bullet">
                                                                 <span class="bullet bullet-dot"></span>
                                                             </span>
@@ -6301,32 +6339,18 @@
         </div>
         <!--end::Modal dialog-->
     </div>
-    <!--end::Modal - Invite Friend-->
-    <!--end::Modals-->
     <!--begin::Javascript-->
     <script>
         var hostUrl = "assets/";
     </script>
-    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
-    <!--end::Global Javascript Bundle-->
-    <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script> --}}
     <script src="{{ asset('assets/plugins/custom/vis-timeline/vis-timeline.bundle.js') }}"></script>
-    <!--end::Vendors Javascript-->
-    <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
     <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
     <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <!--end::Custom Javascript-->
-    <!--end::Javascript-->
 </body>
-<!--end::Body-->
 
 </html>

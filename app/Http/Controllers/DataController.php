@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pasaran;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class DataController extends Controller
 {
@@ -17,15 +19,17 @@ class DataController extends Controller
 
         if(request()->ajax()) {
             return datatables()->of(Pasaran::select('*'))
-            ->addColumn('action', 'action')
+            ->addColumn('action', 'dashboards.pasaran.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
 
+        return view('dashboards.pasaran.index-pasaran');
 
-        return view('dashboards.index-pasaran');
     }
+
+
 
 
     /**
@@ -33,9 +37,23 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function store_data(Request $request)
     {
-        //
+        $request->all();
+
+        $file = $request->file('image');
+        $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
+
+        Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+
+
+        $bukti = Pasaran::create([
+            'name_pasaran' => $request->name_pasaran,
+            'image' => $path
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Data stored successfully', 'bukti' => $bukti]);
+
     }
 
     /**
@@ -44,10 +62,7 @@ class DataController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -55,10 +70,7 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -66,11 +78,20 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function getData($id) {
+        $product = Pasaran::find($id);
+        return response()->json($product);
     }
 
+    public function updateData(Request $request)
+    {
+
+        $product = Pasaran::findOrFail($request->id);
+        $product->update([
+            'name_pasaran' => $request->name_pasaran,
+        ]);
+        return response()->json(['success' => true]);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -78,10 +99,6 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -89,8 +106,10 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy_data(Request $request)
     {
-        //
+        $product = Pasaran::where('id', $request->id)->delete();
+
+        return Response()->json($product);
     }
 }
