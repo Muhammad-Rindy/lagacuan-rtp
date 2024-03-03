@@ -23,21 +23,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pasaran');
+    return view('home');
 
 });
 
 
-// Route::get('/', [PasaranController::class, 'index_pasaran'])->name('index-pasaran');
-// Route::get('/live-draw', [PasaranController::class, 'index_live'])->name('index-live');
-// Route::get('/prediksi-togel', [PasaranController::class, 'index_prediksi'])->name('index-prediksi');
-// Route::get('/jadwal-togel', [PasaranController::class, 'index_jadwal'])->name('index-jadwal');
-// Route::get('/data-result', [PasaranController::class, 'index_result'])->name('index-result');
-// Route::get('/bukti-jackpot', [PasaranController::class, 'index_bukti'])->name('index-bukti');
-// Route::get('/buku-mimpi', [PasaranController::class, 'index_buku'])->name('index-buku');
-// Route::get('/promosi', [PasaranController::class, 'index_promosi'])->name('index-promosi');
-// Route::get('/keluhan', [PasaranController::class, 'index_keluhan'])->name('index-keluhan');
-// Route::get('/paito', [PasaranController::class, 'index_paito'])->name('index-paito');
+Route::get('/', [PasaranController::class, 'index_pasaran_home'])->name('index-pasaran-home');
+Route::get('/live-draw', [PasaranController::class, 'index_live_home'])->name('index-live-home');
+Route::get('/prediksi-togel', [PasaranController::class, 'index_prediksi_home'])->name('index-prediksi-home');
+Route::get('/jadwal-togel', [PasaranController::class, 'index_jadwal_home'])->name('index-jadwal-home');
+Route::get('/data-result', [PasaranController::class, 'index_result_home'])->name('index-result-home');
+Route::get('/bukti-jackpot', [PasaranController::class, 'index_bukti_home'])->name('index-bukti-home');
+Route::get('/buku-mimpi', [PasaranController::class, 'index_buku_home'])->name('index-buku-home');
+Route::get('/promosi', [PasaranController::class, 'index_promosi_home'])->name('index-promosi-home');
+Route::get('/keluhan', [PasaranController::class, 'index_keluhan_home'])->name('index-keluhan-home');
+Route::get('/paito', [PasaranController::class, 'index_paito_home'])->name('index-paito-home');
 
 
 

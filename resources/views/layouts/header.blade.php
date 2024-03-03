@@ -20,33 +20,33 @@
 <div class="nav-scroller py-1 mb-2 nav-desktop" style="border-bottom: solid #ffcf00 2px">
     <nav class="nav nav-underline justify-content-between">
         <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-pasaran') }}" style="font-weight:bold;font-family:math;margin-left:15px"><i
+            href="{{ route('index-pasaran-home') }}" style="font-weight:bold;font-family:math;margin-left:15px"><i
                 class="fa-solid fa-house"></i>
             <span class="head-2">HOME</span></a>
         <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-live') }}" style="font-weight:bold;font-family:math;"><span class="head-2">LIVE
+            href="{{ route('index-live-home') }}" style="font-weight:bold;font-family:math;"><span class="head-2">LIVE
                 DRAW🔥</span></a>
         <a @if (request()->is('prediksi-togel')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-prediksi') }}" style="font-weight:bold;font-family:math;"><span
+            href="{{ route('index-prediksi-home') }}" style="font-weight:bold;font-family:math;"><span
                 class="head-2">PREDIKSI
                 TOGEL</span></a>
         {{-- <a @if (request()->is('jadwal-togel')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
             href="{{ route('index-jadwal') }}" style="font-weight:bold;font-family:math;"><span class="head-2">JADWAL
                 TOGEL</span></a> --}}
         <a @if (request()->is('data-result')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-result') }}" style="font-weight:bold;font-family:math;"><span class="head-2">DATA
+            href="{{ route('index-result-home') }}" style="font-weight:bold;font-family:math;"><span class="head-2">DATA
                 RESULT</span></a>
         <a @if (request()->is('bukti-jackpot')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-bukti') }}" style="font-weight:bold;font-family:math;"><span class="head-2">BUKTI
+            href="{{ route('index-bukti-home') }}" style="font-weight:bold;font-family:math;"><span class="head-2">BUKTI
                 JACKPOT 🔥</span></a>
         <a @if (request()->is('buku-mimpi')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-buku') }}" style="font-weight:bold;font-family:math;"><span class="head-2">BUKU
+            href="{{ route('index-buku-home') }}" style="font-weight:bold;font-family:math;"><span class="head-2">BUKU
                 MIMPI</span></a>
         {{-- <a @if (request()->is('promosi')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
             href="https://jederwd.org/#/activity" target="_blank" style="font-weight:bold;font-family:math;"><span class="head-2">PROMOSI
                 🔥</span></a> --}}
         <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-keluhan') }}" style="font-weight:bold;font-family:math;"><span
+            href="{{ route('index-keluhan-home') }}" style="font-weight:bold;font-family:math;"><span
                 class="head-2">KELUHAN</span></a>
         <a href="https://jederwd.org/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
             target="_blank" class="nav-item nav-link link-body-emphasis"
@@ -91,13 +91,13 @@
     <div class="container text-center mb-3 nav-mobile">
         <div class="row align-items-center mb-1">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-pasaran') }}"><button
+                <a href="{{ route('index-pasaran-home') }}"><button
                         @if (request()->is('/')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         HOME</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px"">
-                <a href="{{ route('index-live') }}"><button
+                <a href="{{ route('index-live-home') }}"><button
                         @if (request()->is('live-draw')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         LIVE DRAW</button></a>
@@ -105,13 +105,13 @@
         </div>
         <div class="row align-items-center mb-1">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-prediksi') }}"><button
+                <a href="{{ route('index-prediksi-home') }}"><button
                         @if (request()->is('prediksi-togel')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         PREDIKSI TOGEL</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px"">
-                <a href="{{ route('index-buku') }}"><button
+                <a href="{{ route('index-buku-home') }}"><button
                         @if (request()->is('buku-mimpi')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         BUKU MIMPI</button></a>
@@ -119,13 +119,13 @@
         </div>
         <div class="row align-items-center mb-1">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-result') }}"><button
+                <a href="{{ route('index-result-home') }}"><button
                         @if (request()->is('data-result')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         DATA RESULT</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px"">
-                <a href="{{ route('index-bukti') }}"><button
+                <a href="{{ route('index-bukti-home') }}"><button
                         @if (request()->is('bukti-jackpot')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         BUKTI JACKPOT</button></a>
@@ -147,7 +147,7 @@
         </div> --}}
         <div class="row align-items-center mb-1">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-keluhan') }}"><button
+                <a href="{{ route('index-keluhan-home') }}"><button
                         @if (request()->is('keluhan')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         KELUHAN</button></a>
@@ -191,14 +191,14 @@
     <div class="container text-center mb-2">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:3px">
-                <a href="{{ route('index-pasaran') }}"><button
+                <a href="{{ route('index-pasaran-home') }}"><button
                         @if (request()->is('/')) class="actives-mobile-2" @endif class="button-15"
                         style="letter-spacing: 0.5px" role="button">
                         <i class="fa-solid fa-chart-column"></i> Result Togel</button></a>
             </div>
 
             <div class="col" style="padding: 0px;margin-left:3px">
-                <a href="{{ route('index-jadwal') }}"><button
+                <a href="{{ route('index-jadwal-home') }}"><button
                         @if (request()->is('jadwal-togel')) class="actives-mobile-2" @endif class="button-15"
                         style="letter-spacing: 0.5px" role="button"> <i class="fa-regular fa-calendar-days"></i>
                         Jadwal
