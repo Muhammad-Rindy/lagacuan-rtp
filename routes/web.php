@@ -40,6 +40,7 @@ Route::get('/', function () {
 // Route::get('/paito', [PasaranController::class, 'index_paito'])->name('index-paito');
 
 
+
 // Pasaran Togel
 Route::get('/index-data', [DataController::class, 'index_data'])->name('index-data');
 Route::post('/store-data', [DataController::class, 'store_data']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasaran;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +15,8 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index_data()
     {
 
