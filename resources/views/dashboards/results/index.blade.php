@@ -248,11 +248,24 @@
                     // Jika success
                     $('#editModal').modal('hide');
                     $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
+                        text: "Your file has been successfully edited",
+                        icon: "success",
+                    });
                     $('#table-pasaran').DataTable().ajax.reload();
 
                 },
                 error: function(error) {
                     console.log(error);
+                    $('#exampleModal').modal('hide');
+                    $('#storeData')[0].reset();
+                    $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
+                        text: "Error: " + error.message,
+                        icon: "error",
+                    });
                 }
             });
         }
