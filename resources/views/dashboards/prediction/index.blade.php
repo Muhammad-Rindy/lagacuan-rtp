@@ -233,21 +233,37 @@
             $('#formResult').submit(function(e) {
                 e.preventDefault();
 
+                var formData = new FormData($(this)[0]);
+
                 $.ajax({
+                    url: '/store-prediksi',
                     type: 'POST',
-                    url: '/store-prediksi', // Sesuaikan dengan nama route Anda
-                    data: $('#formResult').serialize(),
-                    success: function(data) {
-                        if (data.success) {
-                            // Tutup modal (gantilah '#myModal' dengan ID modal Anda)
-                            $('#exampleModal').modal('hide').find('form')[0].reset();
-                            $('.modal-backdrop.show').css('display', 'none');
-                            $('#table-pasaran').DataTable().ajax.reload();
-                        }
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Jika success
+                        $('#exampleModal').modal('hide');
+                        $('#formResult')[0].reset();
+                        $('.modal-backdrop.show').css('display', 'none');
+                        Swal.fire({
+                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
+                            text: "Your file has been saved",
+                            icon: "success",
+                        });
+                        $('#table-pasaran').DataTable().ajax.reload();
                     },
-                    error: function(data) {
-                        // Tambahkan logika penanganan kesalahan jika diperlukan
-                        console.log('Error:', data);
+                    error: function(error) {
+                        console.log(error);
+                        $('#exampleModal').modal('hide');
+                        $('#formResult')[0].reset();
+                        $('.modal-backdrop.show').css('display', 'none');
+                        Swal.fire({
+                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
+                            text: "Error: " + "Please fill all the input fields",
+                            icon: "error",
+                        });
+
                     }
                 });
             });
@@ -285,11 +301,24 @@
                     // Jika success
                     $('#editModal').modal('hide');
                     $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
+                        text: "Your file has been successfully edited",
+                        icon: "success",
+                    });
                     $('#table-pasaran').DataTable().ajax.reload();
 
                 },
                 error: function(error) {
                     console.log(error);
+                    $('#exampleModal').modal('hide');
+                    $('#storeData')[0].reset();
+                    $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
+                        text: "Error: " + error.message,
+                        icon: "error",
+                    });
                 }
             });
         }

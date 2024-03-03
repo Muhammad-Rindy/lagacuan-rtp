@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Keluhan extends Model
 {
@@ -20,4 +21,10 @@ class Keluhan extends Model
         'description_keluhan',
         'created_at',
     ];
+
+    public function getCreatedAtAttribute($value)
+    {
+        $carbonDate = Carbon::parse($value);
+        return $carbonDate->format('l, d / m / Y  -  H:i' );
+    }
 }

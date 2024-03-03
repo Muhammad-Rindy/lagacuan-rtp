@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bukti;
+use App\Models\Buku;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
 
-class BuktiController extends Controller
+class BukuController extends Controller
 {
-    /**
+     /**
     * Display a listing of the resource.
     *
     * @return \Illuminate\Http\Response
     */
-    public function index_bukti()
+    public function index_buku()
     {
 
         if(request()->ajax()) {
-            return datatables()->of(Bukti::select('*'))
-            ->addColumn('action', 'dashboards.bukti.action')
+            return datatables()->of(Buku::select('*'))
+            ->addColumn('action', 'dashboards.buku.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
 
-        return view('dashboards.bukti.index');
+        return view('dashboards.buku.index');
 
     }
 
@@ -37,10 +37,9 @@ class BuktiController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function store_bukti(Request $request)
+    public function store_buku(Request $request)
     {
         $request->validate([
-            'title' => 'required',
             'description' => 'required',
             'image' => 'required',
         ]);
@@ -50,8 +49,7 @@ class BuktiController extends Controller
 
         Storage::disk('local')->put('public/' . $path, file_get_contents($file));
 
-        $bukti = Bukti::create([
-            'title' => $request->title,
+        $bukti = Buku::create([
             'description' => $request->description,
             'image' => $path
         ]);
@@ -83,7 +81,7 @@ class BuktiController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function getData($id) {
-        $product = Bukti::find($id);
+        $product = Buku::find($id);
         return response()->json($product);
     }
 
@@ -91,9 +89,8 @@ class BuktiController extends Controller
     {
         $request->all();
 
-        $product = Bukti::findOrFail($request->id);
+        $product = Buku::findOrFail($request->id);
         $product->update([
-            'title' => $request->title,
             'description' => $request->description,
         ]);
         return response()->json(['success' => true]);
@@ -112,9 +109,9 @@ class BuktiController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function destroy_bukti(Request $request)
+    public function destroy_buku(Request $request)
     {
-        $product = Bukti::where('id', $request->id)->delete();
+        $product = Buku::where('id', $request->id)->delete();
 
         return Response()->json($product);
     }

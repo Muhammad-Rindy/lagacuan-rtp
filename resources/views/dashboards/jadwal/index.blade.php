@@ -25,13 +25,13 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Lists Lottery</span>
+                                <span class="card-label fw-bold text-gray-800">Schedule Lottery</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Actions-->
                             <button type="button" class="btn btn-success btn-sm mb-3 mt-1" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
-                                + Add Payment
+                                + Add Schedule
                             </button>
                             <!--end::Actions-->
                         </div>
@@ -43,29 +43,34 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="editModalLabel" style="text-transform: capitalize">
-                                            Create New Lottery</h4>
+                                            Create New Schedule</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form id="storeData" enctype="multipart/form-data">
+                                    <form id="storeData">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Title Testimony</label>
-                                                <input type="text" name="title" class="form-control"
+                                                <label for="exampleInputEmail1" class="form-label">Name Lottery</label>
+                                                <input type="text" name="name_pasaran" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Description
-                                                    Payment</label>
-                                                <input type="text" name="description" class="form-control"
+                                                <label for="exampleInputEmail1" class="form-label">Closing Schedule</label>
+                                                <input type="time" name="jadwal_tutup" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Image</label>
-                                                <input type="file" name="image" class="form-control"
+                                                <label for="exampleInputEmail1" class="form-label">Lottery Schedule</label>
+                                                <input type="time" name="jadwal_undi" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Official Site</label>
+                                                <input type="text" name="situs_resmi" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm"
@@ -87,11 +92,11 @@
                                     <thead>
                                         <tr class="text-start text-gray-500 fw-bold fs-6 gs-0">
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
-                                            <th style="text-align: center;text-transform:capitalize">Title Testimony</th>
-                                            <th style="text-align: center;text-transform:capitalize">Description Testimony
+                                            <th style="width:15%;text-align: center;text-transform:capitalize">Name Lottery
                                             </th>
-                                            <th style="text-align: center;text-transform:capitalize">Image</th>
-                                            <th style="text-align: center;text-transform:capitalize">Created at</th>
+                                            <th style="text-align: center;text-transform:capitalize">Closing Schedule</th>
+                                            <th style="text-align: center;text-transform:capitalize">Lottery Schedule</th>
+                                            <th style="text-align: center;text-transform:capitalize">Official Site</th>
                                             <th style="width:10%;text-align:center;text-transform:capitalize">Action</th>
                                         </tr>
                                     </thead>
@@ -147,7 +152,7 @@
             $('#table-pasaran').DataTable({
                 processing: true,
                 serverSide: true,
-                url: '/index-bukti',
+                url: '/index-jadwal',
                 columns: [{
                         className: "text-center",
                         data: "DT_RowIndex",
@@ -156,29 +161,22 @@
                         searchable: false
                     },
                     {
-                        data: 'title',
-                        name: 'title'
-                    },
-                    {
-                        data: 'description',
-                        name: 'description'
+                        data: 'name_pasaran',
+                        name: 'name_pasaran'
                     },
                     {
                         className: "text-center",
-                        data: 'image',
-                        name: 'image',
-                        render: function(data, type, full, meta) {
-                            if (type === 'display') {
-                                var url = "{{ url('storage/') }}" + '/' + data;
-                                return '<img src="' + url +
-                                    '" alt="Image" width="70" height="45">';
-                            }
-                            return data;
-                        },
+                        data: 'jadwal_tutup',
+                        name: 'jadwal_tutup'
                     },
                     {
-                        data: 'created_at',
-                        name: 'created_at'
+                        className: "text-center",
+                        data: 'jadwal_undi',
+                        name: 'jadwal_undi'
+                    },
+                    {
+                        data: 'situs_resmi',
+                        name: 'situs_resmi'
                     },
                     {
                         className: "text-center",
@@ -194,7 +192,6 @@
             });
         });
 
-
         // store data
         $(document).ready(function() {
             $('#storeData').submit(function(e) {
@@ -203,24 +200,34 @@
                 var formData = new FormData($(this)[0]);
 
                 $.ajax({
-                    url: '/store-bukti',
+                    url: '/store-jadwal',
                     type: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        if (response.success) {
-                            // Jika success
-                            $('#exampleModal').modal('hide');
-                            $('.modal-backdrop.show').css('display', 'none');
-                            $('#table-pasaran').DataTable().ajax.reload();
-                        } else {
-                            alert('Failed to store data. Please try again.');
-                        }
+                        // Jika success
+                        $('#exampleModal').modal('hide');
+                        $('#storeData')[0].reset();
+                        $('.modal-backdrop.show').css('display', 'none');
+                        Swal.fire({
+                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
+                            text: "Your file has been saved",
+                            icon: "success",
+                        });
+                        $('#table-pasaran').DataTable().ajax.reload();
                     },
                     error: function(error) {
                         console.log(error);
-                        // alert('An error occurred while processing your request.');
+                        $('#exampleModal').modal('hide');
+                        $('#storeData')[0].reset();
+                        $('.modal-backdrop.show').css('display', 'none');
+                        Swal.fire({
+                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
+                            text: "Error: " + "Please fill all the input fields",
+                            icon: "error",
+                        });
+
                     }
                 });
             });
@@ -229,13 +236,15 @@
         // Get data berdasarkan id
         function loadData(id) {
             $.ajax({
-                url: '/get-data-bukti/' + id,
+                url: '/get-data-jadwal/' + id,
                 type: 'GET',
                 success: function(response) {
                     // Mengisi formulir dengan data yang diterima
                     $('#editId').val(response.id);
-                    $('#editTitle').val(response.title);
-                    $('#editDescription').val(response.description);
+                    $('#name_pasaran').val(response.name_pasaran);
+                    $('#jadwal_tutup').val(response.jadwal_tutup);
+                    $('#jadwal_undi').val(response.jadwal_undi);
+                    $('#situs_resmi').val(response.situs_resmi);
                 },
                 error: function(error) {
                     console.log(error);
@@ -246,18 +255,31 @@
         // Update data
         function updateData() {
             $.ajax({
-                url: '/update-bukti',
+                url: '/update-jadwal',
                 type: 'POST',
                 data: $('#editForm').serialize(),
                 success: function(response) {
                     // Jika success
                     $('#editModal').modal('hide');
                     $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
+                        text: "Your file has been successfully edited",
+                        icon: "success",
+                    });
                     $('#table-pasaran').DataTable().ajax.reload();
 
                 },
                 error: function(error) {
                     console.log(error);
+                    $('#exampleModal').modal('hide');
+                    $('#storeData')[0].reset();
+                    $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
+                        text: "Error: " + error.message,
+                        icon: "error",
+                    });
                 }
             });
         }
@@ -276,7 +298,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/destroy-bukti",
+                        url: "/destroy-jadwal",
                         data: {
                             id: id,
                         },

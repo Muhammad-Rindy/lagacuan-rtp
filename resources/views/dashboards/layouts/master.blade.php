@@ -60,16 +60,12 @@
     data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
     data-kt-app-sidebar-push-footer="true" class="app-default">
     <script>
-        var defaultThemeMode = "light";
+        var defaultThemeMode = "dark"; // Mengubah nilai defaultThemeMode menjadi "dark"
         var themeMode;
+
         if (document.documentElement) {
-            if (
-                document.documentElement.hasAttribute("data-bs-theme-mode")
-            ) {
-                themeMode =
-                    document.documentElement.getAttribute(
-                        "data-bs-theme-mode"
-                    );
+            if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+                themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
             } else {
                 if (localStorage.getItem("data-bs-theme") !== null) {
                     themeMode = localStorage.getItem("data-bs-theme");
@@ -77,17 +73,12 @@
                     themeMode = defaultThemeMode;
                 }
             }
+
             if (themeMode === "system") {
-                themeMode = window.matchMedia(
-                        "(prefers-color-scheme: dark)"
-                    ).matches ?
-                    "dark" :
-                    "light";
+                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
             }
-            document.documentElement.setAttribute(
-                "data-bs-theme",
-                themeMode
-            );
+
+            document.documentElement.setAttribute("data-bs-theme", themeMode);
         }
     </script>
     <!--end::Theme mode setup on page load-->
@@ -154,6 +145,12 @@
                                         Prediction
                                     @elseif(request()->is('index-bukti'))
                                         Testimony
+                                    @elseif(request()->is('index-jadwal'))
+                                        Schedule
+                                    @elseif(request()->is('index-buku'))
+                                        Book
+                                    @elseif(request()->is('index-keluhan'))
+                                        Complaint
                                     @endif
 
 
@@ -1587,8 +1584,8 @@
                                     </div>
                                     <!--end:Info-->
                                     <!--begin::User-->
-                                    <div class="cursor-pointer symbol symbol symbol-circle symbol-35px symbol-md-40px">
-                                        <img class="" src="assets/media/avatars/300-3.jpg" alt="user" />
+                                    <div class="cursor-pointer symbol symbol symbol-circle symbol-35px symbol-md-35px">
+                                        <img class="" src="assets/media/avatars/person.png" alt="user" />
                                         <div
                                             class="position-absolute translate-middle bottom-0 mb-1 start-100 ms-n1 bg-success rounded-circle h-8px w-8px">
                                         </div>
@@ -1602,19 +1599,19 @@
                                     <div class="menu-item px-3">
                                         <div class="menu-content d-flex align-items-center px-3">
                                             <!--begin::Avatar-->
-                                            <div class="symbol symbol-50px me-5">
-                                                <img alt="Logo" src="assets/media/avatars/300-3.jpg" />
+                                            <div class="symbol symbol-40px me-5">
+                                                <img alt="Logo" src="assets/media/avatars/person.png" />
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Username-->
                                             <div class="d-flex flex-column">
                                                 <div class="fw-bold d-flex align-items-center fs-5">
-                                                    Ethan
+                                                    {{ Auth::user()->name }}
                                                     <span
-                                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+                                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Active</span>
                                                 </div>
                                                 <a href="#"
-                                                    class="fw-semibold text-muted text-hover-primary fs-7">ethan@kt.com</a>
+                                                    class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
                                             </div>
                                             <!--end::Username-->
                                         </div>
@@ -1624,29 +1621,7 @@
                                     <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
-                                    <div class="menu-item px-5">
-                                        <a href="account/overview.html" class="menu-link px-5">My Profile</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-5">
-                                        <a href="apps/projects/list.html" class="menu-link px-5">
-                                            <span class="menu-text">My Projects</span>
-                                            <span class="menu-badge">
-                                                <span
-                                                    class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
 
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu separator-->
-                                    <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
@@ -1733,9 +1708,9 @@
                     data-kt-drawer-width="250px" data-kt-drawer-direction="start"
                     data-kt-drawer-toggle="#kt_app_sidebar_toggle">
                     <!--begin::Header-->
-                    <div class="d-none d-lg-flex flex-center px-6 pt-10 pb-10" id="kt_app_sidebar_header">
+                    <div class="d-none d-lg-flex flex-center px-6 pt-6 pb-6" id="kt_app_sidebar_header">
                         <a href="index.html">
-                            <img alt="Logo" src="assets/media/logos/demo63-dark.svg" class="h-25px" />
+                            <img alt="Logo" src="assets/media/logos/logo-dash.png" class="h-50px" />
                         </a>
                     </div>
                     <!--end::Header-->
@@ -1764,7 +1739,17 @@
                                         <!--begin:Menu sub-->
                                         <div class="menu-sub menu-sub-accordion">
                                             <!--begin:Menu item-->
-
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('index-data')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-data') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">List Lottery</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
                                             <!--end:Menu item-->
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
@@ -1778,18 +1763,18 @@
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
-
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-data')) class="menu-link active" @endif
-                                                    class="menu-link" href="{{ route('index-data') }}">
+                                                <a @if (request()->is('index-jadwal')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-jadwal') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">List Lottery</span>
+                                                    <span class="menu-title">Schedule Lottery</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
+
 
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
@@ -1813,6 +1798,28 @@
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('index-buku')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-buku') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Dream Book</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('index-keluhan')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-keluhan') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Customer Complaint</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
 
                                             <!--end:Menu item-->
                                             <!--begin:Menu item-->
@@ -1827,583 +1834,7 @@
 
                                     <!--end:Menu item-->
                                     <!--begin:Menu item-->
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <!--begin:Menu link-->
-                                        <span class="menu-link">
-                                            <span class="menu-title">Utilities</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
-                                        <!--end:Menu link-->
-                                        <!--begin:Menu sub-->
-                                        <div class="menu-sub menu-sub-accordion">
-                                            <!--begin:Menu item-->
-                                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                                <!--begin:Menu link-->
-                                                <span class="menu-link">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Modals</span>
-                                                    <span class="menu-arrow"></span>
-                                                </span>
-                                                <!--end:Menu link-->
-                                                <!--begin:Menu sub-->
-                                                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                                    <!--begin:Menu item-->
-                                                    <div data-kt-menu-trigger="click"
-                                                        class="menu-item menu-accordion">
-                                                        <!--begin:Menu link-->
-                                                        <span class="menu-link">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">General</span>
-                                                            <span class="menu-arrow"></span>
-                                                        </span>
-                                                        <!--end:Menu link-->
-                                                        <!--begin:Menu sub-->
-                                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/general/invite-friends.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Invite
-                                                                        Friends</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/general/view-users.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">View
-                                                                        Users</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/general/select-users.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Select
-                                                                        Users</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/general/upgrade-plan.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Upgrade
-                                                                        Plan</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/general/share-earn.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Share
-                                                                        &
-                                                                        Earn</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                        </div>
-                                                        <!--end:Menu sub-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div data-kt-menu-trigger="click"
-                                                        class="menu-item menu-accordion">
-                                                        <!--begin:Menu link-->
-                                                        <span class="menu-link">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Forms</span>
-                                                            <span class="menu-arrow"></span>
-                                                        </span>
-                                                        <!--end:Menu link-->
-                                                        <!--begin:Menu sub-->
-                                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/forms/new-target.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">New
-                                                                        Target</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/forms/new-card.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">New
-                                                                        Card</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/forms/new-address.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">New
-                                                                        Address</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/forms/create-api-key.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Create
-                                                                        API
-                                                                        Key</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/forms/bidding.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Bidding</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                        </div>
-                                                        <!--end:Menu sub-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div data-kt-menu-trigger="click"
-                                                        class="menu-item menu-accordion">
-                                                        <!--begin:Menu link-->
-                                                        <span class="menu-link">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Wizards</span>
-                                                            <span class="menu-arrow"></span>
-                                                        </span>
-                                                        <!--end:Menu link-->
-                                                        <!--begin:Menu sub-->
-                                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/wizards/create-app.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Create
-                                                                        App</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/wizards/create-campaign.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Create
-                                                                        Campaign</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/wizards/create-account.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Create
-                                                                        Business
-                                                                        Acc</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/wizards/create-project.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Create
-                                                                        Project</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/wizards/top-up-wallet.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Top
-                                                                        Up
-                                                                        Wallet</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/wizards/offer-a-deal.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Offer
-                                                                        a
-                                                                        Deal</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/wizards/two-factor-authentication.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Two
-                                                                        Factor
-                                                                        Auth</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                        </div>
-                                                        <!--end:Menu sub-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div data-kt-menu-trigger="click"
-                                                        class="menu-item menu-accordion">
-                                                        <!--begin:Menu link-->
-                                                        <span class="menu-link">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Search</span>
-                                                            <span class="menu-arrow"></span>
-                                                        </span>
-                                                        <!--end:Menu link-->
-                                                        <!--begin:Menu sub-->
-                                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/search/users.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Users</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                            <!--begin:Menu item-->
-                                                            <div class="menu-item">
-                                                                <!--begin:Menu link-->
-                                                                <a class="menu-link"
-                                                                    href="utilities/modals/search/select-location.html">
-                                                                    <span class="menu-bullet">
-                                                                        <span class="bullet bullet-dot"></span>
-                                                                    </span>
-                                                                    <span class="menu-title">Select
-                                                                        Location</span>
-                                                                </a>
-                                                                <!--end:Menu link-->
-                                                            </div>
-                                                            <!--end:Menu item-->
-                                                        </div>
-                                                        <!--end:Menu sub-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                </div>
-                                                <!--end:Menu sub-->
-                                            </div>
-                                            <!--end:Menu item-->
-                                            <!--begin:Menu item-->
-                                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                                <!--begin:Menu link-->
-                                                <span class="menu-link">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Wizards</span>
-                                                    <span class="menu-arrow"></span>
-                                                </span>
-                                                <!--end:Menu link-->
-                                                <!--begin:Menu sub-->
-                                                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link" href="utilities/wizards/horizontal.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Horizontal</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link" href="utilities/wizards/vertical.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Vertical</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/wizards/two-factor-authentication.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Two Factor
-                                                                Auth</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/wizards/create-app.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Create
-                                                                App</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/wizards/create-campaign.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Create
-                                                                Campaign</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/wizards/create-account.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Create
-                                                                Account</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/wizards/create-project.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Create
-                                                                Project</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/modals/wizards/top-up-wallet.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Top Up
-                                                                Wallet</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/wizards/offer-a-deal.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Offer a
-                                                                Deal</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                </div>
-                                                <!--end:Menu sub-->
-                                            </div>
-                                            <!--end:Menu item-->
-                                            <!--begin:Menu item-->
-                                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                                <!--begin:Menu link-->
-                                                <span class="menu-link">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Search</span>
-                                                    <span class="menu-arrow"></span>
-                                                </span>
-                                                <!--end:Menu link-->
-                                                <!--begin:Menu sub-->
-                                                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/search/horizontal.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Horizontal</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link" href="utilities/search/vertical.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Vertical</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link" href="utilities/search/users.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Users</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link"
-                                                            href="utilities/search/select-location.html">
-                                                            <span class="menu-bullet">
-                                                                <span class="bullet bullet-dot"></span>
-                                                            </span>
-                                                            <span class="menu-title">Location</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                </div>
-                                                <!--end:Menu sub-->
-                                            </div>
-                                            <!--end:Menu item-->
-                                        </div>
-                                        <!--end:Menu sub-->
-                                    </div>
+
                                     <!--end:Menu item-->
                                     <!--begin:Menu item-->
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -2416,27 +1847,13 @@
                                         <!--begin:Menu sub-->
                                         <div class="menu-sub menu-sub-accordion">
                                             <!--begin:Menu item-->
-                                            <div class="menu-item">
-                                                <!--begin:Menu link-->
-                                                <a class="menu-link"
-                                                    href="https://preview.keenthemes.com/html/metronic/docs/base/utilities"
-                                                    target="_blank" title="Check out over 200 in-house components"
-                                                    data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                    data-bs-dismiss="click" data-bs-placement="right">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">Components</span>
-                                                </a>
-                                                <!--end:Menu link-->
-                                            </div>
+
                                             <!--end:Menu item-->
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a class="menu-link"
-                                                    href="https://preview.keenthemes.com/html/metronic/docs"
-                                                    target="_blank" title="Check out the complete documentation"
+                                                <a class="menu-link" href="" target="_blank"
+                                                    title="Check out the complete documentation"
                                                     data-bs-toggle="tooltip" data-bs-trigger="hover"
                                                     data-bs-dismiss="click" data-bs-placement="right">
                                                     <span class="menu-bullet">
@@ -2747,8 +2164,8 @@
                                 <!--begin::Timeline heading-->
                                 <div class="mb-5 pe-3">
                                     <!--begin::Title-->
-                                    <a href="#"
-                                        class="fs-5 fw-semibold text-gray-800 text-hover-primary mb-2">3 New Incoming
+                                    <a href="#" class="fs-5 fw-semibold text-gray-800 text-hover-primary mb-2">3
+                                        New Incoming
                                         Project Files:</a>
                                     <!--end::Title-->
                                     <!--begin::Description-->

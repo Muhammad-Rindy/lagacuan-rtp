@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('table_jadwal', function (Blueprint $table) {
             $table->id();
-            $table->date('name_pasaran');
-            $table->date('jadwal_tutup');
-            $table->date('jadwal_undi');
+            $table->string('name_pasaran');
+            $table->time('jadwal_tutup');
+            $table->time('jadwal_undi');
             $table->string('situs_resmi');
             $table->timestamps();
         });

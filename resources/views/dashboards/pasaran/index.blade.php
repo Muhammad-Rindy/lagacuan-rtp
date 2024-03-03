@@ -25,13 +25,13 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Results Lottery</span>
+                                <span class="card-label fw-bold text-gray-800">Lists Lottery</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Actions-->
                             <button type="button" class="btn btn-success btn-sm mb-3 mt-1" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
-                                + Add Result
+                                + Add Lottery
                             </button>
                             <!--end::Actions-->
                         </div>
@@ -43,26 +43,21 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="editModalLabel" style="text-transform: capitalize">
-                                            Create New Result</h4>
+                                            Create New Lottery</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form id="formResult">
+                                    <form id="storeData" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Choose Lottery :</label>
-                                                <select name="pasaran_id" id="pasaran_select" class="form-control">
-                                                    <option selected disabled>Select your lottery</option>
-                                                    @foreach ($pasarans as $pasaranId => $pasaranName)
-                                                        <option style="text-transform: uppercase"
-                                                            value="{{ $pasaranId }}">{{ $pasaranName }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="exampleInputEmail1" class="form-label">Name Lottery</label>
+                                                <input type="text" name="name_pasaran" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Result</label>
-                                                <input type="number" name="result" class="form-control"
+                                                <label for="exampleInputEmail1" class="form-label">Image</label>
+                                                <input type="file" name="image" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                         </div>
@@ -88,7 +83,7 @@
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
                                             <th style="width:25%;text-align: center;text-transform:capitalize">Name Lottery
                                             </th>
-                                            <th style="text-align: center;text-transform:capitalize">Result Lottery</th>
+                                            <th style="text-align: center;text-transform:capitalize">Image</th>
                                             <th style="width:25%;text-align: center;text-transform:capitalize">Created at
                                             </th>
                                             <th style="width:10%;text-align:center;text-transform:capitalize">Action</th>
@@ -146,7 +141,7 @@
             $('#table-pasaran').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '/index-result',
+                url: '/index-data',
                 columns: [{
                         className: "text-center",
                         data: "DT_RowIndex",
@@ -155,17 +150,25 @@
                         searchable: false
                     },
                     {
-                        data: 'pasaran_name',
-                        name: 'table_pasaran.name_pasaran' // Sesuaikan dengan nama kolom yang benar
+                        data: 'name_pasaran',
+                        name: 'name_pasaran'
                     },
                     {
                         className: "text-center",
-                        data: 'result',
-                        name: 'table_result.result' // Sesuaikan dengan nama kolom yang benar
+                        data: 'image',
+                        name: 'image',
+                        render: function(data, type, full, meta) {
+                            if (type === 'display') {
+                                var url = "{{ url('storage/') }}" + '/' + data;
+                                return '<img src="' + url +
+                                    '" alt="Image" width="70" height="45">';
+                            }
+                            return data;
+                        },
                     },
                     {
                         data: 'created_at',
-                        name: 'table_result.created_at' // Sesuaikan dengan nama kolom yang benar
+                        name: 'created_at'
                     },
                     {
                         className: "text-center",
@@ -177,19 +180,19 @@
                 order: [
                     [0, 'asc']
                 ],
-            });
 
+            });
         });
 
-        // Store data
+        // store data
         $(document).ready(function() {
-            $('#formResult').submit(function(e) {
+            $('#storeData').submit(function(e) {
                 e.preventDefault();
 
                 var formData = new FormData($(this)[0]);
 
                 $.ajax({
-                    url: '/store-result',
+                    url: '/store-data',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -197,11 +200,11 @@
                     success: function(response) {
                         // Jika success
                         $('#exampleModal').modal('hide');
-                        $('#formResult')[0].reset();
+                        $('#storeData')[0].reset();
                         $('.modal-backdrop.show').css('display', 'none');
                         Swal.fire({
                             title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
-                            text: "Your file has been successfully edited",
+                            text: "Your file has been saved",
                             icon: "success",
                         });
                         $('#table-pasaran').DataTable().ajax.reload();
@@ -209,28 +212,29 @@
                     error: function(error) {
                         console.log(error);
                         $('#exampleModal').modal('hide');
-                        $('#formResult')[0].reset();
+                        $('#storeData')[0].reset();
                         $('.modal-backdrop.show').css('display', 'none');
                         Swal.fire({
                             title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
-                            text: "Error: " + error.message,
+                            text: "Error: " + "Please fill all the input fields",
                             icon: "error",
                         });
+
                     }
                 });
             });
         });
 
         // Get data berdasarkan id
-
         function loadData(id) {
             $.ajax({
-                url: '/get-data-result/' + id,
+                url: '/get-data/' + id,
                 type: 'GET',
                 success: function(response) {
                     // Mengisi formulir dengan data yang diterima
                     $('#editId').val(response.id);
-                    $('#editNamePasaran').val(response.result);
+                    $('#editNamePasaran').val(response.name_pasaran);
+                    $('#editImage').val(response.image);
                 },
                 error: function(error) {
                     console.log(error);
@@ -241,18 +245,30 @@
         // Update data
         function updateData() {
             $.ajax({
-                url: '/update-result',
+                url: '/update-data',
                 type: 'POST',
                 data: $('#editForm').serialize(),
                 success: function(response) {
                     // Jika success
                     $('#editModal').modal('hide');
                     $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
+                        text: "Your file has been successfully edited",
+                        icon: "success",
+                    });
                     $('#table-pasaran').DataTable().ajax.reload();
 
                 },
                 error: function(error) {
-                    console.log(error);
+                    $('#exampleModal').modal('hide');
+                    $('#storeData')[0].reset();
+                    $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
+                        text: "Error: " + error.message,
+                        icon: "error",
+                    });
                 }
             });
         }
@@ -271,7 +287,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/destroy-result",
+                        url: "/destroy",
                         data: {
                             id: id,
                         },

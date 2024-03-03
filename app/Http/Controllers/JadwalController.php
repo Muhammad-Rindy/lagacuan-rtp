@@ -2,30 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pasaran;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Storage;
 
-class DataController extends Controller
+class JadwalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index_data()
+    public function index_jadwal()
     {
 
         if(request()->ajax()) {
-            return datatables()->of(Pasaran::select('*'))
-            ->addColumn('action', 'dashboards.pasaran.action')
+            return datatables()->of(Jadwal::select('*'))
+            ->addColumn('action', 'dashboards.jadwal.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
 
-        return view('dashboards.pasaran.index');
+        return view('dashboards.jadwal.index');
 
     }
 
@@ -37,19 +30,16 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store_data(Request $request)
+    public function store_jadwal(Request $request)
     {
         $request->all();
 
-        $file = $request->file('image');
-        $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
 
-        Storage::disk('local')->put('public/' . $path, file_get_contents($file));
-
-
-        $bukti = Pasaran::create([
+        $bukti = Jadwal::create([
             'name_pasaran' => $request->name_pasaran,
-            'image' => $path
+            'jadwal_tutup' => $request->jadwal_tutup,
+            'jadwal_undi' => $request->jadwal_undi,
+            'situs_resmi' => $request->situs_resmi,
         ]);
 
         return response()->json(['success' => true, 'message' => 'Data stored successfully', 'bukti' => $bukti]);
@@ -79,16 +69,19 @@ class DataController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getData($id) {
-        $product = Pasaran::find($id);
+        $product = Jadwal::find($id);
         return response()->json($product);
     }
 
     public function updateData(Request $request)
     {
 
-        $product = Pasaran::findOrFail($request->id);
+        $product = Jadwal::findOrFail($request->id);
         $product->update([
             'name_pasaran' => $request->name_pasaran,
+            'jadwal_tutup' => $request->jadwal_tutup,
+            'jadwal_undi' => $request->jadwal_undi,
+            'situs_resmi' => $request->situs_resmi,
         ]);
         return response()->json(['success' => true]);
     }
@@ -106,9 +99,9 @@ class DataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy_data(Request $request)
+    public function destroy_jadwal(Request $request)
     {
-        $product = Pasaran::where('id', $request->id)->delete();
+        $product = Jadwal::where('id', $request->id)->delete();
 
         return Response()->json($product);
     }

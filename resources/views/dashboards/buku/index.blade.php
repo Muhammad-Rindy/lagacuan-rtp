@@ -6,7 +6,7 @@
 <style>
     table,
     td {
-        text-transform: uppercase;
+        text-transform: capitalize;
     }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -25,13 +25,13 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Lists Lottery</span>
+                                <span class="card-label fw-bold text-gray-800">Dreams Book</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Actions-->
                             <button type="button" class="btn btn-success btn-sm mb-3 mt-1" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
-                                + Add Lottery
+                                + Add Book
                             </button>
                             <!--end::Actions-->
                         </div>
@@ -43,7 +43,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="editModalLabel" style="text-transform: capitalize">
-                                            Create New Lottery</h4>
+                                            Create New Book</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -51,10 +51,11 @@
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Name Lottery</label>
-                                                <input type="text" name="name_pasaran" class="form-control"
+                                                <label for="exampleInputEmail1" class="form-label">Description Book</label>
+                                                <input type="text" name="description" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
+
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Image</label>
                                                 <input type="file" name="image" class="form-control"
@@ -81,10 +82,10 @@
                                     <thead>
                                         <tr class="text-start text-gray-500 fw-bold fs-6 gs-0">
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
-                                            <th style="width:25%;text-align: center;text-transform:capitalize">Name Lottery
+                                            <th style="text-align: center;text-transform:capitalize">Description Book
                                             </th>
                                             <th style="text-align: center;text-transform:capitalize">Image</th>
-                                            <th style="width:25%;text-align: center;text-transform:capitalize">Created at
+                                            <th style="width:10%;text-align: center;text-transform:capitalize">Created at
                                             </th>
                                             <th style="width:10%;text-align:center;text-transform:capitalize">Action</th>
                                         </tr>
@@ -141,7 +142,7 @@
             $('#table-pasaran').DataTable({
                 processing: true,
                 serverSide: true,
-                url: '/index-data',
+                url: '/index-buku',
                 columns: [{
                         className: "text-center",
                         data: "DT_RowIndex",
@@ -150,8 +151,8 @@
                         searchable: false
                     },
                     {
-                        data: 'name_pasaran',
-                        name: 'name_pasaran'
+                        data: 'description',
+                        name: 'description'
                     },
                     {
                         className: "text-center",
@@ -184,6 +185,7 @@
             });
         });
 
+
         // store data
         $(document).ready(function() {
             $('#storeData').submit(function(e) {
@@ -192,24 +194,34 @@
                 var formData = new FormData($(this)[0]);
 
                 $.ajax({
-                    url: '/store-data',
+                    url: '/store-buku',
                     type: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        if (response.success) {
-                            // Jika success
-                            $('#exampleModal').modal('hide');
-                            $('.modal-backdrop.show').css('display', 'none');
-                            $('#table-pasaran').DataTable().ajax.reload();
-                        } else {
-                            alert('Failed to store data. Please try again.');
-                        }
+                        // Jika success
+                        $('#exampleModal').modal('hide');
+                        $('#storeData')[0].reset();
+                        $('.modal-backdrop.show').css('display', 'none');
+                        Swal.fire({
+                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
+                            text: "Your file has been saved",
+                            icon: "success",
+                        });
+                        $('#table-pasaran').DataTable().ajax.reload();
                     },
                     error: function(error) {
                         console.log(error);
-                        // alert('An error occurred while processing your request.');
+                        $('#exampleModal').modal('hide');
+                        $('#storeData')[0].reset();
+                        $('.modal-backdrop.show').css('display', 'none');
+                        Swal.fire({
+                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
+                            text: "Error: " + "Please fill all the input fields",
+                            icon: "error",
+                        });
+
                     }
                 });
             });
@@ -218,13 +230,13 @@
         // Get data berdasarkan id
         function loadData(id) {
             $.ajax({
-                url: '/get-data/' + id,
+                url: '/get-data-buku/' + id,
                 type: 'GET',
                 success: function(response) {
                     // Mengisi formulir dengan data yang diterima
                     $('#editId').val(response.id);
-                    $('#editNamePasaran').val(response.name_pasaran);
-                    $('#editImage').val(response.image);
+                    $('#editTitle').val(response.title);
+                    $('#editDescription').val(response.description);
                 },
                 error: function(error) {
                     console.log(error);
@@ -235,18 +247,31 @@
         // Update data
         function updateData() {
             $.ajax({
-                url: '/update-data',
+                url: '/update-buku',
                 type: 'POST',
                 data: $('#editForm').serialize(),
                 success: function(response) {
                     // Jika success
                     $('#editModal').modal('hide');
                     $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
+                        text: "Your file has been successfully edited",
+                        icon: "success",
+                    });
                     $('#table-pasaran').DataTable().ajax.reload();
 
                 },
                 error: function(error) {
                     console.log(error);
+                    $('#exampleModal').modal('hide');
+                    $('#storeData')[0].reset();
+                    $('.modal-backdrop.show').css('display', 'none');
+                    Swal.fire({
+                        title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
+                        text: "Error: " + error.message,
+                        icon: "error",
+                    });
                 }
             });
         }
@@ -265,7 +290,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/destroy",
+                        url: "/destroy-buku",
                         data: {
                             id: id,
                         },
