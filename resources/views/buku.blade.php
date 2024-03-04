@@ -6,26 +6,67 @@
         </h6>
     </main>
     <main class="container mb-5">
-        <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-                @foreach ($bukus as $key => $buku)
-                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                        <img style="border-radius: 15px" src="{{ $buku->image }}" class="d-block w-100" alt="...">
-                    </div>
-                @endforeach
-            </div>
-            <button style="font-weight: bolder" class="carousel-control-prev" type="button"
-                data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+        <div id="results-container">
+
         </div>
-
-
-
     </main>
+    <script>
+        $(document).ready(function() {
+            // AJAX request to fetch data
+
+            var baseUrl = "{{ url('/') }}";
+
+            $.ajax({
+                url: 'http://127.0.0.1:8000/api/buku',
+                method: 'GET',
+                success: function(data) {
+                    // Handle the successful response and update the results container
+                    displayResults(data);
+                },
+                error: function(error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+
+            function displayResults(data) {
+                var resultsContainer = $('#results-container');
+                var carouselInner = $('<div class="carousel-inner"></div>');
+
+                $.each(data, function(index, result) {
+                    var pathImage = 'storage/' + result.image;
+                    var carouselItem = `
+            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                <img style="border-radius: 10px" src="${pathImage}" class="d-block w-100" alt="...">
+                <div class="carousel-description">
+                    <h6 class="mt-2" style="text-align: center; background-color: #181818;border-radius: 3px;text-align:left; padding:7px; color:white">${result.description}</h6>
+                </div>
+            </div>
+        `;
+                    carouselInner.append(carouselItem);
+                });
+
+                // Append the carousel inner to the results container
+                resultsContainer.prepend('<div id="carouselExample" class="carousel slide"></div>');
+                $('#carouselExample').append(carouselInner);
+
+                // Add carousel controls
+                $('#carouselExample').append(`
+        <button style="font-weight: bolder" class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    `);
+
+                // Initialize the carousel
+                $('#carouselExample').carousel();
+            }
+
+
+
+        });
+    </script>
 @endsection

@@ -31,7 +31,7 @@
                             <label for="exampleInputEmail1" class="form-label"
                                 style="text-transform: capitalize;">Result</label>
                         </div>
-                        <input type="text" class="form-control" name="result" id="editNamePasaran">
+                        <input type="number" class="form-control" name="result" id="editNamePasaran">
                     </div>
                 </form>
             </div>

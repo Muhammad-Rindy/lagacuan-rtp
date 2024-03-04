@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('table_result', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pasaran_id')->constrained('table_pasaran')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->integer('result');
+            $table->string('result');
             $table->timestamps();
         });
     }

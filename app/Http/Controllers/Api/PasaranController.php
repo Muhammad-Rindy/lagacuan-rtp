@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Buku;
 use App\Models\Pasaran;
+use App\Models\Bukti;
 use App\Models\Result;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class PasaranController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function index_result()
+    public function resultJson()
     {
         $data = Pasaran::join('table_result', 'table_result.pasaran_id', '=', 'table_pasaran.id')
         ->select('table_result.id', 'name_pasaran', 'result', 'table_pasaran.image', 'table_result.created_at')
@@ -33,50 +35,59 @@ class PasaranController extends Controller
 
         return response()->json($dataJson);
     }
-
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function store(Request $request)
+    public function prediksiJson()
     {
-        //
+        $data = Pasaran::join('table_prediksi', 'table_prediksi.pasaran_id', '=', 'table_pasaran.id')
+        ->orderBy('table_prediksi.id', 'desc')
+        ->get();
+
+        $dataJson = $data->map(function ($item) {
+            return [
+                'id' => ($item->id),
+                'name_pasaran' => ($item->name_pasaran),
+                'angka_main' => ($item->angka_main),
+                'image' => ($item->image),
+                'top_3d' => (($item->top_3d)),
+                'top_2d' => (($item->top_2d)),
+                'colok_bebas' => (($item->colok_bebas)),
+                'colok_2d' => (($item->colok_2d)),
+                'shio_jitu' => (($item->shio_jitu)),
+                'created_at' => (($item->created_at)),
+            ];
+        });
+
+        return response()->json($dataJson);
     }
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function show($id)
+    public function buktiJson()
     {
-        //
+        $data = Bukti::all();
+
+        $dataJson = $data->map(function ($item) {
+            return [
+                'id' => ($item->id),
+                'image' => ($item->image),
+                'title' => ($item->title),
+                'description' => ($item->description),
+                'created_at' => (($item->created_at)),
+            ];
+        });
+
+        return response()->json($dataJson);
+    }
+    public function bukuJson()
+    {
+        $data = Buku::all();
+
+        $dataJson = $data->map(function ($item) {
+            return [
+                'id' => ($item->id),
+                'image' => ($item->image),
+                'description' => ($item->description),
+            ];
+        });
+
+        return response()->json($dataJson);
     }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function destroy($id)
-    {
-        //
-    }
 }

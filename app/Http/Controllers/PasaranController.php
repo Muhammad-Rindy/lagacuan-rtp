@@ -14,9 +14,6 @@ class PasaranController extends Controller
      */
     public function index_pasaran_home()
     {
-        // $data = Http::get('https://raw.githubusercontent.com/MR-Dragon1/jeder/main/public/data/result.json');
-        // $pasarans = $data->object();
-
 
         return view('home');
     }
