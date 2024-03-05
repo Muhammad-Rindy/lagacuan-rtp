@@ -40,7 +40,15 @@ Route::get('/buku-mimpi', [PasaranController::class, 'index_buku_home'])->name('
 Route::get('/promosi', [PasaranController::class, 'index_promosi_home'])->name('index-promosi-home');
 Route::get('/keluhan', [PasaranController::class, 'index_keluhan_home'])->name('index-keluhan-home');
 Route::get('/paito', [PasaranController::class, 'index_paito_home'])->name('index-paito-home');
+Route::get('/rtpslot', [RtpController::class, 'index'])->name('index-rtp');
+Route::get('/rtpslot/{provider_name}', [RtpController::class, 'providerRtp']);
+Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
 
+Route::get('/dashboard', function () {
+    return redirect()->route('index-data');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
 
 
 // Dashboard
@@ -89,7 +97,7 @@ Route::post('/update-buku', [BukuController::class, 'updateData']);
 // Keluhan Togel
 Route::get('/index-keluhan', [KeluhanController::class, 'index_keluhan'])->name('index-keluhan');
 Route::post('/destroy-keluhan', [KeluhanController::class, 'destroy_keluhan']);
-Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
+
 
 // Banner
 Route::get('/index-banner', [BannerController::class, 'index_banner'])->name('index-banner');
@@ -97,23 +105,17 @@ Route::post('/store-banner', [BannerController::class, 'store_banner']);
 Route::post('/destroy-banner', [BannerController::class, 'destroy_banner']);
 
 // RTP Slot
-Route::get('/rtpslot', [RtpController::class, 'index'])->name('index-rtp');
-Route::get('/rtpslot/{provider_name}', [RtpController::class, 'providerRtp']);
+
 Route::post('/admin/rand-rtp', [RtpController::class, 'update'])->name('admin-rtp');
 
 // Pola rtp
 Route::get('/index-pola', [BannerController::class, 'index_pola_rtp'])->name('index-pola-rtp');
 
+// Profile
+Route::get('/my-profile', [ProfileController::class, 'index_profile'])->name('index-profile');
+Route::post('/update-profile', [ProfileController::class, 'updateData'])->name('update-profile');
 
 
-Route::get('/dashboard', function () {
-    return redirect()->route('index-data');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

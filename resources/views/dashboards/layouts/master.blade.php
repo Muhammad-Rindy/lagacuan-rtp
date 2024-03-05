@@ -155,6 +155,8 @@
                                         Banner
                                     @elseif(request()->is('index-pola'))
                                         Random RTP
+                                    @elseif(request()->is('my-profile'))
+                                        My Profile
                                     @endif
 
 
@@ -1623,6 +1625,14 @@
                                     <!--end::Menu item-->
                                     <!--begin::Menu separator-->
                                     <div class="separator my-2"></div>
+
+                                    <div class="menu-item px-5">
+                                        <a href="/my-profile" class="menu-link px-5">My Profile</a>
+                                    </div>
+
+
+
+                                    <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
 
@@ -1867,12 +1877,23 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-pola-rtp')) class="menu-link active" @endif
+                                                <a @if (request()->is('index-pola')) class="menu-link active" @endif
                                                     class="menu-link" href="{{ route('index-pola-rtp') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">Random Pola RTP</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('my-profile')) class="menu-link active" @endif
+                                                    class="menu-link" href="/my-profile">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">My Profile</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
