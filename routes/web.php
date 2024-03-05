@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BuktiController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DataController;
@@ -27,7 +28,7 @@ Route::get('/', function () {
 
 });
 
-
+// Front end
 Route::get('/', [PasaranController::class, 'index_pasaran_home'])->name('index-pasaran-home');
 Route::get('/live-draw', [PasaranController::class, 'index_live_home'])->name('index-live-home');
 Route::get('/prediksi-togel', [PasaranController::class, 'index_prediksi_home'])->name('index-prediksi-home');
@@ -41,6 +42,7 @@ Route::get('/paito', [PasaranController::class, 'index_paito_home'])->name('inde
 
 
 
+// Dashboard
 // Pasaran Togel
 Route::get('/index-data', [DataController::class, 'index_data'])->name('index-data');
 Route::post('/store-data', [DataController::class, 'store_data']);
@@ -87,6 +89,12 @@ Route::post('/update-buku', [BukuController::class, 'updateData']);
 Route::get('/index-keluhan', [KeluhanController::class, 'index_keluhan'])->name('index-keluhan');
 Route::post('/destroy-keluhan', [KeluhanController::class, 'destroy_keluhan']);
 Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
+
+// Banner
+Route::get('/index-banner', [BannerController::class, 'index_banner'])->name('index-banner');
+Route::post('/store-banner', [BannerController::class, 'store_banner']);
+Route::post('/destroy-banner', [BannerController::class, 'destroy_banner']);
+
 
 
 

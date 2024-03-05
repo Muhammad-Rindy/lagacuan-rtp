@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bukti;
+use App\Models\Banner;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
 
-class BuktiController extends Controller
+class BannerController extends Controller
 {
     /**
     * Display a listing of the resource.
     *
     * @return \Illuminate\Http\Response
     */
-    public function index_bukti()
+    public function index_banner()
     {
 
         if(request()->ajax()) {
-            return datatables()->of(Bukti::select('*'))
-            ->addColumn('action', 'dashboards.bukti.action')
+            return datatables()->of(Banner::select('*'))
+            ->addColumn('action', 'dashboards.banner.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
 
-        return view('dashboards.bukti.index');
+        return view('dashboards.banner.index');
 
     }
 
@@ -37,11 +36,9 @@ class BuktiController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function store_bukti(Request $request)
+    public function store_banner(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
@@ -50,9 +47,7 @@ class BuktiController extends Controller
 
         Storage::disk('local')->put('public/' . $path, file_get_contents($file));
 
-        $bukti = Bukti::create([
-            'title' => $request->title,
-            'description' => $request->description,
+        $bukti = Banner::create([
             'image' => $path
         ]);
 
@@ -76,28 +71,7 @@ class BuktiController extends Controller
     */
 
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function getData($id) {
-        $product = Bukti::find($id);
-        return response()->json($product);
-    }
 
-    public function updateData(Request $request)
-    {
-        $request->all();
-
-        $product = Bukti::findOrFail($request->id);
-        $product->update([
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
-        return response()->json(['success' => true]);
-    }
     /**
     * Update the specified resource in storage.
     *
@@ -112,9 +86,9 @@ class BuktiController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function destroy_bukti(Request $request)
+    public function destroy_banner(Request $request)
     {
-        $product = Bukti::where('id', $request->id)->delete();
+        $product = Banner::where('id', $request->id)->delete();
 
         return Response()->json($product);
     }

@@ -151,6 +151,8 @@
                                         Book
                                     @elseif(request()->is('index-keluhan'))
                                         Complaint
+                                    @elseif(request()->is('index-banner'))
+                                        Banner
                                     @endif
 
 
@@ -1837,6 +1839,40 @@
 
                                     <!--end:Menu item-->
                                     <!--begin:Menu item-->
+                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                        <!--begin:Menu link-->
+                                        <span class="menu-link">
+                                            <span class="menu-title">Design Template</span>
+                                            <span class="menu-arrow"></span>
+                                        </span>
+                                        <!--end:Menu link-->
+                                        <!--begin:Menu sub-->
+                                        <div class="menu-sub menu-sub-accordion">
+                                            <!--begin:Menu item-->
+
+                                            <!--end:Menu item-->
+                                            <!--begin:Menu item-->
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('index-banner')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-banner') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Banner</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <!--end:Menu item-->
+                                            <!--begin:Menu item-->
+
+                                            <!--end:Menu item-->
+                                            <!--begin:Menu item-->
+
+                                            <!--end:Menu item-->
+                                        </div>
+                                        <!--end:Menu sub-->
+                                    </div>
                                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                         <!--begin:Menu link-->
                                         <span class="menu-link">

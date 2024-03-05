@@ -62,29 +62,10 @@
             KEMENANGAN TANPA BATAS BERSAMA KAMI.</span>
     </div>
 </main>
-@php
-    $data = Http::get('https://raw.githubusercontent.com/MR-Dragon1/jeder/main/public/data/banner.json');
-    $banners = $data->object();
-@endphp
+
 <main class="container">
-    <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade mb-3" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            @foreach ($banners as $key => $banner)
-                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img src="{{ $banner->image }}" class="d-block w-100 img-fluid" alt="gambar">
-                </div>
-            @endforeach
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+    <div id="results-banner">
+
     </div>
 
     {{-- Mobile --}}
@@ -228,4 +209,53 @@
 
     // Memanggil fungsi updateInputValue setiap 2 detik
     setInterval(updateInputValue, 2000);
+</script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/banner',
+            method: 'GET',
+            success: function(data) {
+                // Handle the successful response and update the results container
+                displayResults(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+
+        function displayResults(data) {
+            // Iterate through the data and append it to the results container
+            var resultsContainer = $('#results-banner');
+            var carouselInner = '';
+
+            $.each(data, function(index, result) {
+                var pathImage = 'storage/' + result.image;
+
+                carouselInner += `
+                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                    <img src="${pathImage}" class="d-block w-100 img-fluid" alt="gambar">
+                </div>
+            `;
+            });
+
+            var resultCard = `
+            <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade mb-3" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    ${carouselInner}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        `;
+
+            resultsContainer.append(resultCard);
+        }
+    });
 </script>

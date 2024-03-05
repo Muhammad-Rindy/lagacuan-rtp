@@ -41,7 +41,7 @@ class BukuController extends Controller
     {
         $request->validate([
             'description' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $file = $request->file('image');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Buku;
 use App\Models\Jadwal;
 use App\Models\Pasaran;
@@ -102,6 +103,19 @@ class PasaranController extends Controller
                 'jadwal_tutup' => ($item->jadwal_tutup),
                 'jadwal_undi' => ($item->jadwal_undi),
                 'situs_resmi' => ($item->situs_resmi),
+            ];
+        });
+
+        return response()->json($dataJson);
+    }
+    public function bannerJson()
+    {
+        $data = Banner::orderBy('id', 'desc')->get();
+
+        $dataJson = $data->map(function ($item) {
+            return [
+                'id' => ($item->id),
+                'image' => ($item->image),
             ];
         });
 

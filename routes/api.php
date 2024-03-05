@@ -24,3 +24,4 @@ Route::get('prediksi', [PasaranController::class, 'prediksiJson']);
 Route::get('bukti', [PasaranController::class, 'buktiJson']);
 Route::get('buku', [PasaranController::class, 'bukuJson']);
 Route::get('jadwal', [PasaranController::class, 'jadwalJson']);
+Route::get('banner', [PasaranController::class, 'bannerJson']);
