@@ -197,6 +197,11 @@
         'Hen*** Jackpot NEWYORK-MID Sebesar Rp.60.573.371',
         'Wir*** Jackpot HUAHIN Sebesar Rp.20.400.571',
         'Bob*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
+        'Jan*** Jackpot POIPET Sebesar Rp.104.405.102',
+        'Pol*** Jackpot HUAHIN Sebesar Rp.10.473.102',
+        'Vio*** Jackpot TOTOMACAU Sebesar Rp.40.105.054',
+        'Erd*** Jackpot TOTOMACAU Sebesar Rp.275.452.205',
+        'Wen*** Jackpot TOTOMACAU Sebesar Rp.35.104.477',
     ];
 
     var index = 0;

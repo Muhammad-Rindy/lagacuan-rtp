@@ -149,7 +149,7 @@
                             if (type === 'display') {
                                 var url = "{{ url('storage/') }}" + '/' + data;
                                 return '<img src="' + url +
-                                    '" alt="Image" width="260" height="110">';
+                                    '" alt="Image" width="275" height="105">';
                             }
                             return data;
                         },

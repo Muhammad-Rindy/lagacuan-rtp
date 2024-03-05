@@ -59,7 +59,7 @@
                         $('#storeData')[0].reset();
                         Swal.fire({
                             title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
-                            text: "Terima kasih atas masukkan anda, Kami akan segera menanggapinya",
+                            text: "Terima kasih atas ketersediaan Anda mengisi kolom ulasan. Semua kritik dan saran yang disampaikan akan menjadi bahan evaluasi bagi kami.",
                             icon: "success",
                         });
                     },
