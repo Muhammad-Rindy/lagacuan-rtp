@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Buku;
+use App\Models\Jadwal;
 use App\Models\Pasaran;
 use App\Models\Bukti;
 use App\Models\Result;
@@ -84,6 +85,23 @@ class PasaranController extends Controller
                 'id' => ($item->id),
                 'image' => ($item->image),
                 'description' => ($item->description),
+            ];
+        });
+
+        return response()->json($dataJson);
+    }
+
+    public function jadwalJson()
+    {
+        $data = Jadwal::all();
+
+        $dataJson = $data->map(function ($item) {
+            return [
+                'id' => ($item->id),
+                'name_pasaran' => ($item->name_pasaran),
+                'jadwal_tutup' => ($item->jadwal_tutup),
+                'jadwal_undi' => ($item->jadwal_undi),
+                'situs_resmi' => ($item->situs_resmi),
             ];
         });
 

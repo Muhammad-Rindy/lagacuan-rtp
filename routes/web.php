@@ -86,6 +86,7 @@ Route::post('/update-buku', [BukuController::class, 'updateData']);
 // Keluhan Togel
 Route::get('/index-keluhan', [KeluhanController::class, 'index_keluhan'])->name('index-keluhan');
 Route::post('/destroy-keluhan', [KeluhanController::class, 'destroy_keluhan']);
+Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
 
 
 

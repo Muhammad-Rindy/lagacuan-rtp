@@ -23,7 +23,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $.ajax({
-                url: 'https://raw.githubusercontent.com/MR-Dragon1/jeder/main/public/data/jadwal.json',
+                url: 'http://127.0.0.1:8000/api/jadwal',
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -38,26 +38,38 @@
                 $('#jsonTable').DataTable({
                     data: data,
                     columns: [{
-                            data: 'nama'
+
+                            data: 'name_pasaran'
                         },
                         {
-                            data: 'tutup'
+                            className: 'text-center',
+                            data: 'jadwal_tutup',
+                            render: function(data, type, row, meta) {
+                                if (type === 'display') {
+                                    return '<div>' + data + ' WIB' + '</div>';
+                                }
+                                return data;
+                            }
                         },
                         {
-                            data: 'undi',
+                            className: 'text-center',
+                            data: 'jadwal_undi',
+                            render: function(data, type, row, meta) {
+                                if (type === 'display') {
+                                    return '<div>' + data + ' WIB' + '</div>';
+                                }
+                                return data;
+                            }
                         },
                         {
-                            data: 'situs',
+                            data: 'situs_resmi',
                             className: 'text-center',
                             render: function(data, type, row, meta) {
-                                // 'display' type is used to display data in the table
                                 if (type === 'display') {
-                                    // Assuming 'situs' contains the URL
                                     return '<a href="' + data + '" target="_blank">' +
                                         "<i class='fa-solid fa-up-right-from-square'></i>" +
                                         '</a>';
                                 }
-                                // 'filter', 'sort', and 'type' types are used for other purposes
                                 return data;
                             }
                         }

@@ -27,6 +27,26 @@ class KeluhanController extends Controller
 
     }
 
+    public function store_keluhan(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'email' => 'required',
+            'number_phone' => 'required',
+            'title_keluhan' => 'required',
+            'description_keluhan' => 'required',
+        ]);
+
+        $result = Keluhan::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'number_phone' => $request->number_phone,
+            'title_keluhan' => $request->title_keluhan,
+            'description_keluhan' => $request->description_keluhan,
+        ]);
+
+        return response()->json(['success' => true, 'result' => $result]);
+    }
 
 
 
