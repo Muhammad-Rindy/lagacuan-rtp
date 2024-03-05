@@ -1,5 +1,5 @@
 <header class="lh-1 py-3" style="padding: 20px 25px;background-color: #101010;border-bottom: solid #ffcf00 2px">
-    <div class="head-1"><a href=""><img width="18px" src="icon-apk.webp" alt="apk">
+    <div class="head-1"><a href=""><img width="18px" src="{{ asset('icon-apk.webp') }}" alt="apk">
             DOWNLOAD
             APLIKASI TOGEL </a> <span style="color: white"> | </span> <i style="color: white"
             class="fa-brands fa-telegram"></i> <a href=""> TELEGRAM </a> <span style="color: white"> | </span> <i
@@ -8,7 +8,7 @@
     </div>
     <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">
-            <img style="height: 50px" src="logo.png" alt="logo">
+            <img style="height: 50px" src="{{ asset('logo.png') }}" alt="logo">
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
             <a href="https://jederwd.org/#/register" class="Btn" target="_blank"></a>
@@ -19,38 +19,30 @@
 {{-- Desktop --}}
 <div class="nav-scroller py-1 mb-2 nav-desktop" style="border-bottom: solid #ffcf00 2px">
     <nav class="nav nav-underline justify-content-between">
-        <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-pasaran-home') }}" style="font-weight:bold;font-family:math;margin-left:15px"><i
-                class="fa-solid fa-house"></i>
+        <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-pasaran-home') }}" style="margin-left:15px;"><i class="fa-solid fa-house"></i>
             <span class="head-2">HOME</span></a>
-        <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-live-home') }}" style="font-weight:bold;font-family:math;"><span class="head-2">LIVE
+        <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-live-home') }}" style=""><span class="head-2">LIVE
                 DRAW🔥</span></a>
-        <a @if (request()->is('prediksi-togel')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-prediksi-home') }}" style="font-weight:bold;font-family:math;"><span
-                class="head-2">PREDIKSI
+        <a @if (request()->is('prediksi-togel')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-prediksi-home') }}" style=""><span class="head-2">PREDIKSI
                 TOGEL</span></a>
-        {{-- <a @if (request()->is('jadwal-togel')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-jadwal') }}" style="font-weight:bold;font-family:math;"><span class="head-2">JADWAL
-                TOGEL</span></a> --}}
-        <a @if (request()->is('data-result')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-result-home') }}" style="font-weight:bold;font-family:math;"><span class="head-2">DATA
+
+        <a @if (request()->is('data-result')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-result-home') }}" style=""><span class="head-2">DATA
                 RESULT</span></a>
-        <a @if (request()->is('bukti-jackpot')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-bukti-home') }}" style="font-weight:bold;font-family:math;"><span class="head-2">BUKTI
+        <a @if (request()->is('bukti-jackpot')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-bukti-home') }}" style=""><span class="head-2">BUKTI
                 JACKPOT 🔥</span></a>
-        <a @if (request()->is('buku-mimpi')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-buku-home') }}" style="font-weight:bold;font-family:math;"><span class="head-2">BUKU
+        <a @if (request()->is('buku-mimpi')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-buku-home') }}" style=""><span class="head-2">BUKU
                 MIMPI</span></a>
-        {{-- <a @if (request()->is('promosi')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="https://jederwd.org/#/activity" target="_blank" style="font-weight:bold;font-family:math;"><span class="head-2">PROMOSI
-                🔥</span></a> --}}
-        <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link link-body-emphasis"
-            href="{{ route('index-keluhan-home') }}" style="font-weight:bold;font-family:math;"><span
-                class="head-2">KELUHAN</span></a>
+
+        <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-keluhan-home') }}" style=""><span class="head-2">KELUHAN</span></a>
         <a href="https://jederwd.org/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
-            target="_blank" class="nav-item nav-link link-body-emphasis"
-            style="font-weight:bold;font-family:math;margin-right:15px"><span class="head-2">CARA
+            target="_blank" class="nav-item nav-link no-actived" style="margin-right:15px"><span class="head-2">CARA
                 BERMAIN</span></a>
     </nav>
 </div>
@@ -112,20 +104,6 @@
                         BUKTI JACKPOT</button></a>
             </div>
         </div>
-        {{-- <div class="row align-items-center mb-1">
-            <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-buku') }}"><button
-                        @if (request()->is('buku-mimpi')) class="actives-mobile" @endif class="button-15"
-                        role="button">
-                        BUKU MIMPI</button></a>
-            </div>
-            <div class="col" style="padding: 0px;margin-left:2px"">
-                <a href="https://jederwd.org/#/activity"><button
-                        @if (request()->is('promosi')) class="actives-mobile" @endif class="button-15"
-                        role="button" target="_blank">
-                        PROMOSI</button></a>
-            </div>
-        </div> --}}
         <div class="row align-items-center mb-1">
             <div class="col" style="padding: 0px; margin-right:2px">
                 <a href="{{ route('index-keluhan-home') }}"><button
@@ -155,17 +133,17 @@
                         Promo</button></a>
             </div>
             <div class="col" style="padding: 0px">
-                <a href="https://jederwd.org/#/index?category=elgame"><button class="button-15"
-                        style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-gamepad"></i> RTP slot
+                <a href="{{ route('index-rtp') }}"><button class="button-15" style="letter-spacing: 0.5px"
+                        role="button"> <i class="fa-solid fa-gamepad"></i> RTP slot
                     </button></a>
             </div>
         </div>
     </div>
     <div class="mb-2">
         <div class="input-group">
-            <span style="border: solid red 2px; color:white" class="input-group-text winner" style=""
+            <span style="border: solid #214dfd 2px; color:white" class="input-group-text winner" style=""
                 id="basic-addon3"><i style="margin-right:5px" class="fa-solid fa-trophy"></i> Winner Togel</span>
-            <input style="border: solid red 2px; background-color:#181818; color:white;" type="text"
+            <input style="border: solid #214dfd 2px; background-color:#181818; color:white;" type="text"
                 class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" disabled>
         </div>
     </div>
@@ -199,9 +177,9 @@
         'Bob*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
         'Jan*** Jackpot POIPET Sebesar Rp.104.405.102',
         'Pol*** Jackpot HUAHIN Sebesar Rp.10.473.102',
-        'Vio*** Jackpot TOTOMACAU Sebesar Rp.40.105.054',
-        'Erd*** Jackpot TOTOMACAU Sebesar Rp.275.452.205',
-        'Wen*** Jackpot TOTOMACAU Sebesar Rp.35.104.477',
+        'Vio*** Jackpot NEWYORK-MID Sebesar Rp.40.105.054',
+        'Erd*** Jackpot CHELSEA Sebesar Rp.275.452.205',
+        'Wen*** Jackpot OREGON Sebesar Rp.35.104.477',
     ];
 
     var index = 0;
@@ -221,7 +199,6 @@
             url: 'http://127.0.0.1:8000/api/banner',
             method: 'GET',
             success: function(data) {
-                // Handle the successful response and update the results container
                 displayResults(data);
             },
             error: function(error) {
@@ -230,7 +207,6 @@
         });
 
         function displayResults(data) {
-            // Iterate through the data and append it to the results container
             var resultsContainer = $('#results-banner');
             var carouselInner = '';
 
@@ -238,11 +214,12 @@
                 var pathImage = 'storage/' + result.image;
 
                 carouselInner += `
-                <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                    <img src="${pathImage}" class="d-block w-100 img-fluid" alt="gambar">
-                </div>
-            `;
+        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <img src="{{ asset('${pathImage}') }}" class="d-block w-100 img-fluid" alt="gambar">
+        </div>
+                `;
             });
+
 
             var resultCard = `
             <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade mb-3" data-bs-ride="carousel">

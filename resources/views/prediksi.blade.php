@@ -35,7 +35,7 @@
                     var pathImage = 'storage/' + result.image;
                     var resultCard = `
                             <div class="card w-100 mb-2"
-                style="background-image: linear-gradient(180deg, #bd0002 50%, #7b0000 99%);border-radius: 10px;border: solid red 2px;">
+                style="background-image: linear-gradient(#0e69fb, #071b69);border-radius: 10px;border: solid #214dfd 2px;">
                 <div class="row g-0">
                     <div class="col-md-4"
                         style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -68,7 +68,7 @@
                                 POOLS
                             </h1>
                         </div>
-                        <div class="modal-body" style="background-image: linear-gradient(#ff2d2d, #910505);">
+                        <div class="modal-body" style="background-image: linear-gradient(#0e69fb, #071b69);">
                             <div class="container text-center mb-2">
                                 <img src="${pathImage}" class="img-fluid" alt="...">
                             </div>
@@ -78,17 +78,17 @@
                                 <div class="row align-items-center">
                                     <div class="col" style="font-weight:bold; color:white">
                                         <h5>ANGKA MAIN :</h5>
-                                        <h5 style="color: #161616; font-weight:bold">${result.angka_main}</h5>
+                                        <h5 style="color: black; font-weight:bold">${result.angka_main}</h5>
                                         <h5>TOP 3D (BB) :</h5>
-                                        <h5 style="color: #161616; font-weight:bold">${result.top_3d}</h5>
+                                        <h5 style="color: black; font-weight:bold">${result.top_3d}</h5>
                                         <h5>TOP 2D (BB) :</h5>
-                                        <h5 style="color: #161616; font-weight:bold">${result.top_2d}</h5>
+                                        <h5 style="color: black; font-weight:bold">${result.top_2d}</h5>
                                         <h5>COLOK BEBAS :</h5>
-                                        <h5 style="color: #161616; font-weight:bold">${result.colok_bebas}</h5>
+                                        <h5 style="color: black; font-weight:bold">${result.colok_bebas}</h5>
                                         <h5>COLOK 2D :</h5>
-                                        <h5 style="color: #161616; font-weight:bold">${result.colok_2d}</h5>
+                                        <h5 style="color: black; font-weight:bold">${result.colok_2d}</h5>
                                         <h5>SHIO JITU :</h5>
-                                        <h5 style="color: #161616; font-weight:bold">${result.shio_jitu}</h5>
+                                        <h5 style="color: black; font-weight:bold">${result.shio_jitu}</h5>
                                     </div>
                                 </div>
                             </div>

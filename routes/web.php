@@ -10,6 +10,7 @@ use App\Http\Controllers\PasaranController;
 use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\RtpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,6 +96,13 @@ Route::get('/index-banner', [BannerController::class, 'index_banner'])->name('in
 Route::post('/store-banner', [BannerController::class, 'store_banner']);
 Route::post('/destroy-banner', [BannerController::class, 'destroy_banner']);
 
+// RTP Slot
+Route::get('/rtpslot', [RtpController::class, 'index'])->name('index-rtp');
+Route::get('/rtpslot/{provider_name}', [RtpController::class, 'providerRtp']);
+Route::post('/admin/rand-rtp', [RtpController::class, 'update'])->name('admin-rtp');
+
+// Pola rtp
+Route::get('/index-pola', [BannerController::class, 'index_pola_rtp'])->name('index-pola-rtp');
 
 
 

@@ -11,9 +11,9 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>JEDERWD - Link Alternatif Resmi Jeder WD, Official Login Jeder WD</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -30,7 +30,7 @@
 
 <body style="background-color: #212529">
     <div class="position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        <a href=""><img width="60" src="logo-wa.png" alt="whatsapp"></a>
+        <a href=""><img width="60" src="{{ asset('logo-wa.png') }}" alt="whatsapp"></a>
     </div>
 
 
@@ -59,7 +59,7 @@
 
 
         @include('layouts.footer')
-        <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ asset('../assets/dist/js/bootstrap.bundle.min.js') }}"></script>
         <script>
             const seconds = document.querySelector(".seconds .number"),
                 minutes = document.querySelector(".minutes .number"),

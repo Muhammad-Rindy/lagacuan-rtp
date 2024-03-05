@@ -27,6 +27,12 @@ class BannerController extends Controller
         return view('dashboards.banner.index');
 
     }
+    public function index_pola_rtp()
+    {
+
+        return view('dashboards.banner.index_pola');
+
+    }
 
 
 

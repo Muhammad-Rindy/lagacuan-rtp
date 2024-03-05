@@ -1,0 +1,40 @@
+[
+    {
+        "provider_name" : "pragmatic",
+        "img_url" : "/images/logo_provider/pragmatic.png"
+    },
+    {
+        "provider_name" : "pioneer",
+        "img_url" : "/images/logo_provider/pioneer.png"
+    },
+    {
+        "provider_name" : "pg",
+        "img_url" : "/images/logo_provider/pg.png"
+    },
+    {
+        "provider_name" : "joker",
+        "img_url" : "/images/logo_provider/joker.png"
+    },
+    {
+        "provider_name" : "nolimit",
+        "img_url" : "/images/logo_provider/nolimit.png"
+    },
+    {
+        "provider_name" : "netent",
+        "img_url" : "/images/logo_provider/netent.png"
+    },
+    {
+        "provider_name" : "bigtime",
+        "img_url" : "/images/logo_provider/bigtime.png"
+    },
+    {
+        "provider_name" : "redtiger",
+        "img_url" : "/images/logo_provider/redtiger.png"
+    },
+    {
+        "provider_name" : "jili",
+        "img_url" : "/images/logo_provider/jili.png"
+    }
+
+]
+

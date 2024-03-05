@@ -51,7 +51,7 @@
                                 <h1 class="modal-title fs-6" id="exampleModalLabel">LIVE DRAW <span style="text-transform:uppercase">${result.name_pasaran}</span> POOLS
                                 </h1>
                             </div>
-                            <div class="modal-body" style="background-image: linear-gradient(#ff2d2d, #910505);">
+                            <div class="modal-body" style="background-image: linear-gradient(#0e69fb, #071b69);">
                                 <div class="container text-center mb-3">
                                     <img src="${pathImage}" class="img-fluid" alt="...">
                                 </div>
@@ -67,7 +67,7 @@
                                         <div class="col" style="font-weight:bold;font-size:22px; color:white">
                                             Prize #1
                                         </div>
-                                        <div class="col" style="font-weight:bold;font-size:22px; color:#161616">
+                                        <div class="col" style="font-weight:bold;font-size:22px; color:white">
                                             ${result.result}
                                         </div>
                                     </div>

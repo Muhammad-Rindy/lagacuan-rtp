@@ -1,6 +1,6 @@
 .card-red {
-    background-image: linear-gradient(0deg, #750609 0%, #cb0d10 50%);
-    border: solid red 2px;
+    background-image: linear-gradient(26deg, #011841 0%, #073fdf 50%);
+    border: solid #0079ff 2px;
     border-radius: 10px;
 }
 
@@ -114,11 +114,11 @@ input::placeholder {
 }
 
 .button-16:hover {
-    background-image: linear-gradient(#cfcc0a, #685f00);
+    background-image: linear-gradient(#f1f735, #a19d05);
 }
 
 .button-16 {
-    background-image: linear-gradient(#fffb24, #837903);
+    background-image: linear-gradient(#f1f735, #a19d05);
     border-color: #efff33;
     text-decoration: none;
     border-radius: 5px;
@@ -168,7 +168,15 @@ a {
 .actives {
     color: #ffd600;
     text-decoration: none;
+    font-weight: bold;
+    font-family: math;
     margin-top: 7.5px;
+}
+
+.no-actived {
+    font-weight: bold;
+    font-family: math;
+    color: white;
 }
 
 .marquee {
@@ -197,7 +205,7 @@ a {
 }
 
 .winner {
-    background-image: linear-gradient(#ff2d2d, #910505);
+    background-image: linear-gradient(#0e69fb, #071b69);
     color: white;
     font-weight: bold;
     font-size: 13px;
@@ -205,8 +213,8 @@ a {
 
 .button-15 {
     transition: 0.3s;
-    background-image: linear-gradient(#ff2d2d, #910505);
-    border-color: #ef0000;
+    background-image: linear-gradient(#0e69fb, #071b69);
+    border-color: #214dfd;
     text-decoration: none;
     border-radius: 5px;
     box-sizing: border-box;
@@ -296,7 +304,7 @@ a {
 }
 
 .button-15:active {
-    border-color: #006dbc;
+    border-color: #214dfd;
     outline: none;
 }
 
@@ -314,7 +322,7 @@ a {
 }
 
 .button-15:hover {
-    background-image: linear-gradient(#c70707, #5d0404);
+    background-image: linear-gradient(#0744a5, #01104b);
 }
 
 @media (min-width: 900px) {
@@ -385,8 +393,8 @@ a {
         background: rgba(250, 250, 250, 0.2);
     }
     .actives-mobile-2 {
-        background-image: linear-gradient(#c70707, #5d0404);
-        border-color: #cf0000;
+        background-image: linear-gradient(#0744a5, #01104b);
+        border-color: #214dfd;
         text-decoration: none;
         border-radius: 5px;
         box-sizing: border-box;
@@ -426,8 +434,8 @@ a {
     }
 
     .actives-mobile-2 {
-        background-image: linear-gradient(#c70707, #5d0404);
-        border-color: #cf0000;
+        background-image: linear-gradient(#0744a5, #01104b);
+        border-color: #214dfd;
         text-decoration: none;
         border-radius: 5px;
         box-sizing: border-box;
@@ -512,8 +520,8 @@ a {
     }
 
     .actives-mobile {
-        background-image: linear-gradient(#9f0606, #410202);
-        border-color: #cf0000;
+        background-image: linear-gradient(#0744a5, #01104b);
+        border-color: #214dfd;
         text-decoration: none;
         border-radius: 5px;
         box-sizing: border-box;
@@ -610,7 +618,7 @@ a {
     font-family: serif;
     color: white;
     font-weight: bold;
-    border: dashed 2px red;
+    border: dashed 2px #0da0f0;
     background-color: black;
 }
 
@@ -621,9 +629,13 @@ a {
     border-radius: 4px;
     background-image: linear-gradient(
         180deg,
-        #e70909 12%,
-        #e91515 50%,
-        #b10000 100%
+        #0714b1 12%,
+        #2f3efd 50%,
+        #0714b1 100%
     );
     text-align: center;
+}
+
+.button-1:hover {
+    background-color: #0714b1;
 }
