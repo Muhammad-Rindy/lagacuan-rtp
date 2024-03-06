@@ -1,7 +1,7 @@
 @extends('layouts.master')
 <style>
     .provider {
-        background-image: linear-gradient(132deg, #fbf370 0%, #b1a406 85%);
+        background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
         border-radius: 8px;
         padding: 15px;
         border: solid #ffd800 2px;
@@ -9,7 +9,7 @@
     }
 
     .provider-game {
-        background-image: linear-gradient(132deg, #fbf370 0%, #b1a406 85%);
+        background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
         padding: 8px;
         border: solid #ffd800 2px;
         border-radius: 3px;
@@ -19,6 +19,16 @@
     .provider-game:hover {
         transform: scale(1.1);
         /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+    @media screen and (min-width: 900px) {
+        .img-rtp {
+            height: 110px;
+        }
+    }
+
+    .bg-animasi {
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
     }
 </style>
 @section('content')
@@ -45,11 +55,27 @@
             @foreach ($games as $item)
                 <div class="col mb-2">
                     <div class="card h-100 shadow lazy-image"
-                        style="background-image: linear-gradient(90deg, #1b44c5 14%, #3b9ee4 70%);border: solid #198cf5 3px; color:white">
+                        style="background-image: linear-gradient(45deg, #1b44c5 14%, #3b7fe4 70%);border: solid #198cf5 3px; color:white">
                         <a href="https://jederwd.org/#/index?category=home" class="provider-game">
-                            <img style="" height="110" src="{{ asset($item['image']) }}" class="card-img-top"
+                            <img style="" src="{{ asset($item['image']) }}" class="card-img-top img-new"
                                 alt="...">
                         </a>
+                        <div class="progress mt-2" style="margin: 0px 12px -8px 12px; height:18px; border-radius:20px">
+                            @php
+                                $persentase = intval($item['persentase']);
+                                $color = '';
+                                if ($persentase >= 30 && $persentase <= 40) {
+                                    $color = 'bg-danger bg-animasi';
+                                } elseif ($persentase >= 41 && $persentase <= 60) {
+                                    $color = 'bg-warning bg-animasi';
+                                } elseif ($persentase >= 61 && $persentase <= 100) {
+                                    $color = 'bg-success bg-animasi';
+                                }
+                            @endphp
+                            <div class="progress-bar {{ $color }}" role="progressbar"
+                                style="width: {{ $persentase }}%;" aria-valuenow="{{ $persentase }}" aria-valuemin="0"
+                                aria-valuemax="100">{{ $persentase }}%</div>
+                        </div>
                         <hr style="border-top: 5px double white;">
                         <p class=""
                             style="text-align: center;

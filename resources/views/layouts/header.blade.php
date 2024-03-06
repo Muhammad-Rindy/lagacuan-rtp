@@ -133,8 +133,9 @@
                         Promo</button></a>
             </div>
             <div class="col" style="padding: 0px">
-                <a href="{{ route('index-rtp') }}"><button class="button-15" style="letter-spacing: 0.5px"
-                        role="button"> <i class="fa-solid fa-gamepad"></i> RTP slot
+                <a href="{{ route('index-rtp') }}"><button
+                        @if (request()->is('rtpslot')) class="actives-mobile-2" @endif class="button-15"
+                        style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-gamepad"></i> RTP slot
                     </button></a>
             </div>
         </div>

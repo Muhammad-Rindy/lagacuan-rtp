@@ -61,10 +61,11 @@ class RtpController extends Controller
         foreach ($data as &$item) {
 
             $item['pola'] = $this->generateRandomString();
+            $item['persentase'] = $this->generateRandomPercentage();
         }
 
 
-        $result = File::put(database_path('json/data_rtp.json'), json_encode($data, JSON_PRETTY_PRINT));
+        $result =File::put(database_path('json/data_rtp.json'), json_encode($data, JSON_PRETTY_PRINT));
 
         return response()->json(['success' => true, 'result' => $result]);
     }
@@ -163,5 +164,10 @@ class RtpController extends Controller
 
         return $randomVariable;
 
+    }
+
+    private function generateRandomPercentage() {
+        $randomPercentage = rand(30, 100);
+        return $randomPercentage;
     }
 }

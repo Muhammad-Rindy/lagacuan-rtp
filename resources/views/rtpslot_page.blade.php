@@ -1,7 +1,7 @@
 @extends('layouts.master')
 <style>
     .provider {
-        background-image: linear-gradient(132deg, #fbf370 0%, #b1a406 85%);
+        background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
         border-radius: 8px;
         padding: 20px;
         margin: 30px 0px;
@@ -15,7 +15,7 @@
     }
 
     .provider-game {
-        background-image: linear-gradient(132deg, #fbf370 0%, #b1a406 85%);
+        background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
         padding: 8px;
         border-radius: 3px;
         border: solid #ffd800 2px;
@@ -25,6 +25,30 @@
     .provider-game:hover {
         transform: scale(1.1);
         /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+    @media screen and (min-width: 900px) {
+        .img-rtp {
+            height: 110px;
+        }
+
+        .provider-img {
+            display: flex;
+        }
+
+    }
+
+    @media screen and (max-width: 900px) {
+
+
+        .provider-img {
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
+    }
+
+    .bg-animasi {
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
     }
 </style>
 @section('content')
@@ -38,7 +62,7 @@
             <h4 class="text-center" style="color: white">
                 {{ now()->format('l, F j, Y') }}
             </h4>
-            <div class="d-flex align-item-center justify-content-around">
+            <div class="align-item-center justify-content-around provider-img">
                 @foreach ($provider as $item)
                     <a class="provider" target="_blank" href="/rtpslot/{{ $item['provider_name'] }}">
                         <img src="{{ asset($item['img_url']) }}" alt={{ $item['provider_name'] }}>
@@ -52,20 +76,36 @@
             @foreach ($data as $item)
                 <div class="col mb-2">
                     <div class="card h-100 shadow lazy-image"
-                        style="background-image: linear-gradient(90deg, #1b44c5 14%, #3b9ee4 70%);border: solid #198cf5 3px; color:white">
+                        style="background-image: linear-gradient(45deg, #1b44c5 14%, #3b7fe4 70%);border: solid #198cf5 3px; color:white;">
                         <a href="https://jederwd.org/#/index?category=home" class="provider-game">
-                            <img style="" height="110" src="{{ asset($item['image']) }}" class="card-img-top"
-                                alt="...">
+                            <img src="{{ asset($item['image']) }}" class="card-img-top img-rtp" alt="...">
                         </a>
+                        <div class="progress mt-2" style="margin: 0px 12px -8px 12px; height:18px; border-radius:20px">
+                            @php
+                                $persentase = intval($item['persentase']);
+                                $color = '';
+                                if ($persentase >= 30 && $persentase <= 40) {
+                                    $color = 'bg-danger bg-animasi';
+                                } elseif ($persentase >= 41 && $persentase <= 60) {
+                                    $color = 'bg-warning bg-animasi';
+                                } elseif ($persentase >= 61 && $persentase <= 100) {
+                                    $color = 'bg-success bg-animasi';
+                                }
+                            @endphp
+                            <div class="progress-bar {{ $color }}" role="progressbar"
+                                style="width: {{ $persentase }}%;" aria-valuenow="{{ $persentase }}" aria-valuemin="0"
+                                aria-valuemax="100">{{ $persentase }}%</div>
+                        </div>
                         <hr style="border-top: 5px double white;">
-                        <p class=""
+
+                        <div class=""
                             style="text-align: center;
             font-weight: bold;
             background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);border: solid #198cf5 2px; border-radius:25px;
             margin: -5px 15px 5px 15px;">
                             <span style="font-size:14px; letter-spacing:1px">Pola</span>
 
-                        </p>
+                        </div>
                         <p style="font-family: math;background-color: #00000096;margin: 5px 10px;padding: 5px 0px;border-radius: 5px;font-size:13px"
                             class="text-center">{!! $item['pola'] !!}</p>
                     </div>
