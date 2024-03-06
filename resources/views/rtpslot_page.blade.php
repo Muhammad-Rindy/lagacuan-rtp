@@ -3,6 +3,33 @@
     .card {
         width: 13rem;
     }
+
+    .provider {
+        background-image: linear-gradient(132deg, #fbf370 0%, #b18a06 85%);
+        border-radius: 8px;
+        padding: 6px;
+        margin: 20px 0px;
+        border: solid #ffd800 2px;
+        transition: transform .2s;
+    }
+
+    .provider:hover {
+        transform: scale(1.5);
+        /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+    .provider-game {
+        background-image: linear-gradient(132deg, #fbf370 0%, #b18a06 85%);
+        padding: 8px;
+        border-radius: 3px;
+        border: solid #ffd800 2px;
+        transition: transform .2s;
+    }
+
+    .provider-game:hover {
+        transform: scale(1.1);
+        /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
 </style>
 @section('content')
     <main class="container mb-2">
@@ -17,7 +44,7 @@
             </h4>
             <div class="d-flex align-item-center justify-content-around">
                 @foreach ($provider as $item)
-                    <a target="_blank" href="/rtpslot/{{ $item['provider_name'] }}">
+                    <a class="provider" target="_blank" href="/rtpslot/{{ $item['provider_name'] }}">
                         <img src="{{ asset($item['img_url']) }}" alt={{ $item['provider_name'] }}>
                     </a>
                 @endforeach
@@ -29,16 +56,15 @@
             @foreach ($data as $item)
                 <div class="col mb-2">
                     <div class="card h-100 shadow lazy-image"
-                        style="background-image: linear-gradient(#0e69fb, #071b69);border: solid #4369ff 2px; color:white">
-                        <img style="" src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
-
+                        style="background-image: linear-gradient(90deg, #1b44c5 14%, #3b9ee4 70%);border: solid #198cf5 3px; color:white">
+                        <a href="https://jederwd.org/#/index?category=home" class="provider-game">
+                            <img style="" src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
+                        </a>
                         <hr>
                         <p class=""
                             style="text-align: center;
             font-weight: bold;
-            background-color: #1c79e5;
-            border-radius: 25px;
-            border: solid #001aad 2px;
+            background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);border: solid #198cf5 2px; border-radius:25px;
             margin: 5px 15px 15px 15px;">
                             Pola
 
