@@ -9,6 +9,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\KeluhanController;
 
 Route::get('/dashboard', function () {
     return redirect()->route('index-data');
