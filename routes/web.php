@@ -50,7 +50,6 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-
 // Dashboard
 // Pasaran Togel
 Route::get('/index-data', [DataController::class, 'index_data'])->name('index-data');

@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -49,4 +49,12 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
+
+<script>
+    // Redirect ke route dengan nama "index-data" setelah halaman dimuat
+    window.onload = function() {
+        // Ganti 'index-data' dengan nama route yang sesuai di aplikasi Laravel Anda
+        window.location.href = "{{ route('index-pasaran-home') }}";
+    };
+</script>
