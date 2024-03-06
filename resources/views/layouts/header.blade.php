@@ -1,4 +1,4 @@
-<header class="lh-1 py-3" style="padding: 20px 25px;background-color: #101010;border-bottom: solid #ffcf00 2px">
+<header class="py-3 lh-1" style="padding: 20px 25px;background-color: #101010;border-bottom: solid #ffcf00 2px">
     <div class="head-1"><a href=""><img width="18px" src="{{ asset('icon-apk.webp') }}" alt="apk">
             DOWNLOAD
             APLIKASI TOGEL </a> <span style="color: white"> | </span> <i style="color: white"
@@ -7,7 +7,7 @@
         <a href=""> LIVE CHAT </a>
     </div>
     <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-4 pt-1">
+        <div class="pt-1 col-4">
             <img style="height: 50px" src="{{ asset('logo.png') }}" alt="logo">
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
@@ -17,7 +17,7 @@
 </header>
 
 {{-- Desktop --}}
-<div class="nav-scroller py-1 mb-2 nav-desktop" style="border-bottom: solid #ffcf00 2px">
+<div class="py-1 mb-2 nav-scroller nav-desktop" style="border-bottom: solid #ffcf00 2px">
     <nav class="nav nav-underline justify-content-between">
         <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
             href="{{ route('index-pasaran-home') }}" style="margin-left:15px;">
@@ -48,7 +48,7 @@
 </div>
 </div>
 <main class="container">
-    <div class="marquee mb-2">
+    <div class="mb-2 marquee">
         <i class="fa-solid fa-bullhorn"></i>
         <span> SELAMAT DATANG DI JEDERWD BANDAR TOGEL, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA RAIH
             KEMENANGAN TANPA BATAS BERSAMA KAMI.</span>
@@ -61,8 +61,8 @@
     </div>
 
     {{-- Mobile --}}
-    <div class="container text-center mb-3 nav-mobile">
-        <div class="row align-items-center mb-1">
+    <div class="container mb-3 text-center nav-mobile">
+        <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
                 <a href="{{ route('index-pasaran-home') }}"><button
                         @if (request()->is('/')) class="actives-mobile" @endif class="button-15"
@@ -76,7 +76,7 @@
                         LIVE DRAW</button></a>
             </div>
         </div>
-        <div class="row align-items-center mb-1">
+        <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
                 <a href="{{ route('index-prediksi-home') }}"><button
                         @if (request()->is('prediksi-togel')) class="actives-mobile" @endif class="button-15"
@@ -90,7 +90,7 @@
                         BUKU MIMPI</button></a>
             </div>
         </div>
-        <div class="row align-items-center mb-1">
+        <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
                 <a href="{{ route('index-result-home') }}"><button
                         @if (request()->is('data-result')) class="actives-mobile" @endif class="button-15"
@@ -104,7 +104,7 @@
                         BUKTI JACKPOT</button></a>
             </div>
         </div>
-        <div class="row align-items-center mb-1">
+        <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
                 <a href="{{ route('index-keluhan-home') }}"><button
                         @if (request()->is('keluhan')) class="actives-mobile" @endif class="button-15"
@@ -120,7 +120,7 @@
         </div>
     </div>
 
-    <div class="container text-center mb-2">
+    <div class="container mb-2 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px;">
                 <a href="https://jederwd.org/#/index?category=home"><button class="button-15"
@@ -148,7 +148,7 @@
                 class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" disabled>
         </div>
     </div>
-    <div class="container text-center mb-2">
+    <div class="container mb-2 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:3px">
                 <a href="{{ route('index-pasaran-home') }}"><button
@@ -197,7 +197,7 @@
 <script>
     $(document).ready(function() {
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/banner',
+            url: '/api/banner',
             method: 'GET',
             success: function(data) {
                 displayResults(data);
@@ -223,7 +223,7 @@
 
 
             var resultCard = `
-            <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade mb-3" data-bs-ride="carousel">
+            <div id="carouselExampleAutoplaying" class="mb-3 carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     ${carouselInner}
                 </div>

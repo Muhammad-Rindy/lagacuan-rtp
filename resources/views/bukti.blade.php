@@ -18,7 +18,7 @@
             var baseUrl = "{{ url('/') }}";
 
             $.ajax({
-                url: 'http://127.0.0.1:8000/api/bukti',
+                url: '/api/bukti',
                 method: 'GET',
                 success: function(data) {
                     // Handle the successful response and update the results container
