@@ -1,15 +1,15 @@
 @extends('layouts.master')
 <style>
     .provider {
-        background-image: linear-gradient(132deg, #fbf370 0%, #b18a06 85%);
+        background-image: linear-gradient(132deg, #fbf370 0%, #b1a406 85%);
         border-radius: 8px;
-        padding: 0px 8px;
+        padding: 15px;
         border: solid #ffd800 2px;
-        margin: 20px 0px;
+        margin: 30px 0px;
     }
 
     .provider-game {
-        background-image: linear-gradient(132deg, #fbf370 0%, #b18a06 85%);
+        background-image: linear-gradient(132deg, #fbf370 0%, #b1a406 85%);
         padding: 8px;
         border: solid #ffd800 2px;
         border-radius: 3px;
@@ -35,8 +35,7 @@
             </h4>
             <div class="d-flex align-item-center justify-content-around">
                 <div class="provider">
-                    <img class="provider" src={{ asset('/images/logo_provider/' . $provider . '.png') }} alt=""
-                        width="75">
+                    <img src={{ asset('/images/logo_provider/' . $provider . '.png') }} alt="" width="75">
                 </div>
             </div>
         </div>
@@ -48,19 +47,21 @@
                     <div class="card h-100 shadow lazy-image"
                         style="background-image: linear-gradient(90deg, #1b44c5 14%, #3b9ee4 70%);border: solid #198cf5 3px; color:white">
                         <a href="https://jederwd.org/#/index?category=home" class="provider-game">
-                            <img style="" src="{{ asset($item['image']) }}" class="card-img-top" alt="...">
+                            <img style="" height="110" src="{{ asset($item['image']) }}" class="card-img-top"
+                                alt="...">
                         </a>
-                        <hr>
+                        <hr style="border-top: 5px double white;">
                         <p class=""
                             style="text-align: center;
             font-weight: bold;
             background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);border: solid #198cf5 2px; border-radius:25px;
-            margin: 5px 15px 15px 15px;">
-                            Pola
+            margin: -5px 15px 5px 15px;">
+                            <span style="font-size:14px; letter-spacing:1px">Pola</span>
+
 
                         </p>
-                        <p style="font-family: math" class="text-center">{!! $item['pola'] !!}</p>
-
+                        <p style="font-family: math;background-color: #00000096;margin: 5px 10px;padding: 5px 0px;border-radius: 5px;font-size:13px"
+                            class="text-center">{!! $item['pola'] !!}</p>
                     </div>
                 </div>
             @endforeach

@@ -20,8 +20,8 @@
 <div class="nav-scroller py-1 mb-2 nav-desktop" style="border-bottom: solid #ffcf00 2px">
     <nav class="nav nav-underline justify-content-between">
         <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="{{ route('index-pasaran-home') }}" style="margin-left:15px;"><i class="fa-solid fa-house"></i>
-            <span class="head-2">HOME</span></a>
+            href="{{ route('index-pasaran-home') }}" style="margin-left:15px;">
+            <span class="head-2"><i class="fa-solid fa-house"></i>HOME</span></a>
         <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link no-actived"
             href="{{ route('index-live-home') }}" style=""><span class="head-2">LIVE
                 DRAW🔥</span></a>
