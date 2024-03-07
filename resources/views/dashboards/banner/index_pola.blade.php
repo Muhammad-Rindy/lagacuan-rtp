@@ -13,6 +13,7 @@
 @section('content')
     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
         <div class="d-flex flex-column flex-column-fluid">
+
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <div class="m-6">
                     <div class="card card-flush">
@@ -20,6 +21,19 @@
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bold text-gray-800">Button Random Pola</span>
                             </h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="urlRtp">
+                                @csrf
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">URL Target Rtpslot</span>
+                                    <input type="text" id="newUrl" name="newUrl" class="form-control"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    <button type="submit" style="margin: 0px 5px"
+                                        class="btn btn-primary text-center">Submit</button>
+                                </div>
+                            </form>
                         </div>
                         <div class="card-body pt-2" style="text-align: -webkit-center;">
                             <div class="col-md-4 mb-4">
@@ -64,6 +78,69 @@
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            $('#urlRtp').submit(function(e) {
+                e.preventDefault();
+
+                var formData = new FormData($(this)[0]);
+
+                $.ajax({
+                    url: '/admin/input-url',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Jika success
+                        Swal.fire({
+                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Are you sure?</span>',
+                            text: 'This will update the pattern RTP',
+                            icon: 'info',
+                            showCancelButton: true,
+                            confirmButtonColor: "#006ae6",
+                            cancelButtonColor: "#f8285a",
+                            confirmButtonText: 'Yes, update it!',
+                            preConfirm: () => {
+                                return new Promise((resolve) => {
+                                    // Menampilkan loading sebelum mengirim permintaan asinkron
+                                    Swal.showLoading();
+
+                                    // Menggunakan Fetch API untuk mengirim permintaan asinkron
+                                    fetch("/admin/input-url", {
+                                            method: "POST",
+                                            body: new FormData(document
+                                                .getElementById(
+                                                    'urlRtp'))
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Menutup loading dan menampilkan pemberitahuan berhasil jika sukses
+                                            Swal.close();
+                                            Swal.fire('Success!',
+                                                'Your pattern has been updated',
+                                                'success');
+                                            resolve(true);
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:',
+                                                error);
+
+                                            // Menutup loading dan menampilkan pemberitahuan gagal jika terjadi kesalahan
+                                            Swal.close();
+                                            Swal.fire('Failed!',
+                                                'Error: Ada kesalahan',
+                                                'error');
+                                            resolve(false);
+                                        });
+                                });
+                            }
+                        });
+                    },
+
+                });
+            });
+        });
+
         $(document).ready(function() {
             $('#storeData').submit(function(e) {
                 e.preventDefault();

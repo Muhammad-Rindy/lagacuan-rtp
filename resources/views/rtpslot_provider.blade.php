@@ -8,13 +8,7 @@
         margin: 30px 0px;
     }
 
-    .provider-game {
-        background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
-        padding: 8px;
-        border: solid #ffd800 2px;
-        border-radius: 3px;
-        transition: transform .2s;
-    }
+
 
     .provider-game:hover {
         transform: scale(1.1);
@@ -22,10 +16,100 @@
     }
 
     @media screen and (min-width: 900px) {
+
+        .card-rtp-new {
+            background-image: linear-gradient(45deg, #0d3cd1 14%, #396dff 70%);
+            border: solid #198cf5 3px;
+        }
+
+        .pola-set {
+            font-family: math;
+            background-color: #00000096;
+            margin: 5px 10px;
+            padding: 5px 0px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .provider-game {
+            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            padding: 8px;
+            border: solid #ffd800 2px;
+            border-radius: 3px;
+            transition: transform .2s;
+        }
+
+        .bar-persen {
+            margin: 0px 12px -8px 12px;
+            height: 18px;
+            border-radius: 20px
+        }
+
+
+        .img-rtp {
+            height: 110px;
+        }
+
+        .box-pola {
+            text-align: center;
+            font-weight: bold;
+            background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);
+            border: solid #198cf5 2px;
+            border-radius: 25px;
+            margin: -5px 15px 5px 15px;
+        }
+
+        .box-pola-span {
+            font-size: 14px;
+            letter-spacing: 1px
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+
+        .card-rtp-new {
+            background-image: linear-gradient(45deg, #0d3cd1 14%, #396dff 70%);
+            border: solid #198cf5 2px;
+        }
+
+        .pola-set {
+            font-family: math;
+            background-color: #00000096;
+            margin: 5px 3px;
+            padding: 5px 0px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .box-pola {
+            text-align: center;
+            font-weight: bold;
+            background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);
+            border: solid #198cf5 2px;
+            border-radius: 25px;
+            margin: -8px 3px 3px 3px;
+        }
+
+        .box-pola-span {
+            font-size: 11px
+        }
+
+        .provider-game {
+            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            padding: 1px;
+            border: solid #ffd800 1px;
+            border-radius: 3px;
+        }
+
+        .bar-persen {
+            margin: 0px 3px -8px 3px;
+        }
+
         .img-rtp {
             height: 110px;
         }
     }
+
 
     .bg-animasi {
         background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
@@ -45,7 +129,7 @@
             </h4>
             <div class="d-flex align-item-center justify-content-around">
                 <div class="provider">
-                    <img src={{ asset('/images/logo_provider/' . $provider . '.png') }} alt="" width="75">
+                    <img src={{ asset('/images/logo_provider/' . $provider . '.png') }} alt="" width="50">
                 </div>
             </div>
         </div>
@@ -53,14 +137,12 @@
     <main class="container mb-5">
         <div class="row row-cols-1 row-cols-md-6 g-6 mb-5">
             @foreach ($games as $item)
-                <div class="col mb-2">
-                    <div class="card h-100 shadow lazy-image"
-                        style="background-image: linear-gradient(45deg, #1b44c5 14%, #3b7fe4 70%);border: solid #198cf5 3px; color:white">
-                        <a href="https://jederwd.org/#/index?category=home" class="provider-game">
-                            <img style="" src="{{ asset($item['image']) }}" class="card-img-top img-new"
-                                alt="...">
+                <div class="col-4" style="padding: 7px;">
+                    <div class="card h-100 shadow lazy-image card-rtp-new" style="color: white;border: solid #198cf5 3px">
+                        <a href="{{ $item['url'] }}" class="provider-game">
+                            <img src="{{ asset($item['image']) }}" class="card-img-top img-new" alt="...">
                         </a>
-                        <div class="progress mt-2" style="margin: 0px 12px -8px 12px; height:18px; border-radius:20px">
+                        <div class="progress mt-2 bar-persen">
                             @php
                                 $persentase = intval($item['persentase']);
                                 $color = '';
@@ -77,22 +159,14 @@
                                 aria-valuemax="100">{{ $persentase }}%</div>
                         </div>
                         <hr style="border-top: 5px double white;">
-                        <p class=""
-                            style="text-align: center;
-            font-weight: bold;
-            background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);border: solid #198cf5 2px; border-radius:25px;
-            margin: -5px 15px 5px 15px;">
-                            <span style="font-size:14px; letter-spacing:1px">Pola</span>
-
-
-                        </p>
-                        <p style="font-family: math;background-color: #00000096;margin: 5px 10px;padding: 5px 0px;border-radius: 5px;font-size:13px"
-                            class="text-center">{!! $item['pola'] !!}</p>
+                        <div class="box-pola" style=""><span class="box-pola-span">Pola</span></div>
+                        <div style="" class="text-center pola-set">{!! $item['pola'] !!}</div>
                     </div>
                 </div>
             @endforeach
         </div>
     </main>
+
     <script>
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-image');

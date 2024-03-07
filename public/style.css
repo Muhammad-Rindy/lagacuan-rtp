@@ -213,35 +213,6 @@ a {
     font-size: 13px;
 }
 
-.button-15 {
-    transition: 0.3s;
-    background-image: linear-gradient(#0e69fb, #071b69);
-    border-color: #214dfd;
-    text-decoration: none;
-    border-radius: 5px;
-    box-sizing: border-box;
-    color: #ffffff;
-    cursor: pointer;
-    direction: ltr;
-    display: block;
-    font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
-        Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: -0.022em;
-    line-height: 1.7;
-    min-width: 30px;
-    overflow: visible;
-    width: 100%;
-    padding: 4px 15px;
-    text-align: center;
-    vertical-align: baseline;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-}
-
 .head-2:hover {
     color: #ffd600;
 }
@@ -328,6 +299,35 @@ a {
 }
 
 @media (min-width: 900px) {
+    .button-15 {
+        transition: 0.3s;
+        background-image: linear-gradient(#0e69fb, #071b69);
+        border-color: #214dfd;
+        text-decoration: none;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        direction: ltr;
+        display: block;
+        font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons",
+            "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: -0.022em;
+        line-height: 1.7;
+        min-width: 30px;
+        overflow: visible;
+        width: 100%;
+        padding: 4px 15px;
+        text-align: center;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+    }
+
     .h5 {
         font-size: 17px;
     }
@@ -428,11 +428,43 @@ a {
 }
 
 @media (max-width: 900px) {
+    .button-15 {
+        transition: 0.3s;
+        background-image: linear-gradient(#0e69fb, #071b69);
+        border-color: #214dfd;
+        text-decoration: none;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        direction: ltr;
+        display: block;
+        font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons",
+            "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: -0.022em;
+        line-height: 1.7;
+        min-width: 30px;
+        overflow: visible;
+        width: 100%;
+        padding: 4px 15px;
+        text-align: center;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+    }
     .h5 {
         font-size: 16px;
     }
     .h6 {
         font-size: 13px;
+    }
+
+    .ft-marquee {
+        font-size: 14px;
     }
 
     .actives-mobile-2 {

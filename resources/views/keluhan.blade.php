@@ -11,30 +11,33 @@
             @csrf
             <div class="mb-3">
                 <label style="color: white" for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="text" class="form-control bg-light text-black" name="username" id="exampleInputEmail1"
+                <input type="text" class="form-control  text-white" name="username" id="exampleInputEmail1"
                     aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
                 <label style="color: white" for="exampleInputEmail1" class="form-label">Email Address</label>
-                <input type="email" class="form-control bg-light text-black" name="email" id="exampleInputEmail1"
+                <input type="email" class="form-control  text-white" name="email" id="exampleInputEmail1"
                     aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
-                <label style="color: white" for="exampleInputEmail1" class="form-label">No. Whatsapp Aktif</label>
-                <input type="text" name="number_phone" class="form-control bg-light text-black" id="exampleInputEmail1"
+                <label style="color: white" for="exampleInputEmail1" class="form-label">No. Whatsapp Active</label>
+                <input type="text" name="number_phone" class="form-control  text-white" id="exampleInputEmail1"
                     aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
-                <label style="color: white" for="exampleInputEmail1" class="form-label">Judul Keluhan</label>
-                <input type="text" name="title_keluhan" class="form-control bg-light text-black" id="exampleInputEmail1"
+                <label style="color: white" for="exampleInputEmail1" class="form-label">Title Complaint</label>
+                <input type="text" name="title_keluhan" class="form-control  text-white" id="exampleInputEmail1"
                     aria-describedby="emailHelp" required>
             </div>
-            <div class="mb-3">
-                <label style="color: white" for="exampleInputEmail1" class="form-label">Deskripsi Keluhan</label>
-                <input type="text" name="description_keluhan" class="form-control bg-light text-black"
-                    id="exampleInputEmail1" aria-describedby="emailHelp" required>
+            <div class="mb-5">
+                <label style="color: white" for="exampleInputEmail1" class="form-label">Description Complaint</label>
+                <div class="form-floating">
+                    <textarea class="form-control text-white" name="description_keluhan" placeholder="Leave a comment here"
+                        id="floatingTextarea2" style="height: 100px" maxlength="255"></textarea>
+                    <label for="floatingTextarea2">Max. 255 Characters</label>
+                </div>
             </div>
-            <div class="d-grid gap-2 col-4 mx-auto mb-3">
+            <div class="d-grid gap-2 col-3 mx-auto mb-3">
                 <button style="border-radius:25px" type="submit" class="btn btn-primary"><i
                         class="fa-solid fa-paper-plane"></i> Submit</button>
             </div>

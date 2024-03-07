@@ -230,7 +230,8 @@
                             text: "Your file has been saved",
                             icon: "success",
                         });
-                        $('#table-pasaran').DataTable().ajax.reload();
+                        location.reload();
+                        // $('#table-pasaran').DataTable().ajax.reload();
                     },
                     error: function(error) {
                         console.log(error);
@@ -242,6 +243,8 @@
                             text: "Error: " + "Please fill all the input fields",
                             icon: "error",
                         });
+
+
 
                     }
                 });
@@ -325,7 +328,7 @@
                                 text: "Your file has been deleted.",
                                 icon: "success",
                             });
-                            $('#table-pasaran').DataTable().ajax.reload();
+                            location.reload();
                         },
                     });
                 }

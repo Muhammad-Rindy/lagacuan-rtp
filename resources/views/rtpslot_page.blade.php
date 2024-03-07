@@ -15,7 +15,7 @@
     }
 
     .provider-game {
-        background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
+        background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
         padding: 8px;
         border-radius: 3px;
         border: solid #ffd800 2px;
@@ -36,15 +36,104 @@
             display: flex;
         }
 
+        .card-rtp-new {
+            background-image: linear-gradient(45deg, #0d3cd1 14%, #396dff 70%);
+            border: solid #198cf5 3px;
+        }
+
+        .pola-set {
+            font-family: math;
+            background-color: #00000096;
+            margin: 5px 10px;
+            padding: 5px 0px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .provider-game {
+            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            padding: 8px;
+            border: solid #ffd800 2px;
+            border-radius: 3px;
+            transition: transform .2s;
+        }
+
+        .bar-persen {
+            margin: 0px 12px -8px 12px;
+            height: 18px;
+            border-radius: 20px
+        }
+
+        .box-pola {
+            text-align: center;
+            font-weight: bold;
+            background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);
+            border: solid #198cf5 2px;
+            border-radius: 25px;
+            margin: -5px 15px 5px 15px;
+        }
+
+        .box-pola,
+        span {
+            font-size: 14px;
+            letter-spacing: 1px
+        }
+
+
     }
 
     @media screen and (max-width: 900px) {
 
+        .provider-game {
+            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            padding: 1px;
+            border: solid #ffd800 1px;
+            border-radius: 3px;
+        }
 
         .provider-img {
             display: grid;
             grid-template-columns: auto auto auto;
         }
+
+        .card-rtp-new {
+            background-image: linear-gradient(45deg, #0d3cd1 14%, #396dff 70%);
+            border: solid #198cf5 2px;
+        }
+
+        .pola-set {
+            font-family: math;
+            background-color: #00000096;
+            margin: 5px 3px;
+            padding: 5px 0px;
+            border-radius: 5px;
+            font-size: 11px;
+        }
+
+        .box-pola {
+            text-align: center;
+            font-weight: bold;
+            background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);
+            border: solid #198cf5 2px;
+            border-radius: 25px;
+            margin: -8px 3px 3px 3px;
+        }
+
+        .box-pola-span {
+            font-size: 11px;
+        }
+
+        .provider-game {
+            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            padding: 1px;
+            border: solid #ffd800 1px;
+            border-radius: 3px;
+        }
+
+        .bar-persen {
+            margin: 0px 3px -8px 3px;
+        }
+
     }
 
     .bg-animasi {
@@ -64,23 +153,23 @@
             </h4>
             <div class="align-item-center justify-content-around provider-img">
                 @foreach ($provider as $item)
-                    <a class="provider" target="_blank" href="/rtpslot/{{ $item['provider_name'] }}">
+                    <a class="provider" href="/rtpslot/{{ $item['provider_name'] }}">
                         <img src="{{ asset($item['img_url']) }}" alt={{ $item['provider_name'] }}>
                     </a>
                 @endforeach
+
             </div>
         </div>
     </div>
     <main class="container mb-5">
         <div class="row row-cols-1 row-cols-md-6 g-6 mb-5">
             @foreach ($data as $item)
-                <div class="col mb-2">
-                    <div class="card h-100 shadow lazy-image"
-                        style="background-image: linear-gradient(45deg, #1b44c5 14%, #3b7fe4 70%);border: solid #198cf5 3px; color:white;">
-                        <a href="https://jederwd.org/#/index?category=home" class="provider-game">
-                            <img src="{{ asset($item['image']) }}" class="card-img-top img-rtp" alt="...">
+                <div class="col-4" style="padding: 7px;">
+                    <div class="card h-100 shadow lazy-image card-rtp-new" style="color: white;border: solid #198cf5 3px">
+                        <a href="{{ $item['url'] }}" class="provider-game">
+                            <img src="{{ asset($item['image']) }}" class="card-img-top img-new" alt="...">
                         </a>
-                        <div class="progress mt-2" style="margin: 0px 12px -8px 12px; height:18px; border-radius:20px">
+                        <div class="progress mt-2 bar-persen">
                             @php
                                 $persentase = intval($item['persentase']);
                                 $color = '';
@@ -97,17 +186,8 @@
                                 aria-valuemax="100">{{ $persentase }}%</div>
                         </div>
                         <hr style="border-top: 5px double white;">
-
-                        <div class=""
-                            style="text-align: center;
-            font-weight: bold;
-            background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);border: solid #198cf5 2px; border-radius:25px;
-            margin: -5px 15px 5px 15px;">
-                            <span style="font-size:14px; letter-spacing:1px">Pola</span>
-
-                        </div>
-                        <p style="font-family: math;background-color: #00000096;margin: 5px 10px;padding: 5px 0px;border-radius: 5px;font-size:13px"
-                            class="text-center">{!! $item['pola'] !!}</p>
+                        <div class="box-pola" style=""><span class="box-pola-span">Pola</span></div>
+                        <div style="" class="text-center pola-set">{!! $item['pola'] !!}</div>
                     </div>
                 </div>
             @endforeach

@@ -11,6 +11,7 @@ use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\KeluhanController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/dashboard', function () {
     return redirect()->route('index-data');
@@ -74,6 +75,7 @@ Route::middleware('auth')->group(function () {
     // RTP Slot
 
     Route::post('/admin/rand-rtp', [RtpController::class, 'update'])->name('admin-rtp');
+    Route::post('/admin/input-url', [RtpController::class, 'updateUrl'])->name('url-rtp');
 
     // Pola rtp
     Route::get('/index-pola', [BannerController::class, 'index_pola_rtp'])->name('index-pola-rtp');
@@ -81,6 +83,13 @@ Route::middleware('auth')->group(function () {
     // Profile
     Route::get('/my-profile', [ProfileController::class, 'index_profile'])->name('index-profile');
     Route::post('/update-profile', [ProfileController::class, 'updateData'])->name('update-profile');
+
+    // My Contact
+    Route::get('/index-contact', [ContactController::class, 'index_contact'])->name('index-contact');
+    Route::post('/store-contact', [ContactController::class, 'store_contact']);
+    Route::post('/destroy-contact', [ContactController::class, 'destroy_contact']);
+    Route::get('/get-data-contact/{id}', [ContactController::class, 'getData']);
+    Route::post('/update-contact', [ContactController::class, 'updateData']);
 
 
 });

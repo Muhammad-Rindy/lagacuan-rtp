@@ -36,7 +36,7 @@
 </div>
 </div>
 <main class="container">
-    <div class="mb-2 marquee">
+    <div class="mb-2 marquee ft-marquee">
         <i class="fa-solid fa-bullhorn"></i>
         <span> SELAMAT DATANG DI JEDERWD BANDAR TOGEL, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA RAIH
             KEMENANGAN TANPA BATAS BERSAMA KAMI.</span>
@@ -204,7 +204,7 @@
                 <div class="position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
                 <a target="_blank" href="https://wa.me/${result.number_wa}"><img width="60" src="{{ asset('logo-wa.png') }}" alt="whatsapp"></a>
             </div>
-            <div class="head-1"><a target="_blank" href="${result.link_apk}"><img width="18px" src="{{ asset('icon-apk.webp') }}" alt="apk">
+            <div class="head-1"><a   href="${result.link_apk}"><img width="18px" src="{{ asset('icon-apk.webp') }}" alt="apk">
                     DOWNLOAD
                     APLIKASI TOGEL </a> <span style="color: white"> | </span> <i style="color: white"
                     class="fa-brands fa-telegram"></i> <a target="_blank" href="tg://resolve?domain=${result.number_tele}"> TELEGRAM </a> <span style="color: white"> |
