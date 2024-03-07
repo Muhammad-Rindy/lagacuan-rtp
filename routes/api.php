@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('contact', [PasaranController::class, 'contactJson']);
 Route::get('result', [PasaranController::class, 'resultJson']);
 Route::get('prediksi', [PasaranController::class, 'prediksiJson']);
 Route::get('bukti', [PasaranController::class, 'buktiJson']);

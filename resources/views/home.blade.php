@@ -37,11 +37,11 @@
                         <img style="padding: 25px 70px 0px 70px" src="${pathImage}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <div style="text-align: center; text-transform:uppercase">
-                                <h6 class="card-title"><span style="text-transform:uppercase">${result.name_pasaran}</span></h6>
+                                <h6 class="card-title"><span style="text-transform:uppercase;font-weight: bolder;color: #fffc00;font-size: 18px;">${result.name_pasaran}</span></h6>
 
                             </div>
                             <div class="container-brunei">${result.result}</div>
-                            <p class="mt-2" style="text-align: center; font-weight:bold; font-size:15px">
+                            <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:16px; color: #fffc00;">
                                 ${result.created_at}
                             </p>
                             <div style="text-decoration: none; font-weight:bold; cursor:context-menu">

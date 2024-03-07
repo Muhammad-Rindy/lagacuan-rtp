@@ -1,18 +1,6 @@
 <header class="py-3 lh-1" style="padding: 20px 25px;background-color: #101010;border-bottom: solid #ffcf00 2px">
-    <div class="head-1"><a href=""><img width="18px" src="{{ asset('icon-apk.webp') }}" alt="apk">
-            DOWNLOAD
-            APLIKASI TOGEL </a> <span style="color: white"> | </span> <i style="color: white"
-            class="fa-brands fa-telegram"></i> <a href=""> TELEGRAM </a> <span style="color: white"> | </span> <i
-            style="color: white" class="fa-solid fa-comments"></i>
-        <a href=""> LIVE CHAT </a>
-    </div>
-    <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="pt-1 col-4">
-            <img style="height: 50px" src="{{ asset('logo.png') }}" alt="logo">
-        </div>
-        <div class="col-4 d-flex justify-content-end align-items-center">
-            <a href="https://jederwd.org/#/register" class="Btn" target="_blank"></a>
-        </div>
+    <div id="results-contact">
+
     </div>
 </header>
 
@@ -195,6 +183,51 @@
     setInterval(updateInputValue, 2000);
 </script>
 <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/api/contact',
+            method: 'GET',
+            success: function(data) {
+                displayResults(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+
+        function displayResults(data) {
+            var resultsContainer = $('#results-contact');
+
+            $.each(data, function(index, result) {
+
+                var resultCard = `
+                <div class="position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+                <a target="_blank" href="https://wa.me/${result.number_wa}"><img width="60" src="{{ asset('logo-wa.png') }}" alt="whatsapp"></a>
+            </div>
+            <div class="head-1"><a target="_blank" href="${result.link_apk}"><img width="18px" src="{{ asset('icon-apk.webp') }}" alt="apk">
+                    DOWNLOAD
+                    APLIKASI TOGEL </a> <span style="color: white"> | </span> <i style="color: white"
+                    class="fa-brands fa-telegram"></i> <a target="_blank" href="tg://resolve?domain=${result.number_tele}"> TELEGRAM </a> <span style="color: white"> |
+                </span> <i style="color: white" class="fa-solid fa-comments"></i>
+                <a target="_blank" href="${result.live_chat}"> LIVE CHAT </a>
+            </div>
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="pt-1 col-4">
+                    <img style="height: 50px" src="{{ asset('logo.png') }}" alt="logo">
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <a href="https://jederwd.org/#/register" class="Btn" target="_blank"></a>
+                </div>
+            </div>
+            `;
+
+                resultsContainer.append(resultCard);
+            });
+        }
+    });
+
+
+
     $(document).ready(function() {
         $.ajax({
             url: '/api/banner',

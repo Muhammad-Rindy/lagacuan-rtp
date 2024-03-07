@@ -157,9 +157,9 @@
                                         Random RTP
                                     @elseif(request()->is('my-profile'))
                                         My Profile
+                                    @elseif(request()->is('index-contact'))
+                                        My Contact
                                     @endif
-
-
                                 </li>
                                 <!--end::Item-->
                             </ul>
@@ -1897,39 +1897,14 @@
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
-                                            <!--end:Menu item-->
-                                            <!--begin:Menu item-->
-
-                                            <!--end:Menu item-->
-                                            <!--begin:Menu item-->
-
-                                            <!--end:Menu item-->
-                                        </div>
-                                        <!--end:Menu sub-->
-                                    </div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <!--begin:Menu link-->
-                                        <span class="menu-link">
-                                            <span class="menu-title">Help</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
-                                        <!--end:Menu link-->
-                                        <!--begin:Menu sub-->
-                                        <div class="menu-sub menu-sub-accordion">
-                                            <!--begin:Menu item-->
-
-                                            <!--end:Menu item-->
-                                            <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a class="menu-link" href="" target="_blank"
-                                                    title="Check out the complete documentation"
-                                                    data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                    data-bs-dismiss="click" data-bs-placement="right">
+                                                <a @if (request()->is('index-contact')) class="menu-link active" @endif
+                                                    class="menu-link" href="/index-contact">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Documentation</span>
+                                                    <span class="menu-title">My Contact</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
@@ -1944,48 +1919,6 @@
                                         <!--end:Menu sub-->
                                     </div>
                                     <!--end:Menu item-->
-                                </div>
-                            </div>
-                            <div class="app-sidebar-navs-default px-5">
-                                <div class="menu menu-rounded menu-column">
-                                    <div class="menu-item pb-0 pt-0">
-                                        <div class="menu-content">
-                                            <span class="menu-heading">Categories</span>
-                                        </div>
-                                    </div>
-                                    <div class="separator mb-3 mx-4"></div>
-                                    <!--begin::Menu Item-->
-                                    <div class="menu-item">
-                                        <!--begin::Menu link-->
-                                        <a class="menu-link"
-                                            href="https://preview.keenthemes.com/html/metronic/docs/getting-started/changelog">
-                                            <!--begin::Bullet-->
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <!--end::Bullet-->
-                                            <!--begin::Title-->
-                                            <span class="menu-title">Changelog</span>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Menu link-->
-                                    </div>
-                                    <!--end::Menu Item-->
-                                    <!--begin::Menu Item-->
-                                    <div class="menu-item">
-                                        <!--begin::Menu link-->
-                                        <a class="menu-link" href="https://devs.keenthemes.com/">
-                                            <!--begin::Bullet-->
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <!--end::Bullet-->
-                                            <!--begin::Title-->
-                                            <span class="menu-title">Support Forum</span>
-                                            <!--end::Title-->
-                                        </a>
-                                        <!--end::Menu link-->
-                                    </div>
                                 </div>
                             </div>
                         </div>

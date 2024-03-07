@@ -29,10 +29,16 @@ class Pasaran extends Model
         return $this->hasMany(Prediksi::class);
     }
 
+    public function jadwals()
+    {
+        return $this->hasMany(Jadwal::class);
+    }
+
     public function getCreatedAtAttribute($value)
     {
         $carbonDate = Carbon::parse($value);
-        return $carbonDate->format('l, d / m / Y  -  H:i' );
+        setlocale(LC_TIME, 'id_ID');
+        return $carbonDate->translatedFormat('l, d / m / Y');
     }
 
 }

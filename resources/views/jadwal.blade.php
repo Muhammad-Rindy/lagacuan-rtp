@@ -13,7 +13,7 @@
                         <th style="text-align: center">Nama Pasaran</th>
                         <th style="text-align: center">Jadwal Tutup</th>
                         <th style="text-align: center">Jadwal Undi</th>
-                        <th style="text-align: center; width:10%">Situs Resmi</th>
+                        <th style="text-align: center; width:20%">Situs Resmi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -38,8 +38,15 @@
                 $('#jsonTable').DataTable({
                     data: data,
                     columns: [{
-
-                            data: 'name_pasaran'
+                            data: 'name_pasaran',
+                            render: function(data, type, row, meta) {
+                                if (type === 'display') {
+                                    return '<div style="text-transform:uppercase;">' +
+                                        data +
+                                        '</div>';
+                                }
+                                return data;
+                            }
                         },
                         {
                             className: 'text-center',
@@ -66,8 +73,10 @@
                             className: 'text-center',
                             render: function(data, type, row, meta) {
                                 if (type === 'display') {
-                                    return '<a href="' + data + '" target="_blank">' +
-                                        "<i class='fa-solid fa-up-right-from-square'></i>" +
+                                    return '<a style="font-weight:bolder; font-family:monospace" href="' +
+                                        data +
+                                        '" target="_blank">' +
+                                        "KLIK DISINI" +
                                         '</a>';
                                 }
                                 return data;

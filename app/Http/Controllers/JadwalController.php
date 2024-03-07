@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
+use App\Models\Pasaran;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -11,14 +12,17 @@ class JadwalController extends Controller
     {
 
         if(request()->ajax()) {
-            return datatables()->of(Jadwal::select('*'))
+            return datatables()->of(Jadwal::join('table_pasaran', 'table_jadwal.pasaran_id', '=', 'table_pasaran.id')
+            ->select('table_jadwal.*', 'table_pasaran.name_pasaran as pasaran_name'))
             ->addColumn('action', 'dashboards.jadwal.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
 
-        return view('dashboards.jadwal.index');
+        $pasarans = Pasaran::pluck('name_pasaran', 'id');
+
+        return view('dashboards.jadwal.index', compact('pasarans'));
 
     }
 
@@ -32,17 +36,22 @@ class JadwalController extends Controller
      */
     public function store_jadwal(Request $request)
     {
-        $request->all();
+        $request->validate([
+            'pasaran_id' => 'required',
+            'jadwal_tutup' => 'required',
+            'jadwal_undi' => 'required',
+            'situs_resmi' => 'required',
+        ]);
 
 
-        $bukti = Jadwal::create([
-            'name_pasaran' => $request->name_pasaran,
+        $result = Jadwal::create([
+            'pasaran_id' => $request->pasaran_id,
             'jadwal_tutup' => $request->jadwal_tutup,
             'jadwal_undi' => $request->jadwal_undi,
             'situs_resmi' => $request->situs_resmi,
         ]);
 
-        return response()->json(['success' => true, 'message' => 'Data stored successfully', 'bukti' => $bukti]);
+        return response()->json(['success' => true, 'message' => 'Data stored successfully', 'result' => $result]);
 
     }
 
@@ -78,7 +87,6 @@ class JadwalController extends Controller
 
         $product = Jadwal::findOrFail($request->id);
         $product->update([
-            'name_pasaran' => $request->name_pasaran,
             'jadwal_tutup' => $request->jadwal_tutup,
             'jadwal_undi' => $request->jadwal_undi,
             'situs_resmi' => $request->situs_resmi,

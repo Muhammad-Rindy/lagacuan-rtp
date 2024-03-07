@@ -234,7 +234,6 @@
                     // Mengisi formulir dengan data yang diterima
                     $('#editId').val(response.id);
                     $('#editNamePasaran').val(response.name_pasaran);
-                    $('#editImage').val(response.image);
                 },
                 error: function(error) {
                     console.log(error);

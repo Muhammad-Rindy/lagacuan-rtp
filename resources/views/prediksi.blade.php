@@ -45,7 +45,7 @@
                         <div class="card-body">
                             <h6 style="font-weight:bolder" class="card-title">PREDIKSI TOGEL <span style="text-transform: uppercase">${result.name_pasaran}</span> POOLS
                                 JEDERWD</h6>
-                            <p class="card-text">Prediksi Togel <span style="text-transform: uppercase">${result.name_pasaran}</span> ${result.created_at},  Bocoran & Info Akurat yang pasti JP Togel Online Dari Bandar JEDERWD.
+                            <p class="card-text">Prediksi Togel <span style="text-transform: uppercase; font-weight:bold">${result.name_pasaran}</span> ${result.created_at},  Bocoran & Info Akurat yang pasti JP Togel Online Dari Bandar JEDERWD.
                             </p>
                             <div style="display: flex; justify-content: flex-end;">
                                 <button style="font-weight:bold; font-size:13px;border:none;color:white" type="button"
@@ -78,17 +78,17 @@
                                 <div class="row align-items-center">
                                     <div class="col" style="font-weight:bold; color:white">
                                         <h5>ANGKA MAIN :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.angka_main}</h5>
+                                        <h5 style="color: #fffc00; font-weight:bold">${result.angka_main}</h5>
                                         <h5>TOP 3D (BB) :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.top_3d}</h5>
+                                        <h5 style="color: #fffc00; font-weight:bold">${result.top_3d}</h5>
                                         <h5>TOP 2D (BB) :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.top_2d}</h5>
+                                        <h5 style="color: #fffc00; font-weight:bold">${result.top_2d}</h5>
                                         <h5>COLOK BEBAS :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.colok_bebas}</h5>
+                                        <h5 style="color: #fffc00; font-weight:bold">${result.colok_bebas}</h5>
                                         <h5>COLOK 2D :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.colok_2d}</h5>
+                                        <h5 style="color: #fffc00; font-weight:bold">${result.colok_2d}</h5>
                                         <h5>SHIO JITU :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.shio_jitu}</h5>
+                                        <h5 style="color: #fffc00; font-weight:bold">${result.shio_jitu}</h5>
                                     </div>
                                 </div>
                             </div>

@@ -2,35 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pasaran;
-use App\Models\Result;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class ResultController extends Controller
+class ContactController extends Controller
 {
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-
-    public function index_result()
+    public function index_contact()
     {
-        if (request()->ajax()) {
-            return datatables()->of(Result::join('table_pasaran', 'table_result.pasaran_id', '=', 'table_pasaran.id')
-            ->select('table_result.*', 'table_pasaran.name_pasaran as pasaran_name'))
-            ->addColumn('action', 'dashboards.results.action')
+
+        if(request()->ajax()) {
+            return datatables()->of(Contact::select('*'))
+            ->addColumn('action', 'dashboards.contact.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
 
-        $pasarans = Pasaran::pluck('name_pasaran', 'id');
+        return view('dashboards.contact.index');
 
-        return view('dashboards.results.index', compact('pasarans'));
     }
-
-
 
 
 
@@ -40,19 +30,24 @@ class ResultController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function store_result(Request $request)
+    public function store_contact(Request $request)
     {
         $request->validate([
-            'pasaran_id' => 'required',
-            'result' => 'required',
+            'number_wa' => 'required',
+            'number_tele' => 'required',
+            'live_chat' => 'required',
+            'link_apk' => 'required',
         ]);
 
-        $result = Result::create([
-            'pasaran_id' => $request->pasaran_id,
-            'result' => $request->result,
+
+        $bukti = Contact::create([
+            'number_wa' => $request->number_wa,
+            'number_tele' => $request->number_tele,
+            'live_chat' => $request->live_chat,
+            'link_apk' => $request->link_apk,
         ]);
 
-        return response()->json(['success' => true, 'result' => $result]);
+        return response()->json(['success' => true, 'message' => 'Data stored successfully', 'bukti' => $bukti]);
     }
 
 
@@ -79,18 +74,20 @@ class ResultController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function getData($id) {
-        $product = Result::find($id);
+        $product = Contact::find($id);
         return response()->json($product);
-
-
     }
 
     public function updateData(Request $request)
     {
+        $request->all();
 
-        $product = Result::findOrFail($request->id);
+        $product = Contact::findOrFail($request->id);
         $product->update([
-            'result' => $request->result,
+            'number_wa' => $request->number_wa,
+            'number_tele' => $request->number_tele,
+            'live_chat' => $request->live_chat,
+            'link_apk' => $request->link_apk,
         ]);
         return response()->json(['success' => true]);
     }
@@ -108,9 +105,9 @@ class ResultController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function destroy_result(Request $request)
+    public function destroy_contact(Request $request)
     {
-        $product = Result::where('id', $request->id)->delete();
+        $product = Contact::where('id', $request->id)->delete();
 
         return Response()->json($product);
     }

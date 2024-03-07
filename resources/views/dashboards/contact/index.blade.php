@@ -6,7 +6,7 @@
 <style>
     table,
     td {
-        text-transform: uppercase;
+        text-transform: capitalize;
     }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -25,13 +25,13 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Schedule Lottery</span>
+                                <span class="card-label fw-bold text-gray-800">My Contact</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Actions-->
-                            <button type="button" class="btn btn-success btn-sm mb-3 mt-1" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                + Add Schedule
+                            <button type="button" id="addContactBtn" class="btn btn-success btn-sm mb-3 mt-1"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                + Add Contact
                             </button>
                             <!--end::Actions-->
                         </div>
@@ -43,40 +43,33 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="editModalLabel" style="text-transform: capitalize">
-                                            Create New Schedule</h4>
+                                            Create New Contact</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form id="storeData">
+                                    <form id="storeData" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Choose Lottery :</label>
-                                                <select name="pasaran_id" id="pasaran_select" class="form-control">
-                                                    <option selected disabled>Select your lottery</option>
-                                                    @foreach ($pasarans as $pasaranId => $pasaranName)
-                                                        <option style="text-transform: uppercase"
-                                                            value="{{ $pasaranId }}">{{ $pasaranName }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Closing Schedule</label>
-                                                <input type="time" name="jadwal_tutup" class="form-control"
+                                                <label for="exampleInputEmail1" class="form-label">Number Whatsapp</label>
+                                                <input type="number" name="number_wa" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Lottery Schedule</label>
-                                                <input type="time" name="jadwal_undi" class="form-control"
+                                                <label for="exampleInputEmail1" class="form-label">Number Telegram</label>
+                                                <input type="number" name="number_tele" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Official Site</label>
-                                                <input type="text" name="situs_resmi" class="form-control"
+                                                <label for="exampleInputEmail1" class="form-label">Link Live Chat</label>
+                                                <input type="text" name="live_chat" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
-
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Download APK</label>
+                                                <input type="text" name="link_apk" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm"
@@ -98,11 +91,12 @@
                                     <thead>
                                         <tr class="text-start text-gray-500 fw-bold fs-6 gs-0">
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
-                                            <th style="width:15%;text-align: center;text-transform:capitalize">Name Lottery
+                                            <th style="text-align: center;text-transform:capitalize">Number Whatsapp</th>
+                                            <th style="text-align: center;text-transform:capitalize">Number Telegram</th>
+                                            <th style="text-align: center;text-transform:capitalize">Live Chat</th>
+                                            <th style="text-align: center;text-transform:capitalize">Download APK</th>
+                                            <th style="width:15%;text-align: center;text-transform:capitalize">Created at
                                             </th>
-                                            <th style="text-align: center;text-transform:capitalize">Closing Schedule</th>
-                                            <th style="text-align: center;text-transform:capitalize">Lottery Schedule</th>
-                                            <th style="text-align: center;text-transform:capitalize">Official Site</th>
                                             <th style="width:10%;text-align:center;text-transform:capitalize">Action</th>
                                         </tr>
                                     </thead>
@@ -158,7 +152,7 @@
             $('#table-pasaran').DataTable({
                 processing: true,
                 serverSide: true,
-                url: '/index-jadwal',
+                url: '/index-contact',
                 columns: [{
                         className: "text-center",
                         data: "DT_RowIndex",
@@ -167,22 +161,36 @@
                         searchable: false
                     },
                     {
-                        data: 'pasaran_name',
-                        name: 'table_pasaran.name_pasaran' // Sesuaikan dengan nama kolom yang benar
+                        data: 'number_wa',
+                        name: 'number_wa'
                     },
                     {
-                        className: "text-center",
-                        data: 'jadwal_tutup',
-                        name: 'jadwal_tutup'
+                        data: 'number_tele',
+                        name: 'number_tele'
                     },
                     {
-                        className: "text-center",
-                        data: 'jadwal_undi',
-                        name: 'jadwal_undi'
+                        data: 'live_chat',
+                        name: 'live_chat',
+                        render: function(data, type, full, meta) {
+                            if (type === 'display') {
+                                return '<span style="text-transform:lowercase">' + data + '</span>';
+                            }
+                            return data;
+                        },
                     },
                     {
-                        data: 'situs_resmi',
-                        name: 'situs_resmi'
+                        data: 'link_apk',
+                        name: 'link_apk',
+                        render: function(data, type, full, meta) {
+                            if (type === 'display') {
+                                return '<span style="text-transform:lowercase">' + data + '</span>';
+                            }
+                            return data;
+                        },
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
                     },
                     {
                         className: "text-center",
@@ -198,6 +206,7 @@
             });
         });
 
+
         // store data
         $(document).ready(function() {
             $('#storeData').submit(function(e) {
@@ -206,7 +215,7 @@
                 var formData = new FormData($(this)[0]);
 
                 $.ajax({
-                    url: '/store-jadwal',
+                    url: '/store-contact',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -242,14 +251,15 @@
         // Get data berdasarkan id
         function loadData(id) {
             $.ajax({
-                url: '/get-data-jadwal/' + id,
+                url: '/get-data-contact/' + id,
                 type: 'GET',
                 success: function(response) {
                     // Mengisi formulir dengan data yang diterima
                     $('#editId').val(response.id);
-                    $('#jadwal_tutup').val(response.jadwal_tutup);
-                    $('#jadwal_undi').val(response.jadwal_undi);
-                    $('#situs_resmi').val(response.situs_resmi);
+                    $('#editnumber_wa').val(response.number_wa);
+                    $('#editnumber_tele').val(response.number_tele);
+                    $('#editlive_chat').val(response.live_chat);
+                    $('#editlink_apk').val(response.link_apk);
                 },
                 error: function(error) {
                     console.log(error);
@@ -260,7 +270,7 @@
         // Update data
         function updateData() {
             $.ajax({
-                url: '/update-jadwal',
+                url: '/update-contact',
                 type: 'POST',
                 data: $('#editForm').serialize(),
                 success: function(response) {
@@ -303,7 +313,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/destroy-jadwal",
+                        url: "/destroy-contact",
                         data: {
                             id: id,
                         },
@@ -321,5 +331,25 @@
                 }
             });
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Menggunakan AJAX untuk mengambil data dari URL '/api/contact'
+            $.ajax({
+                url: '/api/contact',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Periksa apakah data sudah ada atau tidak
+                    if (data && data.length > 0) {
+                        // Jika data sudah ada, sembunyikan tombol "Add Contact"
+                        $("#addContactBtn").hide();
+                    }
+                },
+                error: function(error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        });
     </script>
 @endsection

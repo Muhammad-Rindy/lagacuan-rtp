@@ -67,7 +67,7 @@
                                         <div class="col" style="font-weight:bold;font-size:22px; color:white">
                                             Prize #1
                                         </div>
-                                        <div class="col" style="font-weight:bold;font-size:22px; color:white">
+                                        <div class="col" style="font-weight:bold;font-size:22px; color:#fffc00">
                                             ${result.result}
                                         </div>
                                     </div>

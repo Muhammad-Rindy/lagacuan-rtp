@@ -40,7 +40,8 @@
                             data: 'name_pasaran',
                             render: function(data, type, row, meta) {
                                 if (type === 'display') {
-                                    return '<div style="text-transform:uppercase">' + data +
+                                    return '<div style="text-transform:uppercase;">' +
+                                        data +
                                         '</div>';
                                 }
                                 return data;

@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Banner extends Model
+class Contact extends Model
 {
     use HasFactory;
 
-    protected $table = 'banners';
+    protected $table = 'table_contacts';
 
     protected $fillable = [
         'id',
-        'image',
+        'number_wa',
+        'number_tele',
+        'live_chat',
+        'link_apk',
         'created_at',
     ];
 

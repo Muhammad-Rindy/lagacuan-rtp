@@ -25,6 +25,7 @@ class Keluhan extends Model
     public function getCreatedAtAttribute($value)
     {
         $carbonDate = Carbon::parse($value);
-        return $carbonDate->format('l, d / m / Y  -  H:i' );
+        setlocale(LC_TIME, 'id_ID');
+        return $carbonDate->translatedFormat('l, d / m / Y');
     }
 }

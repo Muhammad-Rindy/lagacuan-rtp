@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('table_jadwal', function (Blueprint $table) {
+        Schema::create('table_contacts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pasaran_id')->constrained('table_pasaran')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->time('jadwal_tutup');
-            $table->time('jadwal_undi');
-            $table->string('situs_resmi');
+            $table->string('number_wa');
+            $table->string('number_tele');
+            $table->string('live_chat');
+            $table->string('link_apk');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_jadwal');
+        Schema::dropIfExists('table_contacts');
     }
 };

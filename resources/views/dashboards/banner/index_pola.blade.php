@@ -78,25 +78,51 @@
                     processData: false,
                     success: function(response) {
                         // Jika success
-
                         Swal.fire({
-                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
-                            text: "Your pattern has been updated",
-                            icon: "success",
+                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Are you sure?</span>',
+                            text: 'This will update the pattern RTP',
+                            icon: 'info',
+                            showCancelButton: true,
+                            confirmButtonColor: "#006ae6",
+                            cancelButtonColor: "#f8285a",
+                            confirmButtonText: 'Yes, update it!',
+                            preConfirm: () => {
+                                return new Promise((resolve) => {
+                                    // Menampilkan loading sebelum mengirim permintaan asinkron
+                                    Swal.showLoading();
+
+                                    // Menggunakan Fetch API untuk mengirim permintaan asinkron
+                                    fetch("/admin/rand-rtp", {
+                                            method: "POST",
+                                            body: new FormData(document
+                                                .getElementById(
+                                                    'storeData'))
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Menutup loading dan menampilkan pemberitahuan berhasil jika sukses
+                                            Swal.close();
+                                            Swal.fire('Success!',
+                                                'Your pattern has been updated',
+                                                'success');
+                                            resolve(true);
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:',
+                                                error);
+
+                                            // Menutup loading dan menampilkan pemberitahuan gagal jika terjadi kesalahan
+                                            Swal.close();
+                                            Swal.fire('Failed!',
+                                                'Error: Ada kesalahan',
+                                                'error');
+                                            resolve(false);
+                                        });
+                                });
+                            }
                         });
                     },
-                    error: function(error) {
-                        console.log(error);
-                        $('#exampleModal').modal('hide');
-                        $('#storeData')[0].reset();
-                        $('.modal-backdrop.show').css('display', 'none');
-                        Swal.fire({
-                            title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
-                            text: "Error: " + "Ada kesalahan",
-                            icon: "error",
-                        });
 
-                    }
                 });
             });
         });

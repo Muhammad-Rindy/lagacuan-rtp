@@ -29,10 +29,6 @@
 </head>
 
 <body style="background-color: #212529">
-    <div class="position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        <a href=""><img width="60" src="{{ asset('logo-wa.png') }}" alt="whatsapp"></a>
-    </div>
-
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="aperture" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

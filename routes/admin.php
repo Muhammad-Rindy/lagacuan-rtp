@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\RtpController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BannerController;

@@ -13,11 +13,16 @@ class Jadwal extends Model
 
     protected $fillable = [
         'id',
-        'name_pasaran',
+        'pasaran_id',
         'jadwal_tutup',
         'jadwal_undi',
         'situs_resmi',
         'created_at',
     ];
+
+    public function pasarans()
+    {
+        return $this->belongsTo(Pasaran::class);
+    }
 
 }

@@ -17,7 +17,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="editModalLabel" style="text-transform: capitalize">Edit Schedule</h4>
+                <h4 class="modal-title" id="editModalLabel" style="text-transform: capitalize">Edit Book</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -29,24 +29,30 @@
                     <div class="mb-3">
                         <div style="text-align: left">
                             <label for="exampleInputEmail1" class="form-label"
-                                style="text-transform: capitalize;">Closing Schedule</label>
+                                style="text-transform: capitalize;">Number Whatsapp</label>
                         </div>
-                        <input type="time" class="form-control" name="jadwal_tutup" id="jadwal_tutup">
+                        <input type="number" class="form-control" name="number_wa" id="editnumber_wa">
                     </div>
                     <div class="mb-3">
                         <div style="text-align: left">
                             <label for="exampleInputEmail1" class="form-label"
-                                style="text-transform: capitalize;">Lottery Schedule</label>
+                                style="text-transform: capitalize;">Number Telegram</label>
                         </div>
-                        <input type="time" class="form-control" name="jadwal_undi" id="jadwal_undi">
+                        <input type="number" class="form-control" name="number_tele" id="editnumber_tele">
                     </div>
-
+                    <div class="mb-3">
+                        <div style="text-align: left">
+                            <label for="exampleInputEmail1" class="form-label" style="text-transform: capitalize;">Link
+                                Live Chat</label>
+                        </div>
+                        <input type="text" class="form-control" name="live_chat" id="editlive_chat">
+                    </div>
                     <div class="mb-3">
                         <div style="text-align: left">
                             <label for="exampleInputEmail1" class="form-label"
-                                style="text-transform: capitalize;">Official Site</label>
+                                style="text-transform: capitalize;">Download APK</label>
                         </div>
-                        <input type="text" class="form-control" name="situs_resmi" id="situs_resmi">
+                        <input type="text" class="form-control" name="link_apk" id="editlink_apk">
                     </div>
                 </form>
             </div>

@@ -8,6 +8,7 @@ use App\Models\Buku;
 use App\Models\Jadwal;
 use App\Models\Pasaran;
 use App\Models\Bukti;
+use App\Models\Contact;
 use App\Models\Result;
 use Illuminate\Http\Request;
 
@@ -94,7 +95,12 @@ class PasaranController extends Controller
 
     public function jadwalJson()
     {
-        $data = Jadwal::all();
+
+        $data = Pasaran::join('table_jadwal', 'table_jadwal.pasaran_id', '=', 'table_pasaran.id')
+        ->select('table_jadwal.id', 'name_pasaran', 'table_jadwal.jadwal_tutup', 'table_jadwal.jadwal_undi', 'table_jadwal.situs_resmi')
+        ->orderBy('table_jadwal.id', 'desc')
+        ->get();
+
 
         $dataJson = $data->map(function ($item) {
             return [
@@ -116,6 +122,23 @@ class PasaranController extends Controller
             return [
                 'id' => ($item->id),
                 'image' => ($item->image),
+            ];
+        });
+
+        return response()->json($dataJson);
+    }
+
+    public function contactJson()
+    {
+        $data = Contact::orderBy('id', 'desc')->get();
+
+        $dataJson = $data->map(function ($item) {
+            return [
+                'id' => ($item->id),
+                'number_wa' => ($item->number_wa),
+                'number_tele' => ($item->number_tele),
+                'live_chat' => ($item->live_chat),
+                'link_apk' => ($item->link_apk),
             ];
         });
 
