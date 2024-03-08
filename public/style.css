@@ -194,7 +194,7 @@ a {
     display: inline-block;
     color: white;
     font-weight: bold;
-    animation: marquee 15s linear infinite;
+    animation: marquee 30s linear infinite;
 }
 
 @keyframes marquee {

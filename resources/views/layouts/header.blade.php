@@ -5,7 +5,7 @@
 </header>
 
 {{-- Desktop --}}
-<div class="py-1 mb-2 nav-scroller nav-desktop" style="border-bottom: solid #ffcf00 2px">
+<div class="py-1 mb-1 nav-scroller nav-desktop" style="border-bottom: solid #ffcf00 2px; background-color:#313131c2">
     <nav class="nav nav-underline justify-content-between">
         <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
             href="{{ route('index-pasaran-home') }}" style="margin-left:15px;">
@@ -36,8 +36,8 @@
 </div>
 </div>
 <main class="container">
-    <div class="mb-2 marquee ft-marquee">
-        <i class="fa-solid fa-bullhorn"></i>
+    <div class="mb-1 marquee ft-marquee">
+        <i class="fa-solid fa-bullhorn" style="padding:5px 10px"></i>
         <span> SELAMAT DATANG DI JEDERWD BANDAR TOGEL, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA RAIH
             KEMENANGAN TANPA BATAS BERSAMA KAMI.</span>
     </div>
@@ -140,7 +140,7 @@
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:3px">
                 <a href="{{ route('index-pasaran-home') }}"><button
-                        @if (request()->is('/')) class="actives-mobile-2" @endif class="button-15"
+                        @if (request()->is('index')) class="actives-mobile-2" @endif class="button-15"
                         style="letter-spacing: 0.5px" role="button">
                         <i class="fa-solid fa-chart-column"></i> Result Togel</button></a>
             </div>
@@ -256,7 +256,7 @@
 
 
             var resultCard = `
-            <div id="carouselExampleAutoplaying" class="mb-3 carousel slide carousel-fade" data-bs-ride="carousel">
+            <div id="carouselExampleAutoplaying" class="mb-2 carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     ${carouselInner}
                 </div>

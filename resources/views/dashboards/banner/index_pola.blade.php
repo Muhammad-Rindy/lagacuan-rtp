@@ -23,13 +23,15 @@
                             </h3>
                         </div>
                         <div class="card-body">
+
                             <form id="urlRtp">
                                 @csrf
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="inputGroup-sizing-default">URL Target Rtpslot</span>
                                     <input type="text" id="newUrl" name="newUrl" class="form-control"
-                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                        placeholder="Wajib menggunakan https://">
                                     <button type="submit" style="margin: 0px 5px"
                                         class="btn btn-primary text-center">Submit</button>
                                 </div>
@@ -92,6 +94,7 @@
                     processData: false,
                     success: function(response) {
                         // Jika success
+
                         Swal.fire({
                             title: '<span class="your-custom-css-class" style="color:#b5b7c8">Are you sure?</span>',
                             text: 'This will update the pattern RTP',
