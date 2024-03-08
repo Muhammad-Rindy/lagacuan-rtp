@@ -7,7 +7,7 @@
 {{-- Desktop --}}
 <div class="py-1 mb-2 nav-scroller nav-desktop" style="border-bottom: solid #ffcf00 2px">
     <nav class="nav nav-underline justify-content-between">
-        <a @if (request()->is('index')) class="actives" @endif class="nav-item nav-link no-actived"
+        <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
             href="{{ route('index-pasaran-home') }}" style="margin-left:15px;">
             <span class="head-2"><i class="fa-solid fa-house"></i>HOME</span></a>
         <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link no-actived"
@@ -53,7 +53,7 @@
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
                 <a href="{{ route('index-pasaran-home') }}"><button
-                        @if (request()->is('index')) class="actives-mobile" @endif class="button-15"
+                        @if (request()->is('/')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         HOME</button></a>
             </div>
