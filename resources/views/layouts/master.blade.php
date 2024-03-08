@@ -33,7 +33,7 @@
         rel="stylesheet">
 </head>
 
-<body style="background-color: #212529">
+<body style="background-image: url('bg-rtp.jpg');">
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="aperture" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
