@@ -117,15 +117,15 @@
 </style>
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">JEDERWD -
-            {{ strtoupper($provider) }} RTPSLOT
+        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">⚜️ JEDERWD -
+            {{ strtoupper($provider) }} RTPSLOT ⚜️
         </h6>
     </main>
     <div class="container">
         <div class="container pb-3 pt-3 mb-2" style="background: #4f4f4fb8;border-radius: 10px;">
 
             <h4 class="text-center" style="color: white">
-                {{ now()->format('l, F j, Y') }}
+                ⏱️ {{ now()->format('l, F j, Y') }}
             </h4>
             <div class="d-flex align-item-center justify-content-around">
                 <div class="provider">

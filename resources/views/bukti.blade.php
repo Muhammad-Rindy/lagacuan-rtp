@@ -2,8 +2,8 @@
 
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">JEDERWD - BUKTI JACKPOT
-            KEMENANGAN PLAYER
+        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">⚜️ JEDERWD - BUKTI JACKPOT
+            KEMENANGAN PLAYER ⚜️
         </h6>
     </main>
     <main class="container mb-5">

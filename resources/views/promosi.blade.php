@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px">JEDERWD - PROMOSI
+        <h6 style="text-align: center; background-color:#181818; padding:5px 0px">⚜️ JEDERWD - PROMOSI ⚜️
         </h6>
     </main>
     <main class="container mb-5" style="background-color:#181818; padding:20px 0px; border-radius:10px">
