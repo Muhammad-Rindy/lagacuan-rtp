@@ -22,7 +22,7 @@ class PasaranController extends Controller
     public function resultJson()
     {
         $data = Pasaran::join('table_result', 'table_result.pasaran_id', '=', 'table_pasaran.id')
-        ->select('table_result.id', 'name_pasaran', 'result', 'table_pasaran.image', 'table_result.created_at')
+        ->select('table_result.id', 'name_pasaran','table_pasaran.image','table_result.created_at', 'table_result.result_3', 'table_result.result_2', 'table_result.result_1', 'table_result.shio')
         ->orderBy('table_result.id', 'desc')
         ->get();
 
@@ -30,7 +30,10 @@ class PasaranController extends Controller
             return [
                 'id' => ($item->id),
                 'name_pasaran' => ($item->name_pasaran),
-                'result' => ($item->result),
+                'result_3' => ($item->result_3),
+                'result_2' => ($item->result_2),
+                'result_1' => ($item->result_1),
+                'shio' => ($item->shio),
                 'image' => ($item->image),
                 'created_at' => (($item->created_at)),
             ];

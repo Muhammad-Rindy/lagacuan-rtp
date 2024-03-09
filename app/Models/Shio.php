@@ -2,37 +2,28 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
-class Result extends Model
+class Shio extends Model
 {
     use HasFactory;
 
-    protected $table = 'table_result';
+    protected $table = 'table_shio';
+
 
     protected $fillable = [
         'id',
-        'pasaran_id',
-        'shio',
-        'result_1',
-        'result_2',
-        'result_3',
-        'created_at'
+        'name',
+        'angka',
+        'created_at',
     ];
-
-    public function pasarans()
-    {
-        return $this->belongsTo(Pasaran::class);
-    }
-
 
     public function getCreatedAtAttribute($value)
     {
         $carbonDate = Carbon::parse($value);
-        setlocale(LC_TIME, 'id_ID'); // Atur lokal ke bahasa Indonesia
+        setlocale(LC_TIME, 'id_ID');
         return $carbonDate->translatedFormat('l, d / m / Y');
     }
-
 }

@@ -2,6 +2,7 @@
 use App\Http\Controllers\RtpController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ShioController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BuktiController;
 use App\Http\Controllers\BukuController;
@@ -91,6 +92,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-data-contact/{id}', [ContactController::class, 'getData']);
     Route::post('/update-contact', [ContactController::class, 'updateData']);
 
+    // Shio Lottery
+    Route::get('/index-shio', [ShioController::class, 'index_shio'])->name('index-shio');
+    Route::post('/store-shio', [ShioController::class, 'store_shio']);
+    Route::post('/destroy-shio', [ShioController::class, 'destroy_shio']);
+    Route::get('/get-data-shio/{id}', [ShioController::class, 'getData']);
+    Route::post('/update-shio', [ShioController::class, 'updateData']);
+    Route::post('/generate-shio', [ShioController::class, 'generateShio']);
 
 });
 

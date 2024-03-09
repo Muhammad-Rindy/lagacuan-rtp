@@ -33,7 +33,7 @@
         rel="stylesheet">
 </head>
 
-<body style="background-image: url('bg-rtp.jpg');">
+<body style="background-image: url('{{ asset('bg-rtp.jpg') }}');">
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="aperture" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

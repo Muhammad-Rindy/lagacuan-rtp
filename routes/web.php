@@ -13,6 +13,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\ShioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ use App\Http\Controllers\ResultController;
 */
 
 // Front end
-Route::get('/', [PasaranController::class, 'index_pasaran_home'])->name('index-pasaran-home');
+Route::get('/index', [PasaranController::class, 'index_pasaran_home'])->name('index-pasaran-home');
 Route::get('/live-draw', [PasaranController::class, 'index_live_home'])->name('index-live-home');
 Route::get('/prediksi-togel', [PasaranController::class, 'index_prediksi_home'])->name('index-prediksi-home');
 Route::get('/jadwal-togel', [PasaranController::class, 'index_jadwal_home'])->name('index-jadwal-home');
@@ -40,9 +41,9 @@ Route::get('/rtpslot', [RtpController::class, 'index'])->name('index-rtp');
 Route::get('/rtpslot/{provider_name}', [RtpController::class, 'providerRtp']);
 Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
 
-Route::get('/dashboard', function () {
-    return redirect()->route('index-data');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return redirect()->route('index-data');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 
@@ -118,6 +119,13 @@ Route::get('/dashboard', function () {
 //     Route::get('/get-data-contact/{id}', [ContactController::class, 'getData']);
 //     Route::post('/update-contact', [ContactController::class, 'updateData']);
 
+//     // Shio Lottery
+//     Route::get('/index-shio', [ShioController::class, 'index_shio'])->name('index-shio');
+//     Route::post('/store-shio', [ShioController::class, 'store_shio']);
+//     Route::post('/destroy-shio', [ShioController::class, 'destroy_shio']);
+//     Route::get('/get-data-shio/{id}', [ShioController::class, 'getData']);
+//     Route::post('/update-shio', [ShioController::class, 'updateData']);
+//     Route::post('/generate-shio', [ShioController::class, 'generateShio']);
 
 // });
 

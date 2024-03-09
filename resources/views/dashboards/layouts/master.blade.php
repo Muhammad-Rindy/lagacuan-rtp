@@ -154,11 +154,13 @@
                                     @elseif(request()->is('index-banner'))
                                         Banner
                                     @elseif(request()->is('index-pola'))
-                                        Random RTP
+                                        Set URL & Random RTP
                                     @elseif(request()->is('my-profile'))
                                         My Profile
                                     @elseif(request()->is('index-contact'))
                                         My Contact
+                                    @elseif(request()->is('index-shio'))
+                                        Shio
                                     @endif
                                 </li>
                                 <!--end::Item-->
@@ -1764,6 +1766,17 @@
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('index-shio')) class="menu-link active" @endif
+                                                    class="menu-link" href="{{ route('index-shio') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Shio Lottery</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
                                             <!--end:Menu item-->
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
@@ -1882,7 +1895,7 @@
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Random Pola RTP</span>
+                                                    <span class="menu-title">RTP SLOT</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>

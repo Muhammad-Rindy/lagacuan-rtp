@@ -25,13 +25,13 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Results Lottery</span>
+                                <span class="card-label fw-bold text-gray-800">Shio Lottery</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Actions-->
                             <button type="button" class="btn btn-success btn-sm mb-3 mt-1" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
-                                + Add Result
+                                + Add Shio
                             </button>
                             <!--end::Actions-->
                         </div>
@@ -43,48 +43,23 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="editModalLabel" style="text-transform: capitalize">
-                                            Create New Result</h4>
+                                            Create New Shio</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form id="formResult">
+                                    <form id="storeData" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Choose Lottery :</label>
-                                                <select name="pasaran_id" id="pasaran_select" class="form-control">
-                                                    <option selected disabled>Select your lottery</option>
-                                                    @foreach ($pasarans as $pasaranId => $pasaranName)
-                                                        <option style="text-transform: uppercase"
-                                                            value="{{ $pasaranId }}">{{ $pasaranName }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="exampleInputEmail1" class="form-label">Name Shio</label>
+                                                <input type="text" name="name" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
-                                            <fieldset id="generateForm">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Prize 3</label>
-                                                    <input type="number" name="result_3" class="form-control"
-                                                        id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Prize 2</label>
-                                                    <input type="number" name="result_2" class="form-control"
-                                                        id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="angka" class="form-label">Prize 1</label>
-                                                    <input type="number" class="form-control" id="angka"
-                                                        name="result_1">
-                                                </div>
-                                                <label for="shio" class="form-label">SHIO</label>
-                                                <div class="form-group d-flex">
-                                                    <input style="margin-right:7px" type="text"
-                                                        placeholder="Please generate" class="form-control" id="shio"
-                                                        name="shio" readonly>
-                                                    <button type="button" class="btn btn-primary btn-sm"
-                                                        onclick="generateShio()">Generate</button>
-                                                </div>
-                                            </fieldset>
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Number Shio</label>
+                                                <input type="text" name="angka" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm"
@@ -106,12 +81,10 @@
                                     <thead>
                                         <tr class="text-start text-gray-500 fw-bold fs-6 gs-0">
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
-                                            <th style="width:25%;text-align: center;text-transform:capitalize">Name Lottery
+                                            <th style="width:10%;text-align: center;text-transform:capitalize">Name Shio
                                             </th>
-                                            <th style="text-align: center;text-transform:capitalize">Prize 3</th>
-                                            <th style="text-align: center;text-transform:capitalize">Prize 2</th>
-                                            <th style="text-align: center;text-transform:capitalize">Prize 1</th>
-                                            <th style="text-align: center;text-transform:capitalize">SHIO</th>
+                                            <th style="width:25%;text-align: center;text-transform:capitalize">Number Shio
+                                            </th>
                                             <th style="width:25%;text-align: center;text-transform:capitalize">Created at
                                             </th>
                                             <th style="width:10%;text-align:center;text-transform:capitalize">Action</th>
@@ -152,7 +125,6 @@
             </div>
             <!--end::Footer container-->
         </div>
-
         <!--end::Footer-->
     </div>
 
@@ -170,7 +142,7 @@
             $('#table-pasaran').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '/index-result',
+                url: '/index-shio',
                 columns: [{
                         className: "text-center",
                         data: "DT_RowIndex",
@@ -179,31 +151,16 @@
                         searchable: false
                     },
                     {
-                        data: 'pasaran_name',
-                        name: 'table_pasaran.name_pasaran' // Sesuaikan dengan nama kolom yang benar
+                        data: 'name',
+                        name: 'name'
                     },
                     {
-                        className: "text-center",
-                        data: 'result_3',
-                        name: 'table_result.result_3' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        className: "text-center",
-                        data: 'result_2',
-                        name: 'table_result.result_2' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        className: "text-center",
-                        data: 'result_1',
-                        name: 'table_result.result_1' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'shio',
-                        name: 'table_result.shio'
+                        data: 'angka',
+                        name: 'angka'
                     },
                     {
                         data: 'created_at',
-                        name: 'table_result.created_at' // Sesuaikan dengan nama kolom yang benar
+                        name: 'created_at'
                     },
                     {
                         className: "text-center",
@@ -215,19 +172,19 @@
                 order: [
                     [0, 'asc']
                 ],
-            });
 
+            });
         });
 
-        // Store data
+        // store data
         $(document).ready(function() {
-            $('#formResult').submit(function(e) {
+            $('#storeData').submit(function(e) {
                 e.preventDefault();
 
                 var formData = new FormData($(this)[0]);
 
                 $.ajax({
-                    url: '/store-result',
+                    url: '/store-shio',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -235,11 +192,11 @@
                     success: function(response) {
                         // Jika success
                         $('#exampleModal').modal('hide');
-                        $('#formResult')[0].reset();
+                        $('#storeData')[0].reset();
                         $('.modal-backdrop.show').css('display', 'none');
                         Swal.fire({
                             title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
-                            text: "Your file has been successfully edited",
+                            text: "Your file has been saved",
                             icon: "success",
                         });
                         $('#table-pasaran').DataTable().ajax.reload();
@@ -247,31 +204,29 @@
                     error: function(error) {
                         console.log(error);
                         $('#exampleModal').modal('hide');
-                        $('#formResult')[0].reset();
+                        $('#storeData')[0].reset();
                         $('.modal-backdrop.show').css('display', 'none');
                         Swal.fire({
                             title: '<span class="your-custom-css-class" style="color:#b5b7c8">Failed!</span>',
                             text: "Error: " + "Please fill all the input fields",
                             icon: "error",
                         });
+
                     }
                 });
             });
         });
 
         // Get data berdasarkan id
-
         function loadData(id) {
             $.ajax({
-                url: '/get-data-result/' + id,
+                url: '/get-data-shio/' + id,
                 type: 'GET',
                 success: function(response) {
                     // Mengisi formulir dengan data yang diterima
                     $('#editId').val(response.id);
-                    $('#editResult3').val(response.result_3);
-                    $('#editResult2').val(response.result_2);
-                    $('#editResult1').val(response.result_1);
-                    $('#editShio').val(response.shio);
+                    $('#editShio').val(response.name);
+                    $('#editAngka').val(response.angka);
                 },
                 error: function(error) {
                     console.log(error);
@@ -282,7 +237,7 @@
         // Update data
         function updateData() {
             $.ajax({
-                url: '/update-result',
+                url: '/update-shio',
                 type: 'POST',
                 data: $('#editForm').serialize(),
                 success: function(response) {
@@ -298,7 +253,6 @@
 
                 },
                 error: function(error) {
-                    console.log(error);
                     $('#exampleModal').modal('hide');
                     $('#storeData')[0].reset();
                     $('.modal-backdrop.show').css('display', 'none');
@@ -325,7 +279,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/destroy-result",
+                        url: "/destroy-shio",
                         data: {
                             id: id,
                         },
@@ -340,26 +294,6 @@
                             $('#table-pasaran').DataTable().ajax.reload();
                         },
                     });
-                }
-            });
-        }
-
-
-        function generateShio() {
-            var angka = $('#angka').val();
-
-            // Kirim permintaan AJAX ke backend
-            $.ajax({
-                type: 'POST',
-                url: '/generate-shio',
-                data: {
-                    angka: angka
-                },
-                success: function(response) {
-                    $('#shio').val(response.name);
-                },
-                error: function(error) {
-                    console.log(error);
                 }
             });
         }

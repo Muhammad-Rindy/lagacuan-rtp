@@ -44,12 +44,18 @@ class ResultController extends Controller
     {
         $request->validate([
             'pasaran_id' => 'required',
-            'result' => 'required',
+            'result_1' => 'required',
+            'result_2' => 'required',
+            'result_3' => 'required',
+            'shio' => 'required',
         ]);
 
         $result = Result::create([
             'pasaran_id' => $request->pasaran_id,
-            'result' => $request->result,
+            'result_1' => $request->result_1,
+            'result_2' => $request->result_2,
+            'result_3' => $request->result_3,
+            'shio' => $request->shio,
         ]);
 
         return response()->json(['success' => true, 'result' => $result]);
@@ -90,7 +96,10 @@ class ResultController extends Controller
 
         $product = Result::findOrFail($request->id);
         $product->update([
-            'result' => $request->result,
+            'result_1' => $request->result_1,
+            'result_2' => $request->result_2,
+            'result_3' => $request->result_3,
+            'shio' => $request->shio,
         ]);
         return response()->json(['success' => true]);
     }

@@ -78,7 +78,7 @@
             margin: 5px 3px;
             padding: 5px 0px;
             border-radius: 5px;
-            font-size: 13px;
+            font-size: 11px;
         }
 
         .box-pola {
@@ -159,7 +159,9 @@
                                 aria-valuemax="100">{{ $persentase }}%</div>
                         </div>
                         <hr style="border-top: 5px double white;">
-                        <div class="box-pola" style=""><span class="box-pola-span">Pola</span></div>
+                        <a href="{{ $item['url'] }}" style="color: white; text-decoration:none">
+                            <div class="box-pola" style=""><span class="box-pola-span">Pola</span></div>
+                        </a>
                         <div style="" class="text-center pola-set">{!! $item['pola'] !!}</div>
                     </div>
                 </div>

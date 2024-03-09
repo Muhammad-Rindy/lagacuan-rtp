@@ -25,6 +25,7 @@
                 }
             });
 
+
             function displayResults(data) {
                 // Iterate through the data and append it to the results container
                 var resultsContainer = $('#results-container');
@@ -32,7 +33,7 @@
                 $.each(data, function(index, result) {
                     var pathImage = 'storage/' + result.image;
                     var resultCard = `
-                <div class="col">
+                <div class="col" style="padding:8px">
                     <div class="card h-100 card-red">
                         <img style="padding: 25px 70px 0px 70px" src="${pathImage}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -40,8 +41,30 @@
                                 <h6 class="card-title"><span style="text-transform:uppercase;font-weight: bolder;color: #fffc00;font-size: 18px;font-family: ubuntu, sans-serif">${result.name_pasaran}</span></h6>
 
                             </div>
-                            <div class="container-brunei">${result.result}</div>
-                            <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:17px; color: #fffc00;font-family: ubuntu, sans-serif">
+
+                            <div class="position-relative container-brunei">
+                                ${result.result_1}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                    Prize 1
+                                </span>
+                            </div>
+                            <div class="position-relative container-brunei">
+                                ${result.result_2}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                    Prize 2
+                                </span>
+                            </div>
+                            <div class="position-relative container-brunei">
+                                ${result.result_3}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                    Prize 3
+                                </span>
+                            </div>
+
+                            <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:20px; color: #fffc00;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">
+                                ${result.shio}
+                            </p>
+                            <p class="" style="text-align: center; font-weight:bolder; font-size:17px; color: white;font-family: ubuntu, sans-serif">
                                 ${result.created_at}
                             </p>
                             <div style="text-decoration: none; font-weight:bold; cursor:context-menu">

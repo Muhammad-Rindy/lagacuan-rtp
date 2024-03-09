@@ -26,13 +26,40 @@
                     <!-- Add hidden input for ID -->
                     <input type="hidden" id="editId" name="id">
                     <!-- Form fields (name, color, number) go here -->
-                    <div class="mb-3">
-                        <div style="text-align: left">
-                            <label for="exampleInputEmail1" class="form-label"
-                                style="text-transform: capitalize;">Result</label>
+                    <fieldset id="generateForm">
+                        <div class="mb-3">
+                            <div style="text-align: left">
+                                <label for="exampleInputEmail1" class="form-label"
+                                    style="text-transform: capitalize;">Prize
+                                    3</label>
+                            </div>
+                            <input type="number" class="form-control" name="result_3" id="editResult3">
                         </div>
-                        <input type="number" class="form-control" name="result" id="editNamePasaran">
-                    </div>
+                        <div class="mb-3">
+                            <div style="text-align: left">
+                                <label for="exampleInputEmail1" class="form-label"
+                                    style="text-transform: capitalize;">Prize
+                                    2</label>
+                            </div>
+                            <input type="number" class="form-control" name="result_2" id="editResult2">
+                        </div>
+                        <div class="mb-3">
+                            <div style="text-align: left">
+                                <label for="exampleInputEmail1" class="form-label"
+                                    style="text-transform: capitalize;">Prize
+                                    1</label>
+                            </div>
+                            <input type="number" class="form-control" name="result_1" id="editResult1">
+                        </div>
+                        <div class="mb-3">
+                            <div style="text-align: left">
+                                <label for="exampleInputEmail1" class="form-label"
+                                    style="text-transform: capitalize;">Shio</label>
+                            </div>
+                            <input type="text" class="form-control" name="shio" id="editShio">
+
+                        </div>
+                    </fieldset>
                 </form>
             </div>
             <div class="modal-footer">

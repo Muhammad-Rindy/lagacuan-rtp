@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('table_result', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pasaran_id')->constrained('table_pasaran')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('result');
+            $table->string('result_1');
+            $table->string('result_2');
+            $table->string('result_3');
+            $table->string('shio');
             $table->timestamps();
         });
     }

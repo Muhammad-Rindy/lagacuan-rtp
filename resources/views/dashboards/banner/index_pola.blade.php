@@ -19,7 +19,7 @@
                     <div class="card card-flush">
                         <div class="card-header pt-7">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Button Random Pola</span>
+                                <span class="card-label fw-bold text-gray-800">RTP SLOT</span>
                             </h3>
                         </div>
                         <div class="card-body">
@@ -28,12 +28,12 @@
                                 @csrf
 
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">URL Target Rtpslot</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">URL Target</span>
                                     <input type="text" id="newUrl" name="newUrl" class="form-control"
-                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-                                        placeholder="Wajib menggunakan https://">
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                                        placeholder="Use Https://">
                                     <button type="submit" style="margin: 0px 5px"
-                                        class="btn btn-primary text-center">Submit</button>
+                                        class="btn btn-primary btn-sm text-center">Submit</button>
                                 </div>
                             </form>
                         </div>
