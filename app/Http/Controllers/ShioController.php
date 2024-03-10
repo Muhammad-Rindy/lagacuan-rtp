@@ -103,7 +103,7 @@ class ShioController extends Controller
 
         $product = Shio::findOrFail($request->id);
         $product->update([
-            'shio' => $request->shio,
+            'name' => $request->name,
             'angka' => $request->angka,
         ]);
         return response()->json(['success' => true]);
