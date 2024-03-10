@@ -55,6 +55,9 @@
                                 <div class="container text-center mb-3">
                                     <img src="${pathImage}" class="img-fluid" alt="...">
                                 </div>
+                                <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:20px; color: #fffc00;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">
+                                ${result.shio}
+                            </p>
                                 <div class="container text-center mb-3">
                                     <div class="row align-items-center">
                                         <div class="col" style="font-weight:bold; color:white">
@@ -68,7 +71,7 @@
                                             Prize #1
                                         </div>
                                         <div class="col" style="font-weight:bold;font-size:22px; color:#fffc00">
-                                            ${result.result}
+                                            ${result.result_1}
                                         </div>
                                     </div>
                                 </div>
