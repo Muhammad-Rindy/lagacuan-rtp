@@ -51,7 +51,7 @@
                             </div>
                              <div class="position-relative container-brunei">
                                 ${result.result_2 !== null ? result.result_2 : "-"}  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
-                                    Prize 3
+                                    Prize 2
                                 </span>
                             </div>
                             <div class="position-relative container-brunei">
