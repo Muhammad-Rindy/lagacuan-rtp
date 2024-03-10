@@ -13,6 +13,8 @@
                     <tr>
                         <th style="text-align: center">Nama Pasaran</th>
                         <th style="text-align: center">Prize 1</th>
+                        <th style="text-align: center">Prize 2</th>
+                        <th style="text-align: center">Prize 3</th>
                         <th style="text-align: center">Tanggal & Waktu</th>
                     </tr>
                 </thead>
@@ -50,7 +52,15 @@
                         },
                         {
                             className: 'text-center',
-                            data: 'result'
+                            data: 'result_1'
+                        },
+                        {
+                            className: 'text-center',
+                            data: 'result_2'
+                        },
+                        {
+                            className: 'text-center',
+                            data: 'result_3'
                         },
                         {
                             className: 'text-center',
