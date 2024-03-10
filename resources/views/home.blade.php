@@ -29,8 +29,9 @@
             function displayResults(data) {
                 // Iterate through the data and append it to the results container
                 var resultsContainer = $('#results-container');
+                var limitedData = data.slice(0, 48);
 
-                $.each(data, function(index, result) {
+                $.each(limitedData, function(index, result) {
                     var pathImage = 'storage/' + result.image;
                     var resultCard = `
                 <div class="col" style="padding:8px">

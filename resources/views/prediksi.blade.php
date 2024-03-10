@@ -31,8 +31,9 @@
 
             function displayResults(data) {
                 var resultsContainer = $('#results-container');
+                var limitedData = data.slice(0, 44);
 
-                $.each(data, function(index, result) {
+                $.each(limitedData, function(index, result) {
                     var pathImage = 'storage/' + result.image;
                     var resultCard = `
                             <div class="card w-100 mb-2"
@@ -44,9 +45,9 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h6 style="font-weight:bolder" class="card-title">PREDIKSI TOGEL <span style="text-transform: uppercase;color: white; font-weight:bold">${result.name_pasaran}</span> POOLS
+                            <h6 style="font-weight:bolder" class="card-title" style="color: white;">PREDIKSI TOGEL <span style="text-transform: uppercase; font-weight:bold">${result.name_pasaran}</span> POOLS
                                 JEDERWD</h6>
-                            <p class="card-text">Prediksi Togel <span style="text-transform: uppercase; font-weight:bold; color:white">${result.name_pasaran}</span> ${result.created_at},  Bocoran & Info Akurat yang pasti JP Togel Online Dari Bandar JEDERWD.
+                            <p class="card-text" style="color:white">Prediksi Togel <span style="text-transform: uppercase; font-weight:bold;">${result.name_pasaran}</span> ${result.created_at},  Bocoran & Info Akurat yang pasti JP Togel Online Dari Bandar JEDERWD.
                             </p>
                             <div style="display: flex; justify-content: flex-end;">
                                 <button style="font-weight:bold; font-size:13px;border:none;color:white" type="button"
