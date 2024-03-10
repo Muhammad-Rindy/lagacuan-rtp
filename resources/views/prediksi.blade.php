@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h6 style="font-weight:bolder" class="card-title" style="color: white;">PREDIKSI TOGEL <span style="text-transform: uppercase; font-weight:bold">${result.name_pasaran}</span> POOLS
+                            <h6 style="font-weight:bolder;color: white;" class="card-title">PREDIKSI TOGEL <span style="text-transform: uppercase; font-weight:bold">${result.name_pasaran}</span> POOLS
                                 JEDERWD</h6>
                             <p class="card-text" style="color:white">Prediksi Togel <span style="text-transform: uppercase; font-weight:bold;">${result.name_pasaran}</span> ${result.created_at},  Bocoran & Info Akurat yang pasti JP Togel Online Dari Bandar JEDERWD.
                             </p>
