@@ -42,13 +42,7 @@ class ResultController extends Controller
     */
     public function store_result(Request $request)
     {
-        $request->validate([
-            'pasaran_id' => 'required',
-            'result_1' => 'required',
-            'result_2' => 'required',
-            'result_3' => 'required',
-            'shio' => 'required',
-        ]);
+        $request->all();
 
         $result = Result::create([
             'pasaran_id' => $request->pasaran_id,
