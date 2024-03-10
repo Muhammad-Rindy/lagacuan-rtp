@@ -36,7 +36,7 @@
                 $.each(limitedData, function(index, result) {
                     var pathImage = 'storage/' + result.image;
                     var resultCard = `
-                            <div class="card w-100 mb-2"
+                            <div class="mb-2 card w-100"
                 style="background-image: linear-gradient(#0e69fb, #071b69);border-radius: 10px;border: solid #214dfd 2px;">
                 <div class="row g-0">
                     <div class="col-md-4"
@@ -51,7 +51,7 @@
                             </p>
                             <div style="display: flex; justify-content: flex-end;">
                                 <button style="font-weight:bold; font-size:13px;border:none;color:white" type="button"
-                                    class="btn button-17 btn-sm mb-2" data-bs-toggle="modal"
+                                    class="mb-2 btn button-17 btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal${result.id}">
                                     <i class="fa-solid fa-eye"></i> Lihat Prediksi
                                 </button>
@@ -71,16 +71,18 @@
                             </h1>
                         </div>
                         <div class="modal-body" style="background-image: linear-gradient(#0e69fb, #071b69);">
-                            <div class="container text-center mb-2">
+                            <div class="container mb-2 text-center">
                                 <img src="${pathImage}" class="img-fluid" alt="...">
                             </div>
                             <hr>
 
-                            <div class="container text-center mb-3">
+                            <div class="container mb-3 text-center">
                                 <div class="row align-items-center">
                                     <div class="col" style="font-weight:bold; color:white">
                                         <h5>ANGKA MAIN :</h5>
                                         <h5 style="color: black; font-weight:bold">${result.angka_main}</h5>
+                                        <h5>TOP 4D (BB) :</h5>
+                                        <h5 style="color: black; font-weight:bold">${result.top_4d}</h5>
                                         <h5>TOP 3D (BB) :</h5>
                                         <h5 style="color: black; font-weight:bold">${result.top_3d}</h5>
                                         <h5>TOP 2D (BB) :</h5>

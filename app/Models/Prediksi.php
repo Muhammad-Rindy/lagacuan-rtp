@@ -16,6 +16,7 @@ class Prediksi extends Model
         'id',
         'pasaran_id',
         'angka_main',
+        'top_4d',
         'top_3d',
         'top_2d',
         'colok_bebas',

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pasaran_id')->constrained('table_pasaran')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('angka_main');
+            $table->string('top_4d');
             $table->string('top_3d');
             $table->string('top_2d');
             $table->string('colok_bebas');
