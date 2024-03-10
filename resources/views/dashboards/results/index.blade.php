@@ -185,12 +185,26 @@
                     {
                         className: "text-center",
                         data: 'result_3',
-                        name: 'table_result.result_3' // Sesuaikan dengan nama kolom yang benar
+                        name: 'table_result.result_3',
+                        render: function(data, type, row, meta) {
+                            if (type === 'display') {
+                                return data !== null ? '<div class="text-center">' + data +
+                                    '</div>' : '<div class="text-center">-</div>';
+                            }
+                            return data;
+                        }
                     },
                     {
                         className: "text-center",
                         data: 'result_2',
-                        name: 'table_result.result_2' // Sesuaikan dengan nama kolom yang benar
+                        name: 'table_result.result_2',
+                        render: function(data, type, row, meta) {
+                            if (type === 'display') {
+                                return data !== null ? '<div class="text-center">' + data +
+                                    '</div>' : '<div class="text-center">-</div>';
+                            }
+                            return data;
+                        }
                     },
                     {
                         className: "text-center",
