@@ -137,7 +137,7 @@
                                 <!--begin::Item-->
                                 <li class="breadcrumb-item text-gray-600 fw-bold lh-1">
 
-                                    @if (request()->is('index-data'))
+                                    @if (request()->is('/'))
                                         Lottery
                                     @elseif(request()->is('index-result'))
                                         Result
@@ -1757,7 +1757,7 @@
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-data')) class="menu-link active" @endif
+                                                <a @if (request()->is('/')) class="menu-link active" @endif
                                                     class="menu-link" href="{{ route('index-data') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
