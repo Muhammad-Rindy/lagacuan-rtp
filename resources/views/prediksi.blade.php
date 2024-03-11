@@ -76,7 +76,7 @@
                             </div>
                             <hr>
 
-                            <div class="container mb-3 text-center">
+                            <div class="container mb-3 text-center" style="overflow-y: auto;">
                                 <div class="row align-items-center">
                                     <div class="col" style="font-weight:bold; color:white">
                                         <h5>ANGKA MAIN :</h5>
@@ -92,7 +92,7 @@
                                         <h5>COLOK 2D :</h5>
                                         <h5 style="color: black; font-weight:bold">${result.colok_2d}</h5>
                                         <h5>SHIO JITU :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.shio_jitu}</h5>
+                                        <h5 style="color: black; font-weight:bold; text-transform:capitalize">${result.shio_jitu}</h5>
                                     </div>
                                 </div>
                             </div>

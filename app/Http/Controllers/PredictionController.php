@@ -47,6 +47,7 @@ class PredictionController extends Controller
         $result = Prediksi::create([
             'pasaran_id' => $request->pasaran_id,
             'angka_main' => $request->angka_main,
+            'top_4d' => $request->top_3d,
             'top_3d' => $request->top_3d,
             'top_2d' => $request->top_2d,
             'colok_bebas' => $request->colok_bebas,
@@ -93,6 +94,7 @@ class PredictionController extends Controller
         $product = Prediksi::findOrFail($request->id);
         $product->update([
             'angka_main' => $request->angka_main,
+            'top_4d' => $request->top_3d,
             'top_3d' => $request->top_3d,
             'top_2d' => $request->top_2d,
             'colok_bebas' => $request->colok_bebas,

@@ -36,6 +36,13 @@
                     <div class="mb-3">
                         <div style="text-align: left">
                             <label for="exampleInputEmail1" class="form-label"
+                                style="text-transform: capitalize;">TOP_4D</label>
+                        </div>
+                        <input type="text" class="form-control" name="top_4d" id="top_4d">
+                    </div>
+                    <div class="mb-3">
+                        <div style="text-align: left">
+                            <label for="exampleInputEmail1" class="form-label"
                                 style="text-transform: capitalize;">TOP_3D</label>
                         </div>
                         <input type="text" class="form-control" name="top_3d" id="top_3d">

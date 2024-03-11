@@ -66,6 +66,11 @@
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">TOP_4D</label>
+                                                <input type="text" name="top_4d" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">TOP_3D</label>
                                                 <input type="text" name="top_3d" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -113,13 +118,14 @@
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
                                             <th style="text-align: center;text-transform:capitalize">Name Lottery</th>
                                             <th style="text-align: center;text-transform:capitalize">Angka Main</th>
+                                            <th style="width:10%;text-align: center;text-transform:capitalize">TOP 4D</th>
                                             <th style="text-align: center;text-transform:capitalize">TOP 3D</th>
                                             <th style="text-align: center;text-transform:capitalize">TOP 2D</th>
                                             <th style="text-align: center;text-transform:capitalize">Colok Bebas</th>
                                             <th style="text-align: center;text-transform:capitalize">Colok 2D</th>
                                             <th style="text-align: center;text-transform:capitalize">Shio Jitu</th>
                                             <th style="text-align: center;text-transform:capitalize">Created At</th>
-                                            <th style="width:10%;text-align:center;text-transform:capitalize">Action</th>
+                                            <th style="width:20%;text-align:center;text-transform:capitalize">Action</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -189,6 +195,10 @@
                     {
                         data: 'angka_main',
                         name: 'table_prediksi.angka_main' // Sesuaikan dengan nama kolom yang benar
+                    },
+                    {
+                        data: 'top_4d',
+                        name: 'table_prediksi.top_4d' // Sesuaikan dengan nama kolom yang benar
                     },
                     {
                         data: 'top_3d',
@@ -279,6 +289,7 @@
                     // Mengisi formulir dengan data yang diterima
                     $('#editId').val(response.id);
                     $('#angka_main').val(response.angka_main);
+                    $('#top_4d').val(response.top_4d);
                     $('#top_3d').val(response.top_3d);
                     $('#top_2d').val(response.top_2d);
                     $('#colok_bebas').val(response.colok_bebas);
