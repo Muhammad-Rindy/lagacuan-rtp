@@ -1757,7 +1757,7 @@
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('/')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('/')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-data') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1768,7 +1768,7 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-shio')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-shio')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-shio') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1781,7 +1781,7 @@
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-result')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-result')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-result') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1792,7 +1792,7 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-jadwal')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-jadwal')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-jadwal') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1805,7 +1805,7 @@
 
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-prediksi')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-prediksi')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-prediksi') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1816,7 +1816,7 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-bukti')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-bukti')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-bukti') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1827,7 +1827,7 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-buku')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-buku')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-buku') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1838,7 +1838,7 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-keluhan')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-keluhan')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-keluhan') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1879,7 +1879,7 @@
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-banner')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-banner')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-banner') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1890,7 +1890,7 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-pola')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-pola')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="{{ route('index-pola-rtp') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1901,7 +1901,7 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('my-profile')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('my-profile')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="/my-profile">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
@@ -1912,7 +1912,7 @@
                                             </div>
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a @if (request()->is('index-contact')) class="menu-link active" style="background-color: #0f51b275;" @endif
+                                                <a @if (request()->is('index-contact')) class="menu-link active" style="background-color: #16438575;" @endif
                                                     class="menu-link" href="/index-contact">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
