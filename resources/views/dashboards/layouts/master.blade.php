@@ -135,7 +135,7 @@
                                 </li>
                                 <!--end::Item-->
                                 <!--begin::Item-->
-                                <li class="breadcrumb-item text-gray-600 fw-bold lh-1">
+                                <li class="breadcrumb-item fw-bold lh-1" style="color: #0074fb">
 
                                     @if (request()->is('/'))
                                         Lottery
