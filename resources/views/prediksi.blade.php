@@ -80,19 +80,19 @@
                                 <div class="row align-items-center">
                                     <div class="col" style="font-weight:bold; color:white">
                                         <h5>ANGKA MAIN :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.angka_main}</h5>
+                                        <h5 style="color: #ffd600; font-weight:bold">${result.angka_main}</h5>
                                         <h5>TOP 4D (BB) :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.top_4d}</h5>
+                                        <h5 style="color: #ffd600; font-weight:bold">${result.top_4d}</h5>
                                         <h5>TOP 3D (BB) :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.top_3d}</h5>
+                                        <h5 style="color: #ffd600; font-weight:bold">${result.top_3d}</h5>
                                         <h5>TOP 2D (BB) :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.top_2d}</h5>
+                                        <h5 style="color: #ffd600; font-weight:bold">${result.top_2d}</h5>
                                         <h5>COLOK BEBAS :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.colok_bebas}</h5>
+                                        <h5 style="color: #ffd600; font-weight:bold">${result.colok_bebas}</h5>
                                         <h5>COLOK 2D :</h5>
-                                        <h5 style="color: black; font-weight:bold">${result.colok_2d}</h5>
+                                        <h5 style="color: #ffd600; font-weight:bold">${result.colok_2d}</h5>
                                         <h5>SHIO JITU :</h5>
-                                        <h5 style="color: black; font-weight:bold; text-transform:capitalize">${result.shio_jitu}</h5>
+                                        <h5 style="color: #ffd600; font-weight:bold; text-transform:capitalize">${result.shio_jitu}</h5>
                                     </div>
                                 </div>
                             </div>
