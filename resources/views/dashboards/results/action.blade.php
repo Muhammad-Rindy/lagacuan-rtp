@@ -59,6 +59,14 @@
                             <input type="text" class="form-control" name="shio" id="editShio">
 
                         </div>
+                        <div class="mb-3">
+                            <div style="text-align: left">
+                                <label for="exampleInputEmail1" class="form-label"
+                                    style="text-transform: capitalize;">Date</label>
+                            </div>
+                            <input type="date" class="form-control" name="created_at" id="editDate">
+
+                        </div>
                     </fieldset>
                 </form>
             </div>

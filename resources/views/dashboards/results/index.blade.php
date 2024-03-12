@@ -286,6 +286,7 @@
                     $('#editResult2').val(response.result_2);
                     $('#editResult1').val(response.result_1);
                     $('#editShio').val(response.shio);
+                    $('#editDate').val(response.created_at);
                 },
                 error: function(error) {
                     console.log(error);

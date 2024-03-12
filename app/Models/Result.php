@@ -29,10 +29,12 @@ class Result extends Model
 
 
     public function getCreatedAtAttribute($value)
-    {
-        $carbonDate = Carbon::parse($value);
-        setlocale(LC_TIME, 'id_ID'); // Atur lokal ke bahasa Indonesia
-        return $carbonDate->translatedFormat('l, d / m / Y');
-    }
+{
+    $carbonDate = Carbon::parse($value);
+    setlocale(LC_TIME, 'id_ID'); // Atur lokal ke bahasa Indonesia
+    $carbonDate->setTimezone('Asia/Jakarta'); // Atur zona waktu
+    return $carbonDate->translatedFormat('l, d F Y');
+}
+
 
 }

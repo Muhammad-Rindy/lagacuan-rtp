@@ -94,6 +94,7 @@ class ResultController extends Controller
             'result_2' => $request->result_2,
             'result_3' => $request->result_3,
             'shio' => $request->shio,
+            'created_at' => $request->created_at,
         ]);
         return response()->json(['success' => true]);
     }
