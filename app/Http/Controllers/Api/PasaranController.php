@@ -44,34 +44,34 @@ class PasaranController extends Controller
     }
     public function prediksiJson()
     {
-        // $data = Pasaran::join('table_prediksi', 'table_prediksi.pasaran_id', '=', 'table_pasaran.id')
-        // ->orderBy('table_prediksi.id', 'desc')
-        // ->get();
-        $data = Pasaran::with([
-            "predictions" => fn($e) => $e->whereDate("created_at", Carbon::now())
-        ])->get()->map(function($e) {
-            $res = $e->predictions->first();
-            $res->name_pasaran = $e->name_pasaran;
-            $res->image = $e->image;
-            return $res;
-        });
-
-        // $dataJson = $data->map(function ($item) {
-        //     return [
-        //         'id' => ($item->id),
-        //         'name_pasaran' => ($item->name_pasaran),
-        //         'angka_main' => ($item->angka_main),
-        //         'image' => ($item->image),
-        //         'top_3d' => (($item->top_3d)),
-        //         'top_2d' => (($item->top_2d)),
-        //         'colok_bebas' => (($item->colok_bebas)),
-        //         'colok_2d' => (($item->colok_2d)),
-        //         'shio_jitu' => (($item->shio_jitu)),
-        //         'created_at' => (($item->created_at)),
-        //     ];
+        $data = Pasaran::join('table_prediksi', 'table_prediksi.pasaran_id', '=', 'table_pasaran.id')
+        ->orderBy('table_prediksi.id', 'desc')
+        ->get();
+        // $data = Pasaran::with([
+        //     "predictions" => fn($e) => $e->whereDate("created_at", Carbon::now())
+        // ])->get()->map(function($e) {
+        //     $res = $e->predictions->first();
+        //     $res->name_pasaran = $e->name_pasaran;
+        //     $res->image = $e->image;
+        //     return $res;
         // });
 
-        return response()->json($data);
+        $dataJson = $data->map(function ($item) {
+            return [
+                'id' => ($item->id),
+                'name_pasaran' => ($item->name_pasaran),
+                'angka_main' => ($item->angka_main),
+                'image' => ($item->image),
+                'top_3d' => (($item->top_3d)),
+                'top_2d' => (($item->top_2d)),
+                'colok_bebas' => (($item->colok_bebas)),
+                'colok_2d' => (($item->colok_2d)),
+                'shio_jitu' => (($item->shio_jitu)),
+                'created_at' => (($item->created_at)),
+            ];
+        });
+
+        return response()->json($dataJson);
     }
 
     public function buktiJson()
