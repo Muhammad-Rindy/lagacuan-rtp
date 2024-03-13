@@ -69,7 +69,7 @@
                             <h1 class="modal-title fs-6" id="exampleModalLabel">LIVE DRAW <span style="text-transform: uppercase">${result.name_pasaran}</span>
                                 POOLS
                             </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" style="color: white;font-size: 10px;border: solid white 1px;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" style="background-image: linear-gradient(#0e69fb, #071b69);">
                             <div class="container mb-2 text-center">
