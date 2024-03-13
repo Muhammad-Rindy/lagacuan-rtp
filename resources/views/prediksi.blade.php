@@ -34,14 +34,14 @@
                 var limitedData = data.slice(0, 44);
 
                 $.each(limitedData, function(index, result) {
-                    var pathImage = 'storage/' + result.image;
+                    // var pathImage = 'storage/' + result.image;
                     var resultCard = `
                             <div class="mb-2 card w-100"
                 style="background-image: linear-gradient(#0e69fb, #071b69);border-radius: 10px;border: solid #214dfd 2px;">
                 <div class="row g-0">
                     <div class="col-md-4"
                         style="display: flex; justify-content: center; align-items: center; text-align: center;">
-                        <img src="${pathImage}" class="img-fluid rounded-start" alt="Gambar">
+                        <img src="${result.image}" class="img-fluid rounded-start" alt="Gambar">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
