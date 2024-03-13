@@ -51,9 +51,11 @@
                             }
                         },
                         {
+                            className: 'text-center',
                             data: 'result_1'
                         },
                         {
+                            className: 'text-center',
                             data: 'result_2',
                             render: function(data, type, row, meta) {
                                 if (type === 'display') {
@@ -64,6 +66,7 @@
                             }
                         },
                         {
+                            className: 'text-center',
                             data: 'result_3',
                             render: function(data, type, row, meta) {
                                 if (type === 'display') {
