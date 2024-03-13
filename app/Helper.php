@@ -17,20 +17,20 @@ if (!function_exists("randomPasaran")) {
              */
             $top4D = str_split(Str::substr($nomor, 2), 1);
             $n2 = Str::substr($nomor, 0, 2);
-            $top4D = collect(pertemuan($top4D, 2))->map(fn($e) => $n2.$e)->join("*");
+            $top4D = collect(pertemuan($top4D, 2))->map(fn($e) => $n2.$e)->take(3)->join("*");
 
             /**
              * Untuk Top 3D
              */
             $top3D = str_split(Str::substr($nomor, 1), 1);
             $n1 = Str::substr($nomor, 0, 1);
-            $top3D = collect(pertemuan($top3D, 2))->map(fn($e) => $n1.$e)->join("*");
+            $top3D = collect(pertemuan($top3D, 2))->map(fn($e) => $n1.$e)->take(5)->join("*");
 
             /**
              * Untuk Top 2D
              */
             $top2D = str_split($nomor, 1);
-            $top2D = collect(pertemuan($top2D, 2))->join("*");
+            $top2D = collect(pertemuan($top2D, 2))->take(10)->join("*");
 
             $prediksi = Prediksi::where("pasaran_id", $item->id)->whereDate("created_at", Carbon::now())->first();
             if (!$prediksi) {
