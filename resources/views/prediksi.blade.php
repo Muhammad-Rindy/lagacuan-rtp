@@ -73,7 +73,7 @@
                         </div>
                         <div class="modal-body" style="background-image: linear-gradient(#0e69fb, #071b69);">
                             <div class="container mb-2 text-center">
-                                <img src="${pathImage}" class="img-fluid" alt="...">
+                                <img src="${result.image}" class="img-fluid" alt="...">
                             </div>
                             <hr>
 
