@@ -77,7 +77,6 @@
                             }
                         },
                         {
-                            className: 'text-center',
                             data: 'created_at'
                         },
                     ]

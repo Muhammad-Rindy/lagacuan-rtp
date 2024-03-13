@@ -49,7 +49,6 @@
                             }
                         },
                         {
-                            className: 'text-center',
                             data: 'jadwal_tutup',
                             render: function(data, type, row, meta) {
                                 if (type === 'display') {
@@ -59,7 +58,6 @@
                             }
                         },
                         {
-                            className: 'text-center',
                             data: 'jadwal_undi',
                             render: function(data, type, row, meta) {
                                 if (type === 'display') {
