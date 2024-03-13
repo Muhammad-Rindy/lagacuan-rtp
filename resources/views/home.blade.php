@@ -59,7 +59,7 @@
                                     Prize 3
                                 </span>
                             </div>
-                            <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:17px; color: #fff900;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">SHIO ${result.shio}</p>
+                            <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:17.5px; color: #fff900;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">SHIO ${result.shio}</p>
                             <p class="" style="text-align: center; font-weight:bolder; font-size:17px; color: white;font-family: ubuntu, sans-serif">
                                 ${result.created_at}
                             </p>

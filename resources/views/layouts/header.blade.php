@@ -140,7 +140,7 @@
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:3px">
                 <a href="{{ route('index-pasaran-home') }}"><button
-                        @if (request()->is('index')) class="actives-mobile-2" @endif class="button-15"
+                        @if (request()->is('/')) class="actives-mobile-2" @endif class="button-15"
                         style="letter-spacing: 0.5px" role="button">
                         <i class="fa-solid fa-chart-column"></i> Result Togel</button></a>
             </div>
