@@ -55,8 +55,8 @@
                                 <div class="container text-center mb-3">
                                     <img src="${pathImage}" class="img-fluid" alt="...">
                                 </div>
-                                <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:20px; color: #fff900;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">
-                                ${result.shio}
+                                <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:18px; color: #fff900;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">
+                                SHIO ${result.shio}
                             </p>
                                 <div class="container text-center mb-3">
                                     <div class="row align-items-center">
