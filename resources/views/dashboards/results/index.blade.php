@@ -108,9 +108,9 @@
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
                                             <th style="width:25%;text-align: center;text-transform:capitalize">Name Lottery
                                             </th>
-                                            <th style="text-align: center;text-transform:capitalize">Prize 3</th>
-                                            <th style="text-align: center;text-transform:capitalize">Prize 2</th>
                                             <th style="text-align: center;text-transform:capitalize">Prize 1</th>
+                                            <th style="text-align: center;text-transform:capitalize">Prize 2</th>
+                                            <th style="text-align: center;text-transform:capitalize">Prize 3</th>
                                             <th style="text-align: center;text-transform:capitalize">SHIO</th>
                                             <th style="width:25%;text-align: center;text-transform:capitalize">Created at
                                             </th>
@@ -184,15 +184,8 @@
                     },
                     {
                         className: "text-center",
-                        data: 'result_3',
-                        name: 'table_result.result_3',
-                        render: function(data, type, row, meta) {
-                            if (type === 'display') {
-                                return data !== null ? '<div class="text-center">' + data +
-                                    '</div>' : '<div class="text-center">-</div>';
-                            }
-                            return data;
-                        }
+                        data: 'result_1',
+                        name: 'table_result.result_1' // Sesuaikan dengan nama kolom yang benar
                     },
                     {
                         className: "text-center",
@@ -208,8 +201,15 @@
                     },
                     {
                         className: "text-center",
-                        data: 'result_1',
-                        name: 'table_result.result_1' // Sesuaikan dengan nama kolom yang benar
+                        data: 'result_3',
+                        name: 'table_result.result_3',
+                        render: function(data, type, row, meta) {
+                            if (type === 'display') {
+                                return data !== null ? '<div class="text-center">' + data +
+                                    '</div>' : '<div class="text-center">-</div>';
+                            }
+                            return data;
+                        }
                     },
                     {
                         data: 'shio',
