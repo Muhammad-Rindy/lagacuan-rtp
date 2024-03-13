@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="container">
-        <div id="results-container" class="row row-cols-1 row-cols-md-4 mb-5">
+        <div id="results-container" class="mb-5 row row-cols-1 row-cols-md-4">
         </div>
     </main>
 
@@ -32,11 +32,11 @@
                 var limitedData = data.slice(0, 48);
 
                 $.each(limitedData, function(index, result) {
-                    var pathImage = 'storage/' + result.image;
+                    // var pathImage = 'storage/' + result.image;
                     var resultCard = `
                 <div class="col" style="padding:8px">
                     <div class="card h-100 card-red">
-                        <img style="padding: 25px 70px 0px 70px" src="${pathImage}" class="card-img-top" alt="...">
+                        <img style="padding: 25px 70px 0px 70px" src="${result.image}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <div style="text-align: center; text-transform:uppercase">
                                 <h6 class="card-title"><span style="text-transform:uppercase;font-weight: bolder;color: #fff900;font-size: 18px;font-family: ubuntu, sans-serif">${result.name_pasaran}</span></h6>
@@ -45,17 +45,17 @@
 
                             <div class="position-relative container-brunei">
                                 ${result.result_1}
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
                                     Prize 1
                                 </span>
                             </div>
                              <div class="position-relative container-brunei">
-                                ${result.result_2 !== null ? result.result_2 : "-"}  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                ${result.result_2 !== null ? result.result_2 : "-"}  <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
                                     Prize 2
                                 </span>
                             </div>
                             <div class="position-relative container-brunei">
-                                ${result.result_3 !== null ? result.result_3 : "-"}  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                ${result.result_3 !== null ? result.result_3 : "-"}  <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
                                     Prize 3
                                 </span>
                             </div>
