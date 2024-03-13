@@ -62,6 +62,7 @@ class PasaranController extends Controller
                 'name_pasaran' => ($item->name_pasaran),
                 'angka_main' => ($item->angka_main),
                 'image' => ($item->image),
+                'top_4d' => (($item->top_4d)),
                 'top_3d' => (($item->top_3d)),
                 'top_2d' => (($item->top_2d)),
                 'colok_bebas' => (($item->colok_bebas)),

@@ -76,23 +76,23 @@
                             </div>
                             <hr>
 
-                            <div class="container mb-3 text-center" style="overflow-y: auto;">
+                            <div class="container mb-3 text-center" style="overflow-wrap: break-word;">
                                 <div class="row align-items-center">
                                     <div class="col" style="font-weight:bold; color:white">
                                         <h5>ANGKA MAIN :</h5>
-                                        <h5 style="color: #ffd600; font-weight:bold">${result.angka_main}</h5>
+                                        <h5 style="color: #fff900; font-weight:bold; letter-spacing:1px">${result.angka_main}</h5>
                                         <h5>TOP 4D (BB) :</h5>
-                                        <h5 style="color: #ffd600; font-weight:bold">${result.top_4d}</h5>
+                                        <h5 style="color: #fff900; font-weight:bold; letter-spacing:1px">${result.top_4d !== null ? result.top_4d : "-"}</h5>
                                         <h5>TOP 3D (BB) :</h5>
-                                        <h5 style="color: #ffd600; font-weight:bold">${result.top_3d}</h5>
+                                        <h5 style="color: #fff900; font-weight:bold; letter-spacing:1px">${result.top_3d}</h5>
                                         <h5>TOP 2D (BB) :</h5>
-                                        <h5 style="color: #ffd600; font-weight:bold">${result.top_2d}</h5>
+                                        <h5 style="color: #fff900; font-weight:bold; letter-spacing:1px">${result.top_2d}</h5>
                                         <h5>COLOK BEBAS :</h5>
-                                        <h5 style="color: #ffd600; font-weight:bold">${result.colok_bebas}</h5>
+                                        <h5 style="color: #fff900; font-weight:bold; letter-spacing:1px">${result.colok_bebas}</h5>
                                         <h5>COLOK 2D :</h5>
-                                        <h5 style="color: #ffd600; font-weight:bold">${result.colok_2d}</h5>
+                                        <h5 style="color: #fff900; font-weight:bold; letter-spacing:1px">${result.colok_2d}</h5>
                                         <h5>SHIO JITU :</h5>
-                                        <h5 style="color: #ffd600; font-weight:bold; text-transform:capitalize">${result.shio_jitu}</h5>
+                                        <h5 style="color: #fff900; font-weight:bold; letter-spacing:1px; text-transform:capitalize">${result.shio_jitu}</h5>
                                     </div>
                                 </div>
                             </div>

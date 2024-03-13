@@ -39,7 +39,7 @@
                         <img style="padding: 25px 70px 0px 70px" src="${pathImage}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <div style="text-align: center; text-transform:uppercase">
-                                <h6 class="card-title"><span style="text-transform:uppercase;font-weight: bolder;color: #fffc00;font-size: 18px;font-family: ubuntu, sans-serif">${result.name_pasaran}</span></h6>
+                                <h6 class="card-title"><span style="text-transform:uppercase;font-weight: bolder;color: #fff900;font-size: 18px;font-family: ubuntu, sans-serif">${result.name_pasaran}</span></h6>
 
                             </div>
 
@@ -59,9 +59,7 @@
                                     Prize 3
                                 </span>
                             </div>
-                            <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:20px; color: #fffc00;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">
-                                ${result.shio}
-                            </p>
+                            <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:17px; color: #fff900;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">SHIO ${result.shio}</p>
                             <p class="" style="text-align: center; font-weight:bolder; font-size:17px; color: white;font-family: ubuntu, sans-serif">
                                 ${result.created_at}
                             </p>
