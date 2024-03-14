@@ -237,7 +237,7 @@
                             <div class="col-4 data_rtp" style="padding: 7px;">
                                 <div class="shadow card h-100 lazy-image card-rtp-new" style="color: white;border: solid #198cf5 3px">
                                     <a href="${e.url}" class="provider-game">
-                                        <img src="${e.image}" class="card-img-top img-new" alt="...">
+                                        <img src="${e.image}" class="card-img-top img-new" alt="..." style="max-height: 101px;">
                                     </a>
                                     <div class="mt-2 progress bar-persen">
                                         <div class="progress-bar ${
