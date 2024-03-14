@@ -26,27 +26,30 @@ class RtpController extends Controller
                 $noIndex = $dt->where("index", 0)->values();
                 $index = $dt->where("index", ">", 0)->sortBy("index")->values();
                 $dt = $index->merge($noIndex);
+                $dt = $dt->sortByDesc("persentase")->values();
                 return $dt->take(30);
             })->values()->collapse();
         }else{
             $rtp = $rtp->where("provider", $provider)->when($q, fn($e) => $e->filter(fn($f) => Str::contains($f->name, $q)))->values();
         }
 
-        $noIndex = $rtp->where("index", 0)->values();
-        $index = $rtp->where("index", ">", 0)->sortBy("index")->values();
+        // $noIndex = $rtp->where("index", 0)->values();
+        // $index = $rtp->where("index", ">", 0)->sortBy("index")->values();
 
-        $rtp = $index->merge($noIndex);
+        // $rtp = $index->merge($noIndex);
+
+        $rtp = $rtp->sortByDesc("persentase")->values();
 
         return response()->json($rtp, 200);
     }
 
     public function datatable() {
-        $rtp = getRtp();
+        $rtp = getRtp()->sortByDesc("persentase")->values();
 
-        $rtpNoIndex = $rtp->where("index", 0);
-        $rtpIndex = $rtp->where("index", ">", 0)->sortBy("index")->values();
+        // $rtpNoIndex = $rtp->where("index", 0);
+        // $rtpIndex = $rtp->where("index", ">", 0)->sortBy("index")->values();
 
-        $rtp = $rtpIndex->merge($rtpNoIndex);
+        // $rtp = $rtpIndex->merge($rtpNoIndex);
 
         return datatables()->of($rtp)
         ->addColumn('action', function($data) {
