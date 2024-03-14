@@ -216,7 +216,9 @@
 
         $("#cariGame").keyup(function (e) {
             search = e.target.value;
-            getData();
+            if (search.length == 0 || search.length >= 3) {
+                getData();
+            }
         });
 
         getData();
