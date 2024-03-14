@@ -167,8 +167,8 @@
             </h4>
             <div class="align-item-center justify-content-around provider-img">
                 @foreach ($provider as $item)
-                    <a class="provider" href="javascript:void(0);" data-name="{{ $item['provider_name'] }}">
-                        <img src="{{ asset($item['img_url']) }}" alt={{ $item['provider_name'] }}>
+                    <a class="provider" href="javascript:void(0);" data-name="{{ $item->provider_name }}">
+                        <img src="{{ asset($item->img_url) }}" alt={{ $item->provider_name }}>
                     </a>
                 @endforeach
             </div>
@@ -192,36 +192,6 @@
             @endfor
         </div>
         <div class="mb-5 row row-cols-1 row-cols-md-6 g-6" id="rtpArea" style="display: none">
-            {{-- @foreach ($data as $item)
-                <div class="col-4 data_rtp" style="padding: 7px;" data-provider="{{ $item['provider'] }}" data-name="{{ $item['name'] ?? '' }}">
-                    <div class="shadow card h-100 lazy-image card-rtp-new" style="color: white;border: solid #198cf5 3px">
-                        <a href="{{ $item['url'] }}" class="provider-game">
-                            <img src="{{ asset($item['image']) }}" class="card-img-top img-new" alt="...">
-                        </a>
-                        <div class="mt-2 progress bar-persen">
-                            @php
-                                $persentase = intval($item['persentase']);
-                                $color = '';
-                                if ($persentase >= 30 && $persentase <= 40) {
-                                    $color = 'bg-danger bg-animasi';
-                                } elseif ($persentase >= 41 && $persentase <= 60) {
-                                    $color = 'bg-warning bg-animasi';
-                                } elseif ($persentase >= 61 && $persentase <= 100) {
-                                    $color = 'bg-success bg-animasi';
-                                }
-                            @endphp
-                            <div class="progress-bar {{ $color }}" role="progressbar"
-                                style="width: {{ $persentase }}%;" aria-valuenow="{{ $persentase }}" aria-valuemin="0"
-                                aria-valuemax="100">{{ $persentase }}%</div>
-                        </div>
-                        <hr style="border-top: 5px double white;">
-                        <a href="{{ $item['url'] }}" style="color: white; text-decoration:none">
-                            <div class="box-pola" style=""><span class="box-pola-span">{{ $item['name'] != "" ? $item['name'] : "Pola"  }}</span></div>
-                        </a>
-                        <div style="" class="text-center pola-set">{!! $item['pola'] !!}</div>
-                    </div>
-                </div>
-            @endforeach --}}
         </div>
     </main>
     <script>
