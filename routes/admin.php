@@ -75,11 +75,14 @@ Route::middleware('auth')->group(function () {
 
     // RTP Slot
 
-    Route::post('/admin/rand-rtp', [RtpController::class, 'update'])->name('admin-rtp');
-    Route::post('/admin/input-url', [RtpController::class, 'updateUrl'])->name('url-rtp');
+    Route::get('/index-pola', fn() => view('dashboards.banner.index_pola'))->name('index-pola-rtp');
+    Route::get('rtp/randomSingle', fn() => response()->json(["rtp" => randomRtp(), "persen" => rand(30, 100)], 200));
+    Route::get('/rtp/datatable', [RtpController::class, 'datatable']);
+    Route::post('/rtp', [RtpController::class, 'insert']);
+    Route::put('/rtp/{id}', [RtpController::class, 'update']);
+    Route::delete('/rtp/{id}', [RtpController::class, 'delete']);
 
-    // Pola rtp
-    Route::get('/index-pola', [BannerController::class, 'index_pola_rtp'])->name('index-pola-rtp');
+    Route::get('rtp/randomAll', [RtpController::class, 'randomAll']);
 
     // Profile
     Route::get('/my-profile', [ProfileController::class, 'index_profile'])->name('index-profile');
@@ -99,6 +102,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-data-shio/{id}', [ShioController::class, 'getData']);
     Route::post('/update-shio', [ShioController::class, 'updateData']);
     Route::post('/generate-shio', [ShioController::class, 'generateShio']);
+
+
 
 });
 

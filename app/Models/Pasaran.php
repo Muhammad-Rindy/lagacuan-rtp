@@ -21,7 +21,7 @@ class Pasaran extends Model
 
     public function results()
     {
-        return $this->hasMany(Result::class);
+        return $this->hasMany(Result::class, 'pasaran_id', 'id');
     }
 
     public function predictions()

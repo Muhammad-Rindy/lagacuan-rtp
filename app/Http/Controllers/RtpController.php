@@ -4,48 +4,97 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class RtpController extends Controller
 {
 
-
     public function index()
     {
-        $jsonString = file_get_contents(database_path('json/data_rtp.json'));
-        $data = json_decode($jsonString, true);
-
-        $jsonProvider = file_get_contents(database_path('json/provider_rtp.json'));
-        $provider = json_decode($jsonProvider, true);
-
-
-        $filteredData = [];
-        $dataPerProvider = [];
-
-        foreach ($data as $item) {
-            if (!isset($dataPerProvider[$item['provider']])) {
-                $dataPerProvider[$item['provider']] = 0;
-            }
-
-            if ($dataPerProvider[$item['provider']] < 30) {
-                $filteredData[] = $item;
-                $dataPerProvider[$item['provider']]++;
-            }
-        }
-
-
-        return view('rtpslot_page', ['data' => $filteredData,  'provider' => $provider]);
+        return view('rtpslot_page', ['provider' => getProvider()]);
     }
 
-    public function providerRtp($provider) {
-        $jsonString = file_get_contents(database_path('json/data_rtp.json'));
-        $data = json_decode($jsonString, true);
+    public function providerRtp(Request $request, $provider) {
+        $q = $request->q;
+        $rtp = getRtp();
 
-        $filterGames = array_filter($data, function($data) use ($provider){
-            return $data['provider'] == $provider ;
-        });
+        if ($provider == "all") {
+            $rtp = $rtp->when($q, fn($e) => $e->filter(fn($f) => Str::contains($f['name'], $q)))->groupBy("provider")->map(fn($e) => collect($e)->take(30))->values()->collapse();
+        }else{
+            $rtp = $rtp->where("provider", $provider)->when($q, fn($e) => $e->filter(fn($f) => Str::contains($f['name'], $q)))->take(30)->values();
+        }
 
-        return view('rtpslot_provider', ['games' => $filterGames,  "provider" => $provider ]);
+        $noIndex = $rtp->where("index", 0)->values();
+        $index = $rtp->where("index", ">", 0)->sortBy("index")->values();
 
+        $rtp = $index->merge($noIndex);
+
+        return response()->json($rtp, 200);
+    }
+
+    public function datatable() {
+        $rtp = getRtp();
+
+        $rtpNoIndex = $rtp->where("index", 0);
+        $rtpIndex = $rtp->where("index", ">", 0)->sortBy("index")->values();
+
+        $rtp = $rtpIndex->merge($rtpNoIndex);
+
+        return datatables()->of($rtp)
+        ->addColumn('action', function($data) {
+            $btnDelete = '
+                <button type="button" class="text-center btn btn-danger btn-sm delete me-3" data-id="'.$data->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                    <i class="p-0 fa-solid fa-trash-can"></i>
+                </button>
+            ';
+            $btnEdit = '
+                <button type="button" class="text-center btn btn-primary btn-sm edit me-3" data-id="'.$data->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                    <i class="p-0 fa-solid fa-pen-to-square"></i>
+                </button>
+            ';
+
+            return '<div class="d-flex align-items-center justify-content-center">'.$btnEdit.$btnDelete.'</div>';
+
+        })
+        ->rawColumns(['action', 'pola'])
+        ->make(true);
+    }
+
+    public function insert(Request $request) {
+        $validator = Validator::make($request->all(), [
+            "provider" => "required",
+            "name" => "required",
+            "url" => "required",
+            "urutan" => "required",
+            "pola" => "required",
+            "persen" => "required",
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        if ($validator->fails()) return response()->json($validator->errors(), 400);
+
+        $path = $request->file('image')->storeAs('public', time().'_'. $request->name.".".$request->file('image')->getClientOriginalExtension());
+        $path = url('storage'.str_replace("public", "", $path));
+
+        $storeData = [
+            "id" => Str::uuid(),
+            "image" => $path,
+            "provider" => $request->provider,
+            "pola" => $request->pola,
+            "persentase" => $request->persen,
+            "url" => $request->url,
+            "name" => $request->name,
+            "index" => $request->urutan,
+        ];
+
+        $rtp = getRtp()->merge([$storeData]);
+
+        $data = json_encode($rtp, JSON_PRETTY_PRINT);
+        Storage::put("json/data_rtp.json", $data);
+
+        return response()->json(["status" => true], 200);
     }
 
     public function edit()
@@ -54,137 +103,71 @@ class RtpController extends Controller
         return view('edit', ['data' => $data]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $data = json_decode(File::get(database_path('json/data_rtp.json')), true);
+        $validator = Validator::make($request->all(), [
+            "provider" => "required",
+            "name" => "required",
+            "url" => "required",
+            "urutan" => "required",
+            "pola" => "required",
+            "persen" => "required",
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
 
-        foreach ($data as &$item) {
+        if ($validator->fails()) return response()->json($validator->errors(), 400);
 
-            $item['pola'] = $this->generateRandomString();
-            $item['persentase'] = $this->generateRandomPercentage();
+        $rtps = getRtp();
+        $index = $rtps->search(fn($e) => $e->id == $id);
+        $rtp = $rtps[$index];
+
+        if ($request->hasFile('image')) {
+            $name = Str::of($rtp->image)->split('/\//')->last();
+            Storage::delete("public/$name");
+            $path = $request->file('image')->storeAs('public', time().'_'. $request->name.".".$request->file('image')->getClientOriginalExtension());
+            $path = url('storage'.str_replace("public", "", $path));
+
+            $rtp->image = $path;
         }
 
+        $rtp->provider = $request->provider;
+        $rtp->name = $request->name;
+        $rtp->url = $request->url;
+        $rtp->index = $request->urutan;
+        $rtp->persentase = $request->persen;
+        $rtp->pola = $request->pola;
 
-        $result =File::put(database_path('json/data_rtp.json'), json_encode($data, JSON_PRETTY_PRINT));
+        $rtps[$index] = $rtp;
 
-        return response()->json(['success' => true, 'result' => $result]);
+
+        $data = json_encode($rtps, JSON_PRETTY_PRINT);
+        Storage::put("json/data_rtp.json", $data);
+
+        return response()->json(["status" => true], 200);
     }
 
+    public function delete(Request $request, $id) {
+        $rtps = getRtp();
+        $rtp = $rtps->where("id", $id)->first();
 
+        $name = Str::of($rtp->image)->split('/\//')->last();
+        Storage::delete("public/$name");
 
-
-    private function generateRandomString()
-    {
-
-        $variables = [
-            '<span id="prov1-pola1">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Manual 9 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Manual 5 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola2">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Auto 50 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1">Auto 100 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola2">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola1">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola1">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1">Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1"> Auto 20 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3"> Auto 0 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 50 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3"> Auto 20 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span>',
-            '<span id="prov1-pola1">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola2"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-            '<span id="prov1-pola1"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2"> Auto 70 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola2">Manual 3 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2"> Auto 30 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 9 <i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span><br><span id="prov1-pola3"> Auto 50 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i> </span>',
-            '<span id="prov1-pola1"> Auto 10 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i> </span><br><span id="prov1-pola2">Manual 5 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i></span><br><span id="prov1-pola3">Manual 7 <i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-check fa-lg fa-fw text-success"></i><i class="fa-solid fa-xmark fa-lg fa-fw text-danger"></i></span>',
-        ];
-
-
-        $randomVariable = $variables[array_rand($variables)];
-
-        return $randomVariable;
-
+        $rtps = $rtps->filter(fn($e) => $e->id != $id);
+        $data = json_encode($rtps, JSON_PRETTY_PRINT);
+        Storage::put("json/data_rtp.json", $data);
+        return response()->json(["status" => true], 200);
     }
 
-    private function generateRandomPercentage() {
-        $randomPercentage = rand(30, 100);
-        return $randomPercentage;
+    public function randomAll() {
+        $data = getRtp()->map(function($e) {
+            $e->persentase = rand(30, 100);
+            $e->pola = randomRtp();
+            return $e;
+        });
+
+        $data = json_encode($data, JSON_PRETTY_PRINT);
+        Storage::put("json/data_rtp.json", $data);
+        return response()->json(["status" => true], 200);
     }
-
-    public function updateUrl(Request $request)
-    {
-        $newUrl = $request->input('newUrl');
-
-        $jsonString = file_get_contents(database_path('json/data_rtp.json'));
-        $data = json_decode($jsonString, true);
-
-        foreach ($data as &$item) {
-            $item['url'] = preg_replace('/https:\/\/.*?\//', $newUrl . '/', $item['url']);
-        }
-
-        $result = File::put(database_path('json/data_rtp.json'), json_encode($data, JSON_PRETTY_PRINT));
-
-        return response()->json(['success' => true, 'result' => $result]);
-    }
-
 }
