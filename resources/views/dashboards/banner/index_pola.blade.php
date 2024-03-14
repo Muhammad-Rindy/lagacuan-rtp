@@ -119,7 +119,7 @@
                         class="top-0 position-absolute w-100 h-100 d-flex align-items-center justify-content-center d-none"
                         style="z-index: 9999; background: #ffffff21; cursor: wait;">
                         <div class="spinner-border text-warning me-3 spinner-border-sm"></div>
-                        <span>Sedang menyimpan data</span>
+                        <span>Saving data</span>
                     </div>
                     <form id="storeData" enctype="multipart/form-data" action="/rtp" class="needs-validation" novalidate>
                         @csrf
