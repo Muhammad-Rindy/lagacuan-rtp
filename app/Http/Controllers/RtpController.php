@@ -23,7 +23,7 @@ class RtpController extends Controller
         if ($provider == "all") {
             $rtp = $rtp->when($q, fn($e) => $e->filter(fn($f) => Str::contains($f->name, $q)))->groupBy("provider")->map(fn($e) => collect($e)->take(30))->values()->collapse();
         }else{
-            $rtp = $rtp->where("provider", $provider)->when($q, fn($e) => $e->filter(fn($f) => Str::contains($f->name, $q)))->take(30)->values();
+            $rtp = $rtp->where("provider", $provider)->when($q, fn($e) => $e->filter(fn($f) => Str::contains($f->name, $q)))->values();
         }
 
         $noIndex = $rtp->where("index", 0)->values();

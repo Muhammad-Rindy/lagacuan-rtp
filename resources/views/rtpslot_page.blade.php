@@ -256,7 +256,7 @@
                         `;
                     });
 
-                    rtpArea.html(res);
+                    rtpArea.html(res.join(""));
                     setTimeout(() => {
                         loading.hide();
                         rtpArea.show();
