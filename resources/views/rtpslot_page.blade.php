@@ -120,7 +120,6 @@
             background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);
             border: solid #198cf5 2px;
             border-radius: 25px;
-            padding-bottom: 3px;
             margin: -8px 3px 3px 3px;
         }
 
