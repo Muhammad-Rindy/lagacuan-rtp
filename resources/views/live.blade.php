@@ -77,6 +77,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer" style="background-color:#2c2c2c; color:white">
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
