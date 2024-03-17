@@ -26,7 +26,7 @@
         transition: transform .2s;
     }
 
-    .provider-game:hover{
+    .provider-game:hover {
         transform: scale(1.1);
         /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
     }
@@ -77,10 +77,10 @@
             margin: -5px 15px 5px 15px;
         }
 
-        .box-pola,
-        span {
-            font-size: 14px;
-            letter-spacing: 1px
+        .box-pola-span {
+            font-size: 12px;
+            letter-spacing: 1px;
+            padding-bottom: 3px;
         }
 
 
@@ -120,6 +120,7 @@
             background-image: linear-gradient(0deg, #16379f 14%, #50a7e5 70%);
             border: solid #198cf5 2px;
             border-radius: 25px;
+            padding-bottom: 3px;
             margin: -8px 3px 3px 3px;
         }
 
@@ -151,7 +152,7 @@
     }
 
     .animate-pulse {
-        animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite;
+        animation: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite;
     }
 </style>
 @section('content')
@@ -179,10 +180,11 @@
     </div>
     <main class="container mb-5">
         <div class="mb-5 row row-cols-1 row-cols-md-6 g-6" id="loading">
-            @for ($i=0; $i < 12; $i++)
+            @for ($i = 0; $i < 12; $i++)
                 <div class="col-4 data_rtp" style="padding: 7px;">
                     <div class="shadow card h-100 lazy-image card-rtp-new" style="color: white;border: solid #198cf5 3px">
-                        <div style="width: 100%; height: 100px; background: #e2e8f0; border-radius: 3px" class="animate-pulse"></div>
+                        <div style="width: 100%; height: 100px; background: #e2e8f0; border-radius: 3px"
+                            class="animate-pulse"></div>
                         <div class="mt-2 progress bar-persen animate-pulse" style="background: #e2e8f0"></div>
                         <hr style="border-top: 5px double white;">
                         <div class="box-pola animate-pulse" style="height: 25px;"></div>
@@ -205,7 +207,7 @@
             if ($(this).hasClass("active")) {
                 $(this).removeClass("active");
                 provider = "all";
-            }else{
+            } else {
                 $(this).closest(".provider-img").find(".provider").removeClass("active");
                 $(this).addClass("active");
                 provider = dtProvider;
@@ -214,7 +216,7 @@
             getData();
         });
 
-        $("#cariGame").keyup(function (e) {
+        $("#cariGame").keyup(function(e) {
             search = e.target.value;
             if (search.length == 0 || search.length >= 3) {
                 getData();
@@ -226,18 +228,18 @@
         function getData() {
             loading.show();
             rtpArea.hide();
-            let url = `/rtpslot/${provider}?q=`+search;
+            let url = `/rtpslot/${provider}?q=` + search;
             $.ajax({
                 type: "get",
                 url: url,
                 dataType: "json",
-                success: function (res) {
+                success: function(res) {
                     res = res.map(e => {
                         return `
                             <div class="col-4 data_rtp" style="padding: 7px;">
                                 <div class="shadow card h-100 lazy-image card-rtp-new" style="color: white;border: solid #198cf5 3px">
                                     <a href="${e.url}" class="provider-game">
-                                        <img src="${e.image}" class="card-img-top img-new" alt="..." style="max-height: 101px;">
+                                        <img src="${e.image}" class="card-img-top img-new" alt="..." style="height: 101px;">
                                     </a>
                                     <div class="mt-2 progress bar-persen">
                                         <div class="progress-bar ${
