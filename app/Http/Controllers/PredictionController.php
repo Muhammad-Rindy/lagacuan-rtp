@@ -17,8 +17,7 @@ class PredictionController extends Controller
     public function index_prediksi()
     {
         if (request()->ajax()) {
-            return datatables()->of(Prediksi::join('table_pasaran', 'table_prediksi.pasaran_id', '=', 'table_pasaran.id')
-            ->select('table_prediksi.*', 'table_pasaran.name_pasaran as pasaran_name'))
+            return datatables()->of(Prediksi::with(["pasaran"])->orderBy("created_at", "desc"))
             ->addColumn('action', 'dashboards.prediction.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
@@ -122,5 +121,10 @@ class PredictionController extends Controller
         $product = Prediksi::where('id', $request->id)->delete();
 
         return Response()->json($product);
+    }
+
+    public function randomPrediksi() {
+        randomPasaran();
+        return response()->json(["status" => true], 200);
     }
 }

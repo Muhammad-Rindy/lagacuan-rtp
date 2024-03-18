@@ -25,14 +25,17 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Predictions Lottery</span>
+                                <span class="text-gray-800 card-label fw-bold">Predictions Lottery</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Actions-->
-                            <button type="button" class="btn btn-success btn-sm mb-3 mt-1" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                + Add Prediction
-                            </button>
+                            <div class="mt-1 mb-3 d-flex align-items-center">
+                                <button type="button" class="text-center btn btn-primary btn-sm me-3" id="randomPrediksi">Random All Prediksi</button>
+                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    + Add Prediction
+                                </button>
+                            </div>
                             <!--end::Actions-->
                         </div>
 
@@ -108,13 +111,13 @@
 
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-2">
+                        <div class="pt-2 card-body">
                             <!--begin::Table-->
                             <div class="table-responsive">
                                 <table style="width: 100%; font-size:14px"
                                     class="table align-middle table-row-dashed fs-6 gy-3" id="table-pasaran">
                                     <thead>
-                                        <tr class="text-start text-gray-500 fw-bold fs-6 gs-0">
+                                        <tr class="text-gray-500 text-start fw-bold fs-6 gs-0">
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
                                             <th style="text-align: center;text-transform:capitalize">Name Lottery</th>
                                             <th style="text-align: center;text-transform:capitalize">Angka Main</th>
@@ -138,25 +141,25 @@
         </div>
         <!--end::Content wrapper-->
         <!--begin::Footer-->
-        <div id="kt_app_footer" class="app-footer mt-5">
+        <div id="kt_app_footer" class="mt-5 app-footer">
             <!--begin::Footer container-->
-            <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
+            <div class="py-3 app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack">
                 <!--begin::Copyright-->
-                <div class="text-gray-900 order-2 order-md-1">
+                <div class="order-2 text-gray-900 order-md-1">
                     <span class="text-muted fw-semibold me-1">2024&copy;</span>
                     <a href="/" target="_blank" class="text-gray-800 text-hover-primary">JederWD</a>
                 </div>
                 <!--end::Copyright-->
                 <!--begin::Menu-->
-                <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+                <ul class="order-1 menu menu-gray-600 menu-hover-primary fw-semibold">
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">About</div>
+                        <div target="_blank" class="px-2 menu-link">About</div>
                     </li>
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">Support</div>
+                        <div target="_blank" class="px-2 menu-link">Support</div>
                     </li>
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">Purchase</div>
+                        <div target="_blank" class="px-2 menu-link">Purchase</div>
                     </li>
                 </ul>
                 <!--end::Menu-->
@@ -169,73 +172,70 @@
 
     <script type="text/javascript">
         // Get data
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
 
-            $('#table-pasaran').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '/index-prediksi',
-                columns: [{
-                        className: "text-center",
-                        data: "DT_RowIndex",
-                        name: "DT_RowIndex",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'pasaran_name',
-                        name: 'table_pasaran.name_pasaran' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'angka_main',
-                        name: 'table_prediksi.angka_main' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'top_4d',
-                        name: 'table_prediksi.top_4d' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'top_3d',
-                        name: 'table_prediksi.top_3d' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'top_2d',
-                        name: 'table_prediksi.top_2d' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'colok_bebas',
-                        name: 'table_prediksi.colok_bebas' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'colok_2d',
-                        name: 'table_prediksi.colok_2d' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'shio_jitu',
-                        name: 'table_prediksi.shio_jitu' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'table_prediksi.created_at' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        className: "text-center",
-                        data: 'action',
-                        name: 'action',
-                        orderable: false
-                    },
-                ],
-                order: [
-                    [0, 'asc']
-                ],
-            });
-
+        let table = $('#table-pasaran').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '/index-prediksi',
+            columns: [{
+                    className: "text-center",
+                    data: "DT_RowIndex",
+                    name: "DT_RowIndex",
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'pasaran.name_pasaran',
+                    name: 'name_pasaran' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    data: 'angka_main',
+                    name: 'angka_main' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    data: 'top_4d',
+                    name: 'top_4d' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    data: 'top_3d',
+                    name: 'top_3d' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    data: 'top_2d',
+                    name: 'top_2d' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    data: 'colok_bebas',
+                    name: 'colok_bebas' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    data: 'colok_2d',
+                    name: 'colok_2d' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    data: 'shio_jitu',
+                    name: 'shio_jitu' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    className: "text-center",
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
+                },
+            ],
+            order: [
+                [0, 'asc']
+            ],
         });
 
         // Store data
@@ -366,5 +366,43 @@
                 }
             });
         }
+
+        $("#randomPrediksi").click(() => {
+            Swal.fire({
+                title: '<span class="your-custom-css-class" style="color:#b5b7c8">Are you sure?</span>',
+                text: 'This will update the pattern prediksi',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: "#006ae6",
+                cancelButtonColor: "#f8285a",
+                confirmButtonText: 'Yes, update it!',
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        // Menampilkan loading sebelum mengirim permintaan asinkron
+                        Swal.showLoading();
+
+                        // Menggunakan Fetch API untuk mengirim permintaan asinkron
+                        fetch("/randomPrediksi").then(response => response.json())
+                            .then(data => {
+                                // Menutup loading dan menampilkan pemberitahuan berhasil jika sukses
+                                Swal.close();
+                                Swal.fire('Success!',
+                                    'Your pattern has been updated',
+                                    'success');
+                                table.draw();
+                                resolve(true);
+                            }).catch(error => {
+                                console.error('Error:', error);
+
+                                // Menutup loading dan menampilkan pemberitahuan gagal jika terjadi kesalahan
+                                Swal.close();
+                                Swal.fire('Failed!', 'Error: Ada kesalahan',
+                                    'error');
+                                resolve(false);
+                            });
+                    });
+                }
+            });
+        })
     </script>
 @endsection

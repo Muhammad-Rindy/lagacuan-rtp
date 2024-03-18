@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/destroy-prediksi', [PredictionController::class, 'destroy_prediksi']);
     Route::get('/get-data-prediksi/{id}', [PredictionController::class, 'getData']);
     Route::post('/update-prediksi', [PredictionController::class, 'updateData']);
+    Route::get('/randomPrediksi', [PredictionController::class, 'randomPrediksi']);
 
     // Bukti Togel
     Route::get('/index-bukti', [BuktiController::class, 'index_bukti'])->name('index-bukti');
