@@ -22,6 +22,7 @@
                 url: '/api/prediksi',
                 method: 'GET',
                 success: function(data) {
+                    console.log(data);
                     displayResults(data);
                 },
                 error: function(error) {

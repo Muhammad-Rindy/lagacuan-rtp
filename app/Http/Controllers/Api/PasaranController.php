@@ -23,18 +23,20 @@ class PasaranController extends Controller
     public function resultJson()
     {
 
-        $data = Pasaran::with(['results'])->get()->map(function($pasaran) {
-            return $pasaran->results->map(function($results) use($pasaran) {
-                $results->name_pasaran = $pasaran->name_pasaran;
-                $results->image = $pasaran->image;
-                return $results;
-            });
-        })->collapse()->sortByDesc("id")->values();
+        // $data = Pasaran::with(['results'])->get()->map(function($pasaran) {
+        //     return $pasaran->results->map(function($results) use($pasaran) {
+        //         $results->name_pasaran = $pasaran->name_pasaran;
+        //         $results->image = $pasaran->image;
+        //         return $results;
+        //     });
+        // })->collapse()->sortByDesc("id")->values();
+
+        $data = Result::with(["pasaran"])->orderBy("created_at", "desc")->limit(48)->get();
+
+
         // ->select('table_result.id', 'name_pasaran','table_pasaran.image','table_result.created_at', 'table_result.result_3', 'table_result.result_2', 'table_result.result_1', 'table_result.shio')
         // ->orderBy('table_result.id', 'desc')
         // ->get();
-
-        return $data;
 
         // $dataJson = $data->map(function ($item) {
         //     return [
@@ -118,23 +120,29 @@ class PasaranController extends Controller
     public function jadwalJson()
     {
 
-        $data = Pasaran::join('table_jadwal', 'table_jadwal.pasaran_id', '=', 'table_pasaran.id')
-        ->select('table_jadwal.id', 'name_pasaran', 'table_jadwal.jadwal_tutup', 'table_jadwal.jadwal_undi', 'table_jadwal.situs_resmi')
-        ->orderBy('table_jadwal.id', 'desc')
-        ->get();
+        // $data = Pasaran::join('table_jadwal', 'table_jadwal.pasaran_id', '=', 'table_pasaran.id')
+        // ->select('table_jadwal.id', 'name_pasaran', 'table_jadwal.jadwal_tutup', 'table_jadwal.jadwal_undi', 'table_jadwal.situs_resmi')
+        // ->orderBy('table_jadwal.id', 'desc')
+        // ->get();
 
 
-        $dataJson = $data->map(function ($item) {
-            return [
-                'id' => ($item->id),
-                'name_pasaran' => ($item->name_pasaran),
-                'jadwal_tutup' => ($item->jadwal_tutup),
-                'jadwal_undi' => ($item->jadwal_undi),
-                'situs_resmi' => ($item->situs_resmi),
-            ];
-        });
+        // $dataJson = $data->map(function ($item) {
+        //     return [
+        //         'id' => ($item->id),
+        //         'name_pasaran' => ($item->name_pasaran),
+        //         'jadwal_tutup' => ($item->jadwal_tutup),
+        //         'jadwal_undi' => ($item->jadwal_undi),
+        //         'situs_resmi' => ($item->situs_resmi),
+        //     ];
+        // });
 
-        return response()->json($dataJson);
+        $data = Jadwal::with("pasaran")->orderBy("jadwal_undi", "asc")->get();
+        $dataSelesai = $data->where("jadwal_undi", "<", Carbon::now()->format("H:i:s"));
+        $databelum = $data->where("jadwal_undi", ">", Carbon::now()->format("H:i:s"));
+
+        $data = $databelum->merge($dataSelesai);
+
+        return response()->json($data);
     }
     public function bannerJson()
     {

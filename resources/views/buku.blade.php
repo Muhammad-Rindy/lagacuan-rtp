@@ -6,9 +6,7 @@
         </h6>
     </main>
     <main class="container mb-5">
-        <div id="results-container">
-
-        </div>
+        <div id="results-container"></div>
     </main>
     <script>
         $(document).ready(function() {
@@ -29,44 +27,42 @@
             });
 
             function displayResults(data) {
-                var resultsContainer = $('#results-container');
-                var carouselInner = $('<div class="carousel-inner"></div>');
+                let template = $(`
+                    <div id="carouselExample" class="carousel slide">
+                        <div class="carousel-inner">
 
-                $.each(data, function(index, result) {
-                    var pathImage = 'storage/' + result.image;
-                    var carouselItem = `
-            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img style="border-radius: 10px" src="${pathImage}" class="d-block w-100" alt="...">
-                <div class="carousel-description">
-                    <h6 class="mt-2" style="text-align: center; background-color: #181818;border-radius: 3px;text-align:left; padding:7px; color:white">${result.description}</h6>
-                </div>
-            </div>
-        `;
-                    carouselInner.append(carouselItem);
+                        </div>
+                        <button style="font-weight: bolder" class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                `);
+
+                data = data.map((e, i) => {
+                    return `
+                        <div class="carousel-item ${i == 0 ? 'active' : ''}">
+                            <div class="pt-2 rounded" style="background-color: #181818; min-height: 200px">
+                                <div class="px-4 mb-2 ${e.description != '' ? '' : 'd-none'}">
+                                    <p>${e.description}</p>
+                                </div>
+                                ${e.image ? '<img src="'+e.image+'" class="w-100 rounded-bottom" alt="...">' : ''}
+                            </div>
+                        </div>
+                    `;
                 });
 
-                // Append the carousel inner to the results container
-                resultsContainer.prepend('<div id="carouselExample" class="carousel slide"></div>');
-                $('#carouselExample').append(carouselInner);
-
-                // Add carousel controls
-                $('#carouselExample').append(`
-        <button style="font-weight: bolder" class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    `);
+                template.find(".carousel-inner").html(data.join(""));
 
                 // Initialize the carousel
-                $('#carouselExample').carousel();
+                template.carousel();
+
+                $("#results-container").html(template);
             }
-
-
-
         });
     </script>
 @endsection

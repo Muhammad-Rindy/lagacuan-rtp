@@ -27,6 +27,11 @@ class Result extends Model
         return $this->belongsTo(Pasaran::class);
     }
 
+    public function pasaran()
+    {
+        return $this->hasOne(Pasaran::class, 'id', 'pasaran_id');
+    }
+
 
     public function getCreatedAtAttribute($value)
     {

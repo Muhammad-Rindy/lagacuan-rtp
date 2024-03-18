@@ -170,12 +170,12 @@
                                 <span>Random RTP</span>
                             </button>
                             <div class="mb-3 progress bar-persen">
-                                @php $p = rand(30, 100); @endphp
-                                <div class="progress-bar bg-animasi {{ $p >= 30 && $p <= 40
+                                @php $p = rand(0, 85); @endphp
+                                <div class="progress-bar bg-animasi {{ $p >= 0 && $p <= 40
                                     ? 'bg-danger'
                                     : ($p >= 41 && $p <= 60
                                         ? 'bg-warning'
-                                        : ($p >= 61 && $p <= 100
+                                        : ($p >= 61 && $p <= 85
                                             ? 'bg-success'
                                             : '')) }}"
                                     role="progressbar" id="progresArea" style="width: {{ $p }}%;"
@@ -297,11 +297,11 @@
                             progresArea.removeClass("bg-warning");
                             progresArea.removeClass("bg-success");
 
-                            if (data.persentase >= 30 && data.persentase <= 40) progresArea
+                            if (data.persentase >= 0 && data.persentase <= 40) progresArea
                                 .addClass("bg-danger");
                             if (data.persentase >= 41 && data.persentase <= 60) progresArea
                                 .addClass("bg-warning");
-                            if (data.persentase >= 61 && data.persentase <= 100) progresArea
+                            if (data.persentase >= 61 && data.persentase <= 85) progresArea
                                 .addClass("bg-success");
 
                             progresArea.attr("aria-valuenow", data.persentase);
@@ -405,9 +405,9 @@
                             progresArea.removeClass("bg-warning");
                             progresArea.removeClass("bg-success");
 
-                            if (persen >= 30 && persen <= 40) progresArea.addClass("bg-danger");
+                            if (persen >= 0 && persen <= 40) progresArea.addClass("bg-danger");
                             if (persen >= 41 && persen <= 60) progresArea.addClass("bg-warning");
-                            if (persen >= 61 && persen <= 100) progresArea.addClass("bg-success");
+                            if (persen >= 61 && persen <= 85) progresArea.addClass("bg-success");
 
                             progresArea.attr("aria-valuenow", persen);
                             progresArea.css({

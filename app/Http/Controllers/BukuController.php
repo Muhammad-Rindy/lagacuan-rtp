@@ -18,7 +18,7 @@ class BukuController extends Controller
     {
 
         if(request()->ajax()) {
-            return datatables()->of(Buku::select('*'))
+            return datatables()->of(Buku::query())
             ->addColumn('action', 'dashboards.buku.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
@@ -41,13 +41,17 @@ class BukuController extends Controller
     {
         $request->validate([
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
-        $file = $request->file('image');
-        $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
+        $path = "";
 
-        Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+        if ($request->hasFile("image")) {
+            $file = $request->file('image');
+            $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
+            Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+            $path = url('storage/'.str_replace("public", "", $path));
+        }
 
         $bukti = Buku::create([
             'description' => $request->description,
@@ -87,12 +91,23 @@ class BukuController extends Controller
 
     public function updateData(Request $request)
     {
-        $request->all();
+        $product = Buku::find($request->id);
 
-        $product = Buku::findOrFail($request->id);
-        $product->update([
-            'description' => $request->description,
-        ]);
+        if ($product) {
+            $product->description = $request->description;
+            if ($request->hasFile("image")) {
+                $file = $request->file('image');
+                $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
+                Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+                $path = url('storage/'.str_replace("public", "", $path));
+                $old = collect(explode("/", $product->image))->last();
+                Storage::delete("public/$old");
+                $product->image = $path;
+            }
+        }
+
+        $product->save();
+
         return response()->json(['success' => true]);
     }
     /**
@@ -111,7 +126,12 @@ class BukuController extends Controller
     */
     public function destroy_buku(Request $request)
     {
-        $product = Buku::where('id', $request->id)->delete();
+        $product = Buku::find($request->id);
+
+        $old = collect(explode("/", $product->image))->last();
+        Storage::delete("public/$old");
+
+        $product->delete();
 
         return Response()->json($product);
     }

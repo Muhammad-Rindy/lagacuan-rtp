@@ -76,7 +76,7 @@ Route::middleware('auth')->group(function () {
     // RTP Slot
 
     Route::get('/index-pola', fn() => view('dashboards.banner.index_pola'))->name('index-pola-rtp');
-    Route::get('rtp/randomSingle', fn() => response()->json(["rtp" => randomRtp(), "persen" => rand(30, 100)], 200));
+    Route::get('rtp/randomSingle', fn() => response()->json(["rtp" => randomRtp(), "persen" => rand(0, 85)], 200));
     Route::get('/rtp/datatable', [RtpController::class, 'datatable']);
     Route::post('/rtp', [RtpController::class, 'insert']);
     Route::put('/rtp/{id}', [RtpController::class, 'update']);

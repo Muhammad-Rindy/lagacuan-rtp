@@ -242,10 +242,10 @@
                                     </a>
                                     <div class="mt-2 progress bar-persen">
                                         <div class="progress-bar ${
-                                            e.persentase >= 30 && e.persentase <= 40 ? 'bg-danger bg-animasi' :
+                                            e.persentase >= 0 && e.persentase <= 40 ? 'bg-danger bg-animasi' :
                                             e.persentase >= 41 && e.persentase <= 60 ? 'bg-warning bg-animasi' :
-                                            e.persentase >= 61 && e.persentase <= 100 ? 'bg-success bg-animasi' : ''
-                                        }" role="progressbar" style="width: ${e.persentase}%;" aria-valuenow="${e.persentase}" aria-valuemin="0" aria-valuemax="100">${e.persentase}%</div>
+                                            e.persentase >= 61 && e.persentase <= 85 ? 'bg-success bg-animasi' : ''
+                                        }" role="progressbar" style="width: ${e.persentase < 10 ? '10' : e.persentase}%;" aria-valuenow="${e.persentase}" aria-valuemin="0" aria-valuemax="100">${e.persentase}%</div>
                                     </div>
                                     <hr style="border-top: 5px double white;">
                                     <a href="${e.url}" style="color: white; text-decoration:none">

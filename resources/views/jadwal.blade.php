@@ -12,8 +12,8 @@
                     <tr>
                         <th style="text-align: center">Nama Pasaran</th>
                         <th style="text-align: center">Jadwal Tutup</th>
-                        <th style="text-align: center">Jadwal Undi</th>
-                        <th style="text-align: center; width:20%">Situs Resmi</th>
+                        <th style="text-align: center">Jadwal Result</th>
+                        <th style="text-align: center; width:20%">Link Result</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -38,7 +38,7 @@
                 $('#jsonTable').DataTable({
                     data: data,
                     columns: [{
-                            data: 'name_pasaran',
+                            data: 'pasaran.name_pasaran',
                             render: function(data, type, row, meta) {
                                 if (type === 'display') {
                                     return '<div style="text-transform:uppercase;">' +

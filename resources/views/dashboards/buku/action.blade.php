@@ -22,7 +22,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form Edit Data -->
-                <form id="editForm">
+                <form id="editForm" enctype="multipart/form-data">
                     <!-- Add hidden input for ID -->
                     <input type="hidden" id="editId" name="id">
                     <!-- Form fields (name, color, number) go here -->
@@ -31,7 +31,15 @@
                             <label for="exampleInputEmail1" class="form-label"
                                 style="text-transform: capitalize;">Description Book</label>
                         </div>
-                        <input type="text" class="form-control" name="description" id="editDescription">
+                        <textarea class="form-control" name="description" id="editDescription"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <div style="text-align: left">
+                            <label for="exampleInputEmail1" class="form-label" >Image</label>
+                        </div>
+                        <input type="file" name="image" class="form-control"
+                            id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                 </form>
             </div>

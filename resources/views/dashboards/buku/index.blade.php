@@ -25,11 +25,11 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Dreams Book</span>
+                                <span class="text-gray-800 card-label fw-bold">Dreams Book</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Actions-->
-                            <button type="button" class="btn btn-success btn-sm mb-3 mt-1" data-bs-toggle="modal"
+                            <button type="button" class="mt-1 mb-3 btn btn-success btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 + Add Book
                             </button>
@@ -52,8 +52,7 @@
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Description Book</label>
-                                                <input type="text" name="description" class="form-control"
-                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                <textarea name="description" id="exampleInputEmail1" class="form-control"></textarea>
                                             </div>
 
                                             <div class="mb-3">
@@ -74,13 +73,13 @@
 
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-2">
+                        <div class="pt-2 card-body">
                             <!--begin::Table-->
                             <div class="table-responsive">
                                 <table style="width: 100%; font-size:14px"
                                     class="table align-middle table-row-dashed fs-6 gy-3" id="table-pasaran">
                                     <thead>
-                                        <tr class="text-start text-gray-500 fw-bold fs-6 gs-0">
+                                        <tr class="text-gray-500 text-start fw-bold fs-6 gs-0">
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
                                             <th style="text-align: center;text-transform:capitalize">Description Book
                                             </th>
@@ -100,25 +99,25 @@
         </div>
         <!--end::Content wrapper-->
         <!--begin::Footer-->
-        <div id="kt_app_footer" class="app-footer mt-5">
+        <div id="kt_app_footer" class="mt-5 app-footer">
             <!--begin::Footer container-->
-            <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
+            <div class="py-3 app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack">
                 <!--begin::Copyright-->
-                <div class="text-gray-900 order-2 order-md-1">
+                <div class="order-2 text-gray-900 order-md-1">
                     <span class="text-muted fw-semibold me-1">2024&copy;</span>
                     <a href="/" target="_blank" class="text-gray-800 text-hover-primary">JederWD</a>
                 </div>
                 <!--end::Copyright-->
                 <!--begin::Menu-->
-                <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+                <ul class="order-1 menu menu-gray-600 menu-hover-primary fw-semibold">
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">About</div>
+                        <div target="_blank" class="px-2 menu-link">About</div>
                     </li>
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">Support</div>
+                        <div target="_blank" class="px-2 menu-link">Support</div>
                     </li>
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">Purchase</div>
+                        <div target="_blank" class="px-2 menu-link">Purchase</div>
                     </li>
                 </ul>
                 <!--end::Menu-->
@@ -131,58 +130,58 @@
 
     <script type="text/javascript">
         // Get data
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
 
-            $('#table-pasaran').DataTable({
-                processing: true,
-                serverSide: true,
-                url: '/index-buku',
-                columns: [{
-                        className: "text-center",
-                        data: "DT_RowIndex",
-                        name: "DT_RowIndex",
-                        orderable: false,
-                        searchable: false
+        let tables = $('#table-pasaran').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '/index-buku'
+            },
+            columns: [{
+                    className: "text-center",
+                    data: "DT_RowIndex",
+                    name: "DT_RowIndex",
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'description',
+                    name: 'description'
+                },
+                {
+                    className: "text-center",
+                    data: 'image',
+                    name: 'image',
+                    render: function(data, type, full, meta) {
+                        if (type === 'display') {
+                            var url = "{{ url('storage/') }}" + '/' + data;
+                            return '<img src="' + data +
+                                '" alt="Image" width="70" height="45">';
+                        }
+                        return data;
                     },
-                    {
-                        data: 'description',
-                        name: 'description'
-                    },
-                    {
-                        className: "text-center",
-                        data: 'image',
-                        name: 'image',
-                        render: function(data, type, full, meta) {
-                            if (type === 'display') {
-                                var url = "{{ url('storage/') }}" + '/' + data;
-                                return '<img src="' + data +
-                                    '" alt="Image" width="70" height="45">';
-                            }
-                            return data;
-                        },
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
-                    },
-                    {
-                        className: "text-center",
-                        data: 'action',
-                        name: 'action',
-                        orderable: false
-                    },
-                ],
-                order: [
-                    [0, 'asc']
-                ],
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                },
+                {
+                    className: "text-center",
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
+                },
+            ],
+            order: [
+                [0, 'asc']
+            ],
 
-            });
         });
 
 
@@ -209,7 +208,7 @@
                             text: "Your file has been saved",
                             icon: "success",
                         });
-                        $('#table-pasaran').DataTable().ajax.reload();
+                        tables.draw();
                     },
                     error: function(error) {
                         console.log(error);
@@ -246,10 +245,13 @@
 
         // Update data
         function updateData() {
+            let datax = new FormData($('#editForm')[0]);
             $.ajax({
                 url: '/update-buku',
                 type: 'POST',
-                data: $('#editForm').serialize(),
+                contentType: false,
+                processData: false,
+                data: datax,
                 success: function(response) {
                     // Jika success
                     $('#editModal').modal('hide');
@@ -259,7 +261,7 @@
                         text: "Your file has been successfully edited",
                         icon: "success",
                     });
-                    $('#table-pasaran').DataTable().ajax.reload();
+                    tables.draw();
 
                 },
                 error: function(error) {
@@ -302,7 +304,7 @@
                                 text: "Your file has been deleted.",
                                 icon: "success",
                             });
-                            $('#table-pasaran').DataTable().ajax.reload();
+                            tables.draw();
                         },
                     });
                 }

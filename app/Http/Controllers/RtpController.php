@@ -23,33 +23,34 @@ class RtpController extends Controller
         if ($provider == "all") {
             $rtp = $rtp->when($q, fn($e) => $e->filter(fn($f) => Str::contains($f->name, $q)))->groupBy("provider")->map(function($e) {
                 $dt = collect($e);
-                $noIndex = $dt->where("index", 0)->values();
+                $noIndex = $dt->where("index", 0)->values()->sortByDesc("persentase")->values();
                 $index = $dt->where("index", ">", 0)->sortBy("index")->values();
                 $dt = $index->merge($noIndex);
-                $dt = $dt->sortByDesc("persentase")->values();
-                return $dt->take(30);
+                // $dt = $dt->sortByDesc("persentase")->values();
+                return $dt;
             })->values()->collapse();
         }else{
             $rtp = $rtp->where("provider", $provider)->when($q, fn($e) => $e->filter(fn($f) => Str::contains($f->name, $q)))->values();
+            $noIndex = $rtp->where("index", 0)->values()->sortByDesc("persentase")->values();
+            $index = $rtp->where("index", ">", 0)->sortBy("index")->values();
+
+            $rtp = $index->merge($noIndex);
         }
 
-        // $noIndex = $rtp->where("index", 0)->values();
-        // $index = $rtp->where("index", ">", 0)->sortBy("index")->values();
 
-        // $rtp = $index->merge($noIndex);
-
-        $rtp = $rtp->sortByDesc("persentase")->values();
+        // $rtp = $rtp->sortByDesc("persentase")->values();
+        $rtp = $rtp->take(100);
 
         return response()->json($rtp, 200);
     }
 
     public function datatable() {
-        $rtp = getRtp()->sortByDesc("persentase")->values();
+        $rtp = getRtp();
 
-        // $rtpNoIndex = $rtp->where("index", 0);
-        // $rtpIndex = $rtp->where("index", ">", 0)->sortBy("index")->values();
+        $rtpNoIndex = $rtp->where("index", 0)->sortByDesc("persentase")->values();
+        $rtpIndex = $rtp->where("index", ">", 0)->sortBy("index")->values();
 
-        // $rtp = $rtpIndex->merge($rtpNoIndex);
+        $rtp = $rtpIndex->merge($rtpNoIndex);
 
         return datatables()->of($rtp)
         ->addColumn('action', function($data) {
@@ -85,7 +86,7 @@ class RtpController extends Controller
         if ($validator->fails()) return response()->json($validator->errors(), 400);
 
         $path = $request->file('image')->storeAs('public', time().'_'. $request->name.".".$request->file('image')->getClientOriginalExtension());
-        $path = url('storage'.str_replace("public", "", $path));
+        $path = url('storage/'.str_replace("public", "", $path));
 
         $storeData = [
             "id" => Str::uuid(),
@@ -170,7 +171,7 @@ class RtpController extends Controller
 
     public function randomAll() {
         $data = getRtp()->map(function($e) {
-            $e->persentase = rand(30, 85);
+            $e->persentase = rand(0, 85);
             $e->pola = randomRtp();
             return $e;
         });
