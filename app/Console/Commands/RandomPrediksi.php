@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Library\Telegram;
+use Carbon\Carbon;
 
 class RandomPrediksi extends Command
 {
@@ -28,6 +30,7 @@ class RandomPrediksi extends Command
     public function handle()
     {
         randomPasaran();
+        Telegram::sendMessage(Carbon::now()."\nSuccess running command, `random:prediksi`]");
         return Command::SUCCESS;
     }
 }
