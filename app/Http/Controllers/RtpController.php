@@ -170,7 +170,7 @@ class RtpController extends Controller
 
     public function randomAll() {
         $data = getRtp()->map(function($e) {
-            $e->persentase = rand(30, 100);
+            $e->persentase = rand(30, 85);
             $e->pola = randomRtp();
             return $e;
         });
