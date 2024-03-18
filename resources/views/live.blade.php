@@ -33,7 +33,6 @@
                 var resultsContainer = $('#results-container');
 
                 $.each(data, function(index, result) {
-                    var pathImage = 'storage/' + result.image;
                     var resultCard = `
                         <!-- Button trigger modal -->
                         <button style="text-align: left; font-weight:bold; color:white" type="button" class="btn button-15 mb-2"
@@ -50,10 +49,11 @@
                             <div class="modal-header" style="background-color:#2c2c2c; color:white">
                                 <h1 class="modal-title fs-6" id="exampleModalLabel">LIVE DRAW <span style="text-transform:uppercase">${result.name_pasaran}</span> POOLS
                                 </h1>
+                                <button type="button" style="color: white;font-size: 10px;border: solid white 1px;background-color: white;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body" style="background-image: linear-gradient(#0e69fb, #071b69);">
                                 <div class="container text-center mb-3">
-                                    <img src="${pathImage}" class="img-fluid" alt="...">
+                                    <img src="${result.image}" class="img-fluid" alt="...">
                                 </div>
                                 <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:18px; color: #fff900;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">
                                 SHIO ${result.shio}
@@ -77,8 +77,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer" style="background-color:#2c2c2c; color:white">
-                                <button type="button" class="btn btn-secondary btn-sm bg-dark"
-                                data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
