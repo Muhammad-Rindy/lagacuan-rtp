@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pasaran;
 use App\Models\Prediksi;
 use Illuminate\Http\Request;
+use App\Library\Telegram;
+use Carbon\Carbon;
 
 class PredictionController extends Controller
 {
@@ -125,6 +127,7 @@ class PredictionController extends Controller
 
     public function randomPrediksi() {
         randomPasaran();
+        Telegram::sendMessage(Carbon::now()."\nSuccess running manual, [PredictionController::randomPrediksi()]");
         return response()->json(["status" => true], 200);
     }
 }
