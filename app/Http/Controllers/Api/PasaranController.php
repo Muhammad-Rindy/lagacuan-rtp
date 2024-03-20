@@ -33,6 +33,7 @@ class PasaranController extends Controller
 
         $data = Result::with(["pasaran"])->orderBy("created_at", "desc")->limit(48)->get();
 
+        return $data;
 
         // ->select('table_result.id', 'name_pasaran','table_pasaran.image','table_result.created_at', 'table_result.result_3', 'table_result.result_2', 'table_result.result_1', 'table_result.shio')
         // ->orderBy('table_result.id', 'desc')
