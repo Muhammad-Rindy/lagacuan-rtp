@@ -3,7 +3,6 @@
 namespace App\Library;
 
 use Illuminate\Support\Facades\Http;
-use App\Models\Memo;
 
 /**
 * Telegram Library
