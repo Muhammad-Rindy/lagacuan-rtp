@@ -41,3 +41,17 @@ Route::get('/paito', [PasaranController::class, 'index_paito_home'])->name('inde
 Route::get('/rtpslot', [RtpController::class, 'index'])->name('index-rtp');
 Route::get('/rtpslot/{provider_name}', [RtpController::class, 'providerRtp']);
 Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
+
+Route::get('/testing', function () {
+    $rtp = getRtp()->map(function($e) {
+        if (stripos($e->url, "peler")) {
+            $e->url = "jder.com";
+        }
+        return $e;
+    });
+
+    $data = json_encode($rtp, JSON_PRETTY_PRINT);
+    Storage::put("json/data_rtp.json", $data);
+
+    return getRtp();
+});
