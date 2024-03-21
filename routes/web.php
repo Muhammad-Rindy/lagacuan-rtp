@@ -45,7 +45,7 @@ Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
 Route::get('/testing', function () {
     $rtp = getRtp()->map(function($e) {
         if (stripos($e->url, "peler.com")) {
-            $e->url = str_replace("peler.com", "jederwd.org");
+            $e->url = str_replace("peler.com", "jederwd.org", $e->url);
         }
         return $e;
     });
