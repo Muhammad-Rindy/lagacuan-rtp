@@ -49,14 +49,14 @@ class DataController extends Controller
 
 
         $file = $request->file('image');
-        $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
+        $path = $file->store('public/banners'); // Simpan gambar di dalam folder 'public/banners'
 
-        Storage::disk('local')->put('public/' . $path, file_get_contents($file));
+        $url = Storage::url($path); // Dapatkan URL lengkap dari gambar yang disimpan
 
 
         $bukti = Pasaran::create([
             'name_pasaran' => $request->name_pasaran,
-            'image' => $path
+            'image' => $url
         ]);
 
         return response()->json(['success' => true, 'message' => 'Data stored successfully', 'bukti' => $bukti]);
