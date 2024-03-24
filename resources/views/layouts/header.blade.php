@@ -7,43 +7,51 @@
 {{-- Desktop --}}
 <div class="py-1 mb-1 nav-scroller nav-desktop" style="border-bottom: solid #ffcf00 2px; background-color:#313131c2">
     <nav class="nav nav-underline justify-content-between">
-        <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived" href="{{ route('index-pasaran-home') }}" style="margin-left:15px;">
+        <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-pasaran-home') }}" style="margin-left:15px;">
             <span class="head-2">
                 <i class="fa-solid fa-house"></i>
                 HOME
             </span>
         </a>
-        <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link no-actived" href="{{ route('index-live-home') }}" style="">
+        <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-live-home') }}" style="">
             <span class="head-2">
                 LIVE DRAW 🔥
             </span>
         </a>
-        <a @if (request()->is('prediksi-togel')) class="actives" @endif class="nav-item nav-link no-actived" href="{{ route('index-prediksi-home') }}" style="">
+        <a @if (request()->is('prediksi-togel')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-prediksi-home') }}" style="">
             <span class="head-2">
                 PREDIKSI TOGEL
             </span>
         </a>
 
-        <a @if (request()->is('data-result')) class="actives" @endif class="nav-item nav-link no-actived" href="{{ route('index-result-home') }}" style="">
+        <a @if (request()->is('data-result')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-result-home') }}" style="">
             <span class="head-2">
                 DATA RESULT
             </span>
         </a>
-        <a @if (request()->is('bukti-jackpot')) class="actives" @endif class="nav-item nav-link no-actived" href="{{ route('index-bukti-home') }}" style="">
+        <a @if (request()->is('bukti-jackpot')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-bukti-home') }}" style="">
             <span class="head-2">
                 BUKTI JACKPOT 🔥
             </span>
         </a>
-        <a @if (request()->is('buku-mimpi')) class="actives" @endif class="nav-item nav-link no-actived" href="{{ route('index-buku-home') }}" style="">
+        <a @if (request()->is('buku-mimpi')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-buku-home') }}" style="">
             <span class="head-2">
                 BUKU MIMPI
             </span>
         </a>
 
-        <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link no-actived" href="{{ route('index-keluhan-home') }}" style="">
+        <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link no-actived"
+            href="{{ route('index-keluhan-home') }}" style="">
             <span class="head-2">KELUHAN</span>
         </a>
-        <a href="https://jederwd.org/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif target="_blank" class="nav-item nav-link no-actived" style="margin-right:15px">
+        <a href="https://jederwd.org/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
+            target="_blank" class="nav-item nav-link no-actived" style="margin-right:15px">
             <span class="head-2">
                 CARA BERMAIN
             </span>
@@ -53,9 +61,10 @@
 </div>
 <main class="container">
     <div class="mb-1 d-flex">
-        <i class="fa-solid fa-bullhorn" style="padding:5px 10px; background: #181818"></i>
+        <i class="fa-solid fa-bullhorn" style="color:#ffee00;padding:5px 10px; background: #181818"></i>
         <div class="marquee ft-marquee">
-            <span>SELAMAT DATANG DI JEDERWD BANDAR TOGEL, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA RAIH KEMENANGAN TANPA BATAS BERSAMA KAMI.</span>
+            <span>SELAMAT DATANG DI JEDERWD BANDAR TOGEL, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA RAIH
+                KEMENANGAN TANPA BATAS BERSAMA KAMI.</span>
         </div>
     </div>
 </main>
