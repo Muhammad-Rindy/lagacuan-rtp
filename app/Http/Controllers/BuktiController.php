@@ -49,7 +49,7 @@ class BuktiController extends Controller
         $path = $file->store('public/banners'); // Simpan gambar di dalam folder 'public/banners'
 
         $url = Storage::url($path); // Dapatkan URL lengkap dari gambar yang disimpan
-
+        $url = url($url);
 
         $bukti = Bukti::create([
             'title' => $request->title,
@@ -90,13 +90,26 @@ class BuktiController extends Controller
 
     public function updateData(Request $request)
     {
-        $request->all();
-
-        $product = Bukti::findOrFail($request->id);
-        $product->update([
-            'title' => $request->title,
-            'description' => $request->description,
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
+
+        $product = Bukti::find($request->id);
+        $path = $product->image;
+
+        if ($request->hasFile("image")) {
+            $file = $request->file('image');
+            $path = $file->store('public/banners');
+            $product->image = url(Storage::url($path));
+            Storage::delete($product->image);
+        }
+
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->save();
+
         return response()->json(['success' => true]);
     }
     /**
