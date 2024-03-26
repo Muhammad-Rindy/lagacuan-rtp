@@ -6,6 +6,7 @@ use App\Models\Bukti;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class BuktiController extends Controller
 {
@@ -20,6 +21,7 @@ class BuktiController extends Controller
         if(request()->ajax()) {
             return datatables()->of(Bukti::select('*'))
             ->addColumn('action', 'dashboards.bukti.action')
+            ->addColumn('tanggalFormat', fn($e) => Carbon::parse($value)->setTimezone('Asia/Jakarta')->translatedFormat('l, d F Y'))
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
@@ -42,6 +44,7 @@ class BuktiController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'tanggal' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
@@ -54,6 +57,7 @@ class BuktiController extends Controller
         $bukti = Bukti::create([
             'title' => $request->title,
             'description' => $request->description,
+            'tanggal' => $request->tanggal,
             'image' => $url
         ]);
 
@@ -93,6 +97,7 @@ class BuktiController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'tanggal' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
@@ -108,6 +113,7 @@ class BuktiController extends Controller
 
         $product->title = $request->title;
         $product->description = $request->description;
+        $product->tanggal = $request->tanggal;
         $product->save();
 
         return response()->json(['success' => true]);

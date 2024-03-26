@@ -17,6 +17,7 @@ class Bukti extends Model
         'image',
         'title',
         'description',
+        'tanggal',
         'created_at',
     ];
 

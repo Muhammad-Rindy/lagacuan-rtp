@@ -62,6 +62,10 @@
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
+                                                <label for="tanggal" class="form-label">Tanggal</label>
+                                                <input type="date" name="tanggal" class="form-control" id="tanggal" aria-describedby="emailHelp" >
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Image</label>
                                                 <input type="file" name="image" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -91,7 +95,7 @@
                                             <th style="text-align: center;text-transform:capitalize">Description Testimony
                                             </th>
                                             <th style="text-align: center;text-transform:capitalize">Image</th>
-                                            <th style="text-align: center;text-transform:capitalize">Created at</th>
+                                            <th style="text-align: center;text-transform:capitalize">Tanggal</th>
                                             <th style="width:10%;text-align:center;text-transform:capitalize">Action</th>
                                         </tr>
                                     </thead>
@@ -182,8 +186,8 @@
                     },
                 },
                 {
-                    data: 'created_at',
-                    name: 'created_at'
+                    data: 'tanggalFormat',
+                    name: 'tanggalFormat'
                 },
                 {
                     className: "text-center",
@@ -253,11 +257,11 @@
         function loadData(id) {
             let data = table.data();
             data = Array.from({length: data.length}, (_, i) => data[i]).find(e => e.id == id);
-            console.log(data);
 
             titleModal.text("Edit Testimony");
             $('input[name="title"]').val(data.title);
             $('input[name="description"]').val(data.description);
+            $('input[name="tanggal"]').val(data.tanggal);
             $("#editId").val(id);
             url = '/update-bukti';
             mdl.modal("show");
