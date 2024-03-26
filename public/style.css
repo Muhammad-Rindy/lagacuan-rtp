@@ -19,6 +19,25 @@
     overflow: hidden;
 }
 
+@media screen and (min-width: 950px) {
+    .card-pred {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .card-pred {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 15px;
+    }
+}
+
 .container-soon .image {
     position: absolute;
     height: 100%;
