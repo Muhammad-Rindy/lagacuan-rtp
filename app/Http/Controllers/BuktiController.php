@@ -21,7 +21,7 @@ class BuktiController extends Controller
         if(request()->ajax()) {
             return datatables()->of(Bukti::select('*'))
             ->addColumn('action', 'dashboards.bukti.action')
-            ->addColumn('tanggalFormat', fn($e) => Carbon::parse($value)->setTimezone('Asia/Jakarta')->translatedFormat('l, d F Y'))
+            ->addColumn('tanggalFormat', fn($e) => Carbon::parse($e->tanggal)->setTimezone('Asia/Jakarta')->translatedFormat('l, d F Y'))
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
