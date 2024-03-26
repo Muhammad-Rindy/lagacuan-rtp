@@ -125,7 +125,7 @@
                 @foreach ($data as $index => $prediksi)
                     <div class="swiper-slide">
                         <div class="card">
-                            <div class="card card-blue">
+                            <div class="card card-red">
                                 <div class="mt-4" style="text-align: center; text-transform:uppercase">
                                     <h6 class="card-title"><span
                                             style="text-transform:uppercase;font-weight: bolder;color: #fff900;font-size: 19px;font-family: ubuntu, sans-serif">{{ $pasaran }}</span>
