@@ -139,7 +139,7 @@
     <main class="container mb-3"
         style="text-align: center;background-color: #8989894a;border-radius: 0px 0px 10px 10px;padding: 10px;">
         <div class="swiper-container new-content">
-            <div class="swiper-wrapper" style="height:320px">
+            <div class="swiper-wrapper" style="height:350px">
                 @foreach ($data as $index => $prediksi)
                     <div class="swiper-slide">
                         <div class="card">
