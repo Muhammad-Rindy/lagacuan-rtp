@@ -26,7 +26,7 @@
         }
     }
 
-    @media screen and (max-width: 950px) {
+    @media screen and (min-width: 400px) and (max-width: 950px) {
         .button-swip-right {
             margin-top: 1010px;
 
@@ -42,7 +42,24 @@
             margin: 0 auto;
             overflow: hidden;
         }
+    }
 
+    @media screen and (min-width: 100px) and (max-width: 400px) {
+        .button-swip-right {
+            margin-top: 1080px;
+
+        }
+
+        .button-swip-left {
+            margin-top: 1080px;
+        }
+
+        .new-content {
+            width: 90%;
+            max-width: 270px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
     }
 </style>
 @section('content')
@@ -58,7 +75,8 @@
                 <h6 class="card-title"><span
                         style="text-transform:uppercase;font-weight: bolder;color: #fff900;font-size: 19px;font-family: ubuntu, sans-serif">{{ $pasaran }}</span>
                 </h6>
-                <div id="created_at" style="font-weight: bolder;font-size:14px">{{ $data->first()->created_at }}</div>
+                <div id="created_at" style="font-weight: bolder;font-size:14px; color:white">
+                    {{ $data->first()->created_at }}</div>
             </div>
             <img width="180" style="margin: 13px" src="{{ $data->first()->image }}" alt="gambar">
             <div class="card-body">
@@ -125,7 +143,7 @@
                 @foreach ($data as $index => $prediksi)
                     <div class="swiper-slide">
                         <div class="card">
-                            <div class="card card-red">
+                            <div class="card card-red" style="border-radius:6px">
                                 <div class="mt-4" style="text-align: center; text-transform:uppercase">
                                     <h6 class="card-title"><span
                                             style="text-transform:uppercase;font-weight: bolder;color: #fff900;font-size: 19px;font-family: ubuntu, sans-serif">{{ $pasaran }}</span>
