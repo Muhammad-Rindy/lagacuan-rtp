@@ -34,12 +34,12 @@
                 var resultsContainer = $('#results-container');
 
                 $.each(data, function(index, result) {
-                    var pathImage = 'storage/' + result.image;
+                    // var pathImage = 'storage/' + result.image;
                     var resultCard = `
                     <div class="col">
                 <div class="card h-100"
                     style="background-color: #c70000; color:white; border:solid #ef0000 2px; border-bottom-left-radius:20px; border-bottom-right-radius:20px">
-                    <img style="background-color: white" src="${pathImage}" class="card-img-top" alt="Gambar">
+                    <img style="background-color: white" src="${result.image}" class="card-img-top" alt="Gambar">
                     <div class="card-body">
                         <div style="text-transform:uppercase" class="card-text h5">${result.title}</div>
                         <div class="card-title h6">${result.created_at}</div>
