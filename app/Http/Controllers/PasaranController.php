@@ -2,8 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pasaran;
+use Illuminate\Http\Request;
+
 class PasaranController extends Controller
 {
+
+    public function show_prediksi(Request $request)
+    {
+
+        $pasaran = $request->input('pasaran');
+
+        $data = Pasaran::join('table_prediksi', 'table_prediksi.pasaran_id', '=', 'table_pasaran.id')
+        ->where('name_pasaran', $pasaran)
+        ->orderBy('table_prediksi.id', 'desc')
+        ->get();
+
+        return view('show_prediksi', ['pasaran' => $pasaran,'data' => $data,]);
+
+    }
 
     public function index_pasaran_home()
     {

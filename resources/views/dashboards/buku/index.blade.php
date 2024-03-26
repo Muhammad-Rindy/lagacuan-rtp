@@ -207,6 +207,8 @@
                             title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
                             text: "Your file has been saved",
                             icon: "success",
+                            timer: 700,
+                            showConfirmButton: false,
                         });
                         tables.draw();
                     },
@@ -260,6 +262,8 @@
                         title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
                         text: "Your file has been successfully edited",
                         icon: "success",
+                        timer: 700,
+                        showConfirmButton: false,
                     });
                     tables.draw();
 
@@ -300,9 +304,11 @@
                         success: function(response) {
                             // Jika success
                             Swal.fire({
-                                title: '<span class="your-custom-css-class" style="color:#b5b7c8">Deleted!</span>',
+                                title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
                                 text: "Your file has been deleted.",
                                 icon: "success",
+                                timer: 700,
+                                showConfirmButton: false,
                             });
                             tables.draw();
                         },

@@ -41,6 +41,8 @@ Route::get('/paito', [PasaranController::class, 'index_paito_home'])->name('inde
 Route::get('/rtpslot', [RtpController::class, 'index'])->name('index-rtp');
 Route::get('/rtpslot/{provider_name}', [RtpController::class, 'providerRtp']);
 Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
+Route::get('/prediksi', [PasaranController::class, 'show_prediksi']);
+
 
 // Route::get('/testing', function () {
 //     $rtp = getRtp()->map(function($e) {

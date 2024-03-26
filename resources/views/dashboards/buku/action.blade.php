@@ -1,17 +1,16 @@
 @include('dashboards.layouts.header')
 
-<a href="javascript:void(0)" style="padding: 9px;margin:0px 5px;" onClick="loadData({{ $id }})" title="Edit"
-    class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">
-    <i style="padding: 0;" class="fa-solid fa-pen-to-square"></i>
+<a href="javascript:void(0)" onClick="loadData({{ $id }})" title="Edit"
+    class="btn btn-icon btn-sm h-auto btn-color-gray-500 btn-active-color-primary justify-content-end"
+    data-bs-toggle="modal" data-bs-target="#editModal">
+    <i style="font-size: 19px; color:#006ae6" class="fa-solid fa-pen-to-square"></i>
 </a>
 
-
-
-<a href="javascript:void(0)" style="padding: 9px;margin:0px 5px;" onClick="deleteData({{ $id }})"
-    data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger btn-sm">
-    <i style="padding: 0;" class="fa-solid fa-trash-can"></i>
+<a href="javascript:void(0)" onClick="deleteData({{ $id }})" data-toggle="tooltip" data-original-title="Delete"
+    class="btn btn-icon btn-sm h-auto btn-color-gray-500 btn-active-color-primary justify-content-end">
+    <i style="font-size: 19px; color:#e42855; margin:0px 7px" class="fa-solid fa-trash"></i>
+    {{-- <i style="font-size: 19px; color:#e42855; margin:0px 7px" class="fa-regular fa-square-minus"></i> --}}
 </a>
-
 <!-- Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -36,10 +35,10 @@
 
                     <div class="mb-3">
                         <div style="text-align: left">
-                            <label for="exampleInputEmail1" class="form-label" >Image</label>
+                            <label for="exampleInputEmail1" class="form-label">Image</label>
                         </div>
-                        <input type="file" name="image" class="form-control"
-                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="file" name="image" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
                     </div>
                 </form>
             </div>

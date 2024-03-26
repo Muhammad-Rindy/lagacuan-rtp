@@ -48,14 +48,14 @@ class BukuController extends Controller
 
         if ($request->hasFile("image")) {
             $file = $request->file('image');
-            $path = time() . '_' . $request->name . '.' . $file->getClientOriginalExtension();
-            Storage::disk('local')->put('public/' . $path, file_get_contents($file));
-            $path = url('storage/'.str_replace("public", "", $path));
+        $path = $file->store('public/banners'); // Simpan gambar di dalam folder 'public/banners'
+
+        $url = Storage::url($path); // Dapatkan URL lengkap dari gambar yang disimpan
         }
 
         $bukti = Buku::create([
             'description' => $request->description,
-            'image' => $path
+            'image' => $url
         ]);
 
         return response()->json(['success' => true, 'message' => 'Data stored successfully', 'bukti' => $bukti]);

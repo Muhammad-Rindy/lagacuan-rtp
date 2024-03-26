@@ -176,8 +176,8 @@
                             <div class="app-navbar-item ms-lg-5" id="kt_header_user_menu_toggle">
                                 <!--begin::Menu wrapper-->
                                 <div class="d-flex align-items-center"
-                                    data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                                    data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                                    data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
+                                    data-kt-menu-placement="bottom-end">
                                     <!--begin:Info-->
                                     <div class="text-end d-none d-sm-flex flex-column justify-content-center me-3">
                                         <span class="text-gray-500 fs-8 fw-bold">Hello</span>
@@ -335,17 +335,14 @@
                                     class="menu menu-column menu-rounded menu-sub-indention">
                                     <div class="pt-0 pb-0 menu-item">
                                         <div class="menu-content">
-                                            <span class="menu-heading">Public</span>
+                                            <span class="menu-heading">Dashboard</span>
                                         </div>
                                     </div>
                                     <div class="mx-4 mb-4 separator"></div>
                                     <!--begin:Menu item-->
                                     <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                                         <!--begin:Menu link-->
-                                        <span class="menu-link">
-                                            <span class="menu-title">Dashboard</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
+
                                         <!--end:Menu link-->
                                         <!--begin:Menu sub-->
                                         <div class="menu-sub menu-sub-accordion">
@@ -450,7 +447,12 @@
                                     </div>
                                     <!--end:Menu item-->
                                     <!--begin:Menu item-->
-
+                                    <div class="pt-0 pb-0 menu-item">
+                                        <div class="menu-content">
+                                            <span class="menu-heading">Additional</span>
+                                        </div>
+                                    </div>
+                                    <div class="mx-4 mb-4 separator"></div>
                                     <!--end:Menu item-->
                                     <!--begin:Menu item-->
 
@@ -459,12 +461,9 @@
 
                                     <!--end:Menu item-->
                                     <!--begin:Menu item-->
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                    <div data-kt-menu-trigger="click" class="menu-item show menu-accordion">
                                         <!--begin:Menu link-->
-                                        <span class="menu-link">
-                                            <span class="menu-title">Additional</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
+
                                         <!--end:Menu link-->
                                         <!--begin:Menu sub-->
                                         <div class="menu-sub menu-sub-accordion">

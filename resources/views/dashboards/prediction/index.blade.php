@@ -30,7 +30,8 @@
                             <!--end::Title-->
                             <!--begin::Actions-->
                             <div class="mt-1 mb-3 d-flex align-items-center">
-                                <button type="button" class="text-center btn btn-primary btn-sm me-3" id="randomPrediksi">Random All Prediksi</button>
+                                <button type="button" class="text-center btn btn-primary btn-sm me-3"
+                                    id="randomPrediksi">Random All Prediksi</button>
                                 <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
                                     + Add Prediction
@@ -260,6 +261,8 @@
                             title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
                             text: "Your file has been saved",
                             icon: "success",
+                            timer: 700,
+                            showConfirmButton: false,
                         });
                         $('#table-pasaran').DataTable().ajax.reload();
                     },
@@ -316,6 +319,8 @@
                         title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
                         text: "Your file has been successfully edited",
                         icon: "success",
+                        timer: 700,
+                        showConfirmButton: false,
                     });
                     $('#table-pasaran').DataTable().ajax.reload();
 
@@ -356,9 +361,11 @@
                         success: function(response) {
                             // Jika success
                             Swal.fire({
-                                title: '<span class="your-custom-css-class" style="color:#b5b7c8">Deleted!</span>',
+                                title: '<span class="your-custom-css-class" style="color:#b5b7c8">Success!</span>',
                                 text: "Your file has been deleted.",
                                 icon: "success",
+                                timer: 700,
+                                showConfirmButton: false,
                             });
                             $('#table-pasaran').DataTable().ajax.reload();
                         },
