@@ -26,7 +26,7 @@
         }
     }
 
-    @media screen and (min-width: 400px) and (max-width: 950px) {
+    @media screen and (min-width: 420px) and (max-width: 950px) {
         .button-swip-right {
             margin-top: 1010px;
 
@@ -44,14 +44,34 @@
         }
     }
 
-    @media screen and (min-width: 100px) and (max-width: 400px) {
+
+
+    @media screen and (min-width: 390px) and (max-width: 420px) {
         .button-swip-right {
-            margin-top: 1080px;
+            margin-top: 1050px;
 
         }
 
         .button-swip-left {
-            margin-top: 1080px;
+            margin-top: 1050px;
+        }
+
+        .new-content {
+            width: 90%;
+            max-width: 270px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+    }
+
+    @media screen and (min-width: 100px) and (max-width: 390px) {
+        .button-swip-right {
+            margin-top: 2000px;
+
+        }
+
+        .button-swip-left {
+            margin-top: 2000px;
         }
 
         .new-content {
