@@ -97,7 +97,7 @@ class PasaranController extends Controller
                 'image' => ($item->image),
                 'title' => ($item->title),
                 'description' => ($item->description),
-                'created_at' => (($item->created_at)),
+                'tanggal' => Carbon::parse($item->tanggal)->setTimezone('Asia/Jakarta')->translatedFormat('l, d F Y'),
             ];
         });
 
