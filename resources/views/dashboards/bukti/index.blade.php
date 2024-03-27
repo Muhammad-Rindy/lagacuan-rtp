@@ -25,12 +25,11 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-gray-800">Testimonies Jackpot</span>
+                                <span class="text-gray-800 card-label fw-bold">Testimonies Jackpot</span>
                             </h3>
                             <!--end::Title-->
                             <!--begin::Actions-->
-                            <button type="button" class="btn btn-success btn-sm mb-3 mt-1" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                            <button type="button" class="mt-1 mb-3 btn btn-success btn-sm" id="btnTambah">
                                 + Add Testimony
                             </button>
                             <!--end::Actions-->
@@ -49,6 +48,7 @@
                                     </div>
                                     <form id="storeData" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" id="editId" name="id">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Title Testimony</label>
@@ -56,10 +56,13 @@
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Description
+                                                <label for="description" class="form-label">Description
                                                     Payment</label>
-                                                <input type="text" name="description" class="form-control"
-                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                <textarea name="description" id="description" class="form-control"></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="tanggal" class="form-label">Tanggal</label>
+                                                <input type="date" name="tanggal" class="form-control" id="tanggal" aria-describedby="emailHelp" >
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Image</label>
@@ -79,19 +82,19 @@
 
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-2">
+                        <div class="pt-2 card-body">
                             <!--begin::Table-->
                             <div class="table-responsive">
                                 <table style="width: 100%; font-size:14px"
                                     class="table align-middle table-row-dashed fs-6 gy-3" id="table-pasaran">
                                     <thead>
-                                        <tr class="text-start text-gray-500 fw-bold fs-6 gs-0">
+                                        <tr class="text-gray-500 text-start fw-bold fs-6 gs-0">
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
                                             <th style="text-align: center;text-transform:capitalize">Title Testimony</th>
                                             <th style="text-align: center;text-transform:capitalize">Description Testimony
                                             </th>
                                             <th style="text-align: center;text-transform:capitalize">Image</th>
-                                            <th style="text-align: center;text-transform:capitalize">Created at</th>
+                                            <th style="text-align: center;text-transform:capitalize">Tanggal</th>
                                             <th style="width:10%;text-align:center;text-transform:capitalize">Action</th>
                                         </tr>
                                     </thead>
@@ -105,25 +108,25 @@
         </div>
         <!--end::Content wrapper-->
         <!--begin::Footer-->
-        <div id="kt_app_footer" class="app-footer mt-5">
+        <div id="kt_app_footer" class="mt-5 app-footer">
             <!--begin::Footer container-->
-            <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
+            <div class="py-3 app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack">
                 <!--begin::Copyright-->
-                <div class="text-gray-900 order-2 order-md-1">
+                <div class="order-2 text-gray-900 order-md-1">
                     <span class="text-muted fw-semibold me-1">2024&copy;</span>
                     <a href="/" target="_blank" class="text-gray-800 text-hover-primary">JederWD</a>
                 </div>
                 <!--end::Copyright-->
                 <!--begin::Menu-->
-                <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+                <ul class="order-1 menu menu-gray-600 menu-hover-primary fw-semibold">
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">About</div>
+                        <div target="_blank" class="px-2 menu-link">About</div>
                     </li>
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">Support</div>
+                        <div target="_blank" class="px-2 menu-link">Support</div>
                     </li>
                     <li class="menu-item">
-                        <div target="_blank" class="menu-link px-2">Purchase</div>
+                        <div target="_blank" class="px-2 menu-link">Purchase</div>
                     </li>
                 </ul>
                 <!--end::Menu-->
@@ -136,66 +139,71 @@
 
     <script type="text/javascript">
         // Get data
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        let mdl = $("#exampleModal");
+        let btnTambah = $("#btnTambah");
+        let titleModal = $("#editModalLabel");
+        let url = "/store-bukti";
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-            $('#table-pasaran').DataTable({
-                processing: true,
-                serverSide: true,
-                url: '/index-bukti',
-                columns: [{
-                        className: "text-center",
-                        data: "DT_RowIndex",
-                        name: "DT_RowIndex",
-                        orderable: false,
-                        searchable: false
+        let table = $('#table-pasaran').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '/index-bukti'
+            },
+            columns: [{
+                    className: "text-center",
+                    data: "DT_RowIndex",
+                    name: "DT_RowIndex",
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'description',
+                    name: 'description'
+                },
+                {
+                    className: "text-center",
+                    data: 'image',
+                    name: 'image',
+                    render: function(data, type, full, meta) {
+                        if (type === 'display') {
+                            var url = "{{ url('storage/') }}" + '/' + data;
+                            return '<img src="' + data +
+                                '" alt="Image" width="70" height="45">';
+                        }
+                        return data;
                     },
-                    {
-                        data: 'title',
-                        name: 'title'
-                    },
-                    {
-                        data: 'description',
-                        name: 'description'
-                    },
-                    {
-                        className: "text-center",
-                        data: 'image',
-                        name: 'image',
-                        render: function(data, type, full, meta) {
-                            if (type === 'display') {
-                                var url = "{{ url('storage/') }}" + '/' + data;
-                                return '<img src="' + data +
-                                    '" alt="Image" width="70" height="45">';
-                            }
-                            return data;
-                        },
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
-                    },
-                    {
-                        className: "text-center",
-                        data: 'action',
-                        name: 'action',
-                        orderable: false
-                    },
-                ],
-                order: [
-                    [0, 'asc']
-                ],
+                },
+                {
+                    data: 'tanggalFormat',
+                    name: 'tanggalFormat'
+                },
+                {
+                    className: "text-center",
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
+                },
+            ],
+            order: [
+                [0, 'asc']
+            ],
 
-            });
         });
 
 
         // store data
+
         $(document).ready(function() {
             $('#storeData').submit(function(e) {
                 e.preventDefault();
@@ -203,7 +211,7 @@
                 var formData = new FormData($(this)[0]);
 
                 $.ajax({
-                    url: '/store-bukti',
+                    url: url,
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -220,7 +228,7 @@
                             timer: 700,
                             showConfirmButton: false,
                         });
-                        $('#table-pasaran').DataTable().ajax.reload();
+                        table.draw();
                     },
                     error: function(error) {
                         console.log(error);
@@ -238,22 +246,41 @@
             });
         });
 
-        // Get data berdasarkan id
+        btnTambah.click(() => {
+            titleModal.text("Create New Testimony");
+            $('#storeData').trigger("reset");
+            url = '/store-bukti';
+            mdl.modal("show");
+        })
+
         function loadData(id) {
-            $.ajax({
-                url: '/get-data-bukti/' + id,
-                type: 'GET',
-                success: function(response) {
-                    // Mengisi formulir dengan data yang diterima
-                    $('#editId').val(response.id);
-                    $('#editTitle').val(response.title);
-                    $('#editDescription').val(response.description);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
+            let data = table.data();
+            data = Array.from({length: data.length}, (_, i) => data[i]).find(e => e.id == id);
+
+            titleModal.text("Edit Testimony");
+            $('input[name="title"]').val(data.title);
+            $('input[name="description"]').val(data.description);
+            $('input[name="tanggal"]').val(data.tanggal);
+            $("#editId").val(id);
+            url = '/update-bukti';
+            mdl.modal("show");
+
+            // $.ajax({
+            //     url: '/get-data-bukti/' + id,
+            //     type: 'GET',
+            //     success: function(response) {
+            //         // Mengisi formulir dengan data yang diterima
+            //         $('#editId').val(response.id);
+            //         $('#editTitle').val(response.title);
+            //         $('#editDescription').val(response.description);
+            //     },
+            //     error: function(error) {
+            //         console.log(error);
+            //     }
+            // });
         }
+
+        // Get data berdasarkan id
 
         // Update data
         function updateData() {
