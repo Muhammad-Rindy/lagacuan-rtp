@@ -247,7 +247,7 @@
                                     <a href="${e.url}" class="provider-game">
                                         <img src="${e.image}" class="card-img-top img-new height-card" alt="Gambar">
                                     </a>
-                                    <div class="mt-2 progress bar-persen">
+                                    <div class="mt-2 progress bar-persen" style="border: solid #0ba1ff 2px;">
                                         <div class="progress-bar ${
                                             e.persentase >= 0 && e.persentase <= 40 ? 'bg-danger bg-animasi' :
                                             e.persentase >= 41 && e.persentase <= 60 ? 'bg-warning bg-animasi' :
