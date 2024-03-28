@@ -472,7 +472,7 @@ a {
 ::placeholder {
     color: black;
 }
-
+/* sa */
 @media (max-width: 900px) {
     .text-jp {
         text-align: center;
