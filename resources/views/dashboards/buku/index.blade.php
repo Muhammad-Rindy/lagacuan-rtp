@@ -160,7 +160,7 @@
                     name: 'image',
                     render: function(data, type, full, meta) {
                         if (type === 'display') {
-                            var url = "{{ url('storage/') }}" + '/' + data;
+                            // var url = "{{ url('storage/') }}" + '/' + data;
                             return '<img src="' + data +
                                 '" alt="Image" width="70" height="45">';
                         }

@@ -27,7 +27,7 @@ use App\Http\Controllers\ShioController;
 */
 
 // Front end
-Route::get('/', [PasaranController::class, 'index_pasaran_home'])->name('index-pasaran-home');
+Route::get('/home', [PasaranController::class, 'index_pasaran_home'])->name('index-pasaran-home');
 // Route::get('/home', [PasaranController::class, 'index_pasaran_home'])->name('index-pasaran-home');
 Route::get('/live-draw', [PasaranController::class, 'index_live_home'])->name('index-live-home');
 Route::get('/prediksi-togel', [PasaranController::class, 'index_prediksi_home'])->name('index-prediksi-home');
@@ -42,6 +42,8 @@ Route::get('/rtpslot', [RtpController::class, 'index'])->name('index-rtp');
 Route::get('/rtpslot/{provider_name}', [RtpController::class, 'providerRtp']);
 Route::post('/store-keluhan', [KeluhanController::class, 'store_keluhan']);
 Route::get('/prediksi', [PasaranController::class, 'show_prediksi']);
+Route::get('/details', [PasaranController::class, 'show_bukti']);
+
 
 
 // Route::get('/testing', function () {

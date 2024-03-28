@@ -89,7 +89,7 @@
         </h6>
     </main>
     <main class="container"
-        style="text-align: center;background-color: #8989894a;border-radius: 10px 10px 0px 0px;padding: 10px;">
+        style="text-align: center;background-color: #8989894a;border-radius: 7px 7px 0px 0px;padding: 10px;">
         <div class="card-red container-mobile">
             <div class="mt-4" style="text-align: center; text-transform:uppercase">
                 <h6 class="card-title"><span
@@ -153,11 +153,12 @@
         </div>
     </main>
     <main class="container" style="text-align: center;background-color: #8989894a;">
-        <div style="text-align: center; padding:5px 0px; color:white; font-weight:bold">PREDIKSI TANGGAL SEBELUMNYA
+        <div style="text-align: center; padding:5px 0px; color:#ffe200; font-weight:bold;text-decoration-line: underline;">
+            PREDIKSI TANGGAL SEBELUMNYA
         </div>
     </main>
     <main class="container mb-3"
-        style="text-align: center;background-color: #8989894a;border-radius: 0px 0px 10px 10px;padding: 10px;">
+        style="text-align: center;background-color: #8989894a;border-radius: 0px 0px 7px 7px;padding: 10px;">
         <div class="swiper-container new-content">
             <div class="swiper-wrapper" style="height:350px">
                 @foreach ($data as $index => $prediksi)

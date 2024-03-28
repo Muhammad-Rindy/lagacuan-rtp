@@ -2,7 +2,7 @@
 <style>
     .provider {
         background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
-        border-radius: 8px;
+        border-radius: 5px;
         padding: 20px;
         margin: 30px 0px;
         border: solid #ffd800 2px;

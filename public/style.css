@@ -27,6 +27,13 @@
     z-index: -1;
 }
 
+.card-desc {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 500px;
+}
+
 .container-soon header {
     font-size: 50px;
     color: white;
@@ -208,8 +215,6 @@ a {
     display: block;
     font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
         Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
     letter-spacing: -0.022em;
     line-height: 1.5;
     min-width: 30px;
@@ -221,6 +226,34 @@ a {
     -webkit-user-select: none;
     touch-action: manipulation;
     white-space: nowrap;
+}
+.button-jp {
+    background-image: linear-gradient(#0e69fb, #071b69);
+    text-decoration: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    direction: ltr;
+    display: block;
+    font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
+        Helvetica, Arial, sans-serif;
+    letter-spacing: -0.022em;
+    line-height: 1.5;
+    min-width: 30px;
+    overflow: visible;
+    padding: 4px 15px;
+    text-align: center;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+.button-jp:hover {
+    background-image: linear-gradient(#003881, #020f44);
+    transition: 5ms;
 }
 
 .Btn::before {
@@ -275,6 +308,14 @@ a {
 }
 
 @media (min-width: 900px) {
+    .text-jp {
+        text-align: center;
+        font-size: 17px;
+        font-weight: bolder;
+        color: #ffe200;
+        text-decoration-line: underline;
+    }
+
     .button-15 {
         transition: 0.3s;
         background-image: linear-gradient(#0e69fb, #071b69);
@@ -433,6 +474,15 @@ a {
 }
 
 @media (max-width: 900px) {
+    .text-jp {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bolder;
+        margin-top: 15px;
+        color: #ffe200;
+        text-decoration-line: underline;
+    }
+
     .button-15 {
         transition: 0.3s;
         background-image: linear-gradient(#0e69fb, #071b69);

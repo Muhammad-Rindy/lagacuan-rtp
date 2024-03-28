@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bukti;
 use App\Models\Pasaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PasaranController extends Controller
 {
@@ -21,6 +23,18 @@ class PasaranController extends Controller
         return view('show_prediksi', ['pasaran' => $pasaran,'data' => $data,]);
 
     }
+
+    public function show_bukti(Request $request)
+    {
+        $id = $request->input('id');
+
+        // Menambahkan 2 ID setelahnya ke dalam array
+        $ids = [$id, $id + 1, $id + 2];
+
+        $data = Bukti::whereIn('id', $ids)->get();
+        return view('details', ['data' => $data]);
+    }
+
 
     public function index_pasaran_home()
     {

@@ -62,7 +62,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tanggal" class="form-label">Tanggal</label>
-                                                <input type="date" name="tanggal" class="form-control" id="tanggal" aria-describedby="emailHelp" >
+                                                <input type="date" name="tanggal" class="form-control" id="tanggal"
+                                                    aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Image</label>
@@ -169,7 +170,17 @@
                 },
                 {
                     data: 'description',
-                    name: 'description'
+                    name: 'description',
+                    render: function(data, type, full, meta) {
+                        if (type === 'display') {
+                            // Batasi panjang deskripsi sesuai dengan maxLength yang telah ditentukan
+                            var maxLength = 50; // Ganti dengan nilai maksimum yang Anda inginkan
+                            var truncatedData = data.length > maxLength ? data.substr(0, maxLength) +
+                                '...' : data;
+                            return truncatedData;
+                        }
+                        return data;
+                    }
                 },
                 {
                     className: "text-center",
@@ -255,11 +266,13 @@
 
         function loadData(id) {
             let data = table.data();
-            data = Array.from({length: data.length}, (_, i) => data[i]).find(e => e.id == id);
+            data = Array.from({
+                length: data.length
+            }, (_, i) => data[i]).find(e => e.id == id);
 
             titleModal.text("Edit Testimony");
             $('input[name="title"]').val(data.title);
-            $('input[name="description"]').val(data.description);
+            $('textarea[name="description"]').val(data.description);
             $('input[name="tanggal"]').val(data.tanggal);
             $("#editId").val(id);
             url = '/update-bukti';

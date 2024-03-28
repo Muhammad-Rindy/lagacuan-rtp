@@ -43,6 +43,7 @@
                             <div class="card-body">
                                 <h6 style="font-weight:bolder;color: white;" class="card-title">PREDIKSI TOGEL <span style="text-transform: uppercase; font-weight:bold">${result.name_pasaran}</span> POOLS JEDERWD</h6>
                                 <p class="card-text" style="color:white">Prediksi Togel <span style="text-transform: uppercase; font-weight:bold;">${result.name_pasaran}</span> ${result.created_at},  Bocoran & Info Akurat yang pasti JP Togel Online Dari Bandar JEDERWD.</p>
+
                                 <div style="display: flex; justify-content: flex-end;">
                                     <button style="font-weight:bold; font-size:13px;border:none;color:white" type="button"
                                     class="mb-2 btn button-17 btn-sm btn-sm btn-lihat-prediksi" data-pasaran="${result.name_pasaran}">
