@@ -34,7 +34,7 @@
 </head>
 <style>
     .container {
-        max-width: 1350px;
+        max-width: 1340px;
     }
 </style>
 

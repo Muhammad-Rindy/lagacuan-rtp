@@ -20,7 +20,7 @@
 
     .provider-game {
         background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
-        padding: 8px;
+        padding: 5px;
         border-radius: 3px;
         border: solid #ffd800 2px;
         transition: transform .2s;
