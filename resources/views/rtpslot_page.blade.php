@@ -1,11 +1,11 @@
 @extends('layouts.master')
 <style>
     .provider {
-        background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
+        background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
         border-radius: 5px;
         padding: 20px;
         margin: 30px 0px;
-        border: solid #ffd800 2px;
+        border: solid #f5d000 2px;
         transition: transform .2s;
     }
 
@@ -19,10 +19,10 @@
     }
 
     .provider-game {
-        background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+        background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
         padding: 5px;
         border-radius: 3px;
-        border: solid #ffd800 2px;
+        border: solid #f5d000 2px;
         transition: transform .2s;
     }
 
