@@ -55,9 +55,9 @@
         }
 
         .provider-game {
-            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
             padding: 8px;
-            border: solid #ffd800 2px;
+            border: solid #f5d000 2px;
             border-radius: 3px;
             transition: transform .2s;
         }
@@ -96,9 +96,9 @@
         }
 
         .provider-game {
-            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
             padding: 1px;
-            border: solid #ffd800 1px;
+            border: solid #f5d000 1px;
             border-radius: 3px;
         }
 
@@ -135,9 +135,9 @@
         }
 
         .provider-game {
-            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
             padding: 1px;
-            border: solid #ffd800 1px;
+            border: solid #f5d000 1px;
             border-radius: 3px;
         }
 
