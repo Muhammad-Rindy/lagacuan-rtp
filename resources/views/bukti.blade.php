@@ -44,7 +44,7 @@
                         style="background-image: linear-gradient(225deg, #350000 0%, #fb1e1e 50%, #b90000 100%); color:white; border: solid #ff1b1b 3px; border-bottom-left-radius:20px; border-bottom-right-radius:20px;">
                         <img style="background-color: white" src="${result.image}" class="card-img-top" alt="Gambar">
                         <div class="card-body">
-                            <div style="text-transform:uppercase" class="card-text h5">${result.title}</div>
+                            <div style="text-transform:uppercase" class="card-desc card-text h5">${result.title}</div>
                             <div class="card-title h6">${result.tanggal}</div>
                             <div style="text-transform:capitalize" class="card-desc card-text h5">${result.description}</div>
                                 <div class="d-grid gap-2 mt-4">
