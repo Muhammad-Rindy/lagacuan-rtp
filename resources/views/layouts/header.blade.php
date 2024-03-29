@@ -1,11 +1,11 @@
-<header class="py-3 lh-1" style="padding: 20px 25px;background-color: #101010;border-bottom: solid #ffe200 2px">
+<header class="py-3 lh-1" style="padding: 20px 25px;background-color: #101010;border-bottom: solid #ffcf00 2px">
     <div id="results-contact">
 
     </div>
 </header>
 
 {{-- Desktop --}}
-<div class="py-1 mb-1 nav-scroller nav-desktop" style="border-bottom: solid #ffe200 2px; background-color:#313131c2">
+<div class="py-1 mb-1 nav-scroller nav-desktop" style="border-bottom: solid #ffcf00 2px; background-color:#313131c2">
     <nav class="nav nav-underline justify-content-between">
         <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
             href="{{ route('index-pasaran-home') }}" style="margin-left:15px;">
@@ -61,7 +61,7 @@
 </div>
 <main class="container">
     <div class="mb-1 d-flex">
-        <i class="fa-solid fa-bullhorn" style="color:#ffe200;padding:5px 10px; background: #181818"></i>
+        <i class="fa-solid fa-bullhorn" style="color:#ffcf00;padding:5px 10px; background: #181818"></i>
         <div class="marquee ft-marquee">
             <span>SELAMAT DATANG DI JEDERWD BANDAR TOGEL, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA RAIH
                 KEMENANGAN TANPA BATAS BERSAMA KAMI.</span>
