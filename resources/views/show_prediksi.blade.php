@@ -175,7 +175,7 @@
                                 <div class="card-body">
 
                                     <div class=""
-                                        style="text-align: left; font-weight:bolder; font-size:15px; color: white;font-family: ubuntu">
+                                        style="text-align: left; font-weight:bolder; font-size:16px; color: white;font-family: ubuntu">
                                         Prediksi <span
                                             style="color: #fff900; text-transform:capitalize">{{ $prediksi->name_pasaran }}</span>
                                         Tanggal
