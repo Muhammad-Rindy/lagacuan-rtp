@@ -1,10 +1,20 @@
 .card-red {
-    background-image: linear-gradient(26deg, #011841 0%, #063fe1 50%);
+    background-image: linear-gradient(
+        45deg,
+        #0c0089 0%,
+        #0044ff 52%,
+        #0226b3 90%
+    );
     border: solid #0079ff 2px;
     border-radius: 10px;
 }
 .card-blue {
-    background-image: linear-gradient(26deg, #011841 0%, #063fe1 50%);
+    background-image: linear-gradient(
+        45deg,
+        #0c0089 0%,
+        #0044ff 52%,
+        #0226b3 90%
+    );
     border: solid #0079ff 2px;
 }
 
@@ -154,13 +164,17 @@ a {
     color: #ffd600;
     text-decoration: none;
     font-weight: bold;
-    font-family: math;
+    font-family: "Ubuntu";
+    font-size: 15px;
+    /* letter-spacing: 0.1px; */
     margin-top: 7.5px;
 }
 
 .no-actived {
     font-weight: bold;
-    font-family: math;
+    font-family: "Ubuntu";
+    font-size: 15px;
+    /* letter-spacing: 0.1px; */
     color: white;
 }
 
@@ -190,7 +204,7 @@ a {
 }
 
 .winner {
-    background-image: linear-gradient(#0e69fb, #071b69);
+    background-image: linear-gradient(#0044ff, #0c0089);
     color: white;
     font-weight: bold;
     font-size: 13px;
@@ -228,7 +242,7 @@ a {
     white-space: nowrap;
 }
 .button-jp {
-    background-image: linear-gradient(#0e69fb, #071b69);
+    background-image: linear-gradient(#0044ff, #0c0089);
     text-decoration: none;
     border-radius: 5px;
     box-sizing: border-box;
@@ -304,7 +318,7 @@ a {
 }
 
 .button-15:hover {
-    background-image: linear-gradient(#0744a5, #01104b);
+    background-image: linear-gradient(#0032fb, #031459);
 }
 
 @media (min-width: 900px) {
@@ -318,10 +332,10 @@ a {
 
     .button-15 {
         transition: 0.3s;
-        background-image: linear-gradient(#0e69fb, #071b69);
+        background-image: linear-gradient(#0044ff, #0c0089);
         border-color: #214dfd;
         text-decoration: none;
-        border-radius: 7px;
+        border-radius: 6px;
         box-sizing: border-box;
         color: #ffffff;
         cursor: pointer;
@@ -356,7 +370,7 @@ a {
         border-color: #ab9100;
         color: black;
         text-decoration: none;
-        border-radius: 7px;
+        border-radius: 6px;
         box-sizing: border-box;
         cursor: pointer;
         direction: ltr;
@@ -446,7 +460,7 @@ a {
         background: rgba(250, 250, 250, 0.2);
     }
     .actives-mobile-2 {
-        background-image: linear-gradient(#0744a5, #01104b);
+        background-image: linear-gradient(#0032fb, #031459);
         border-color: #214dfd;
         text-decoration: none;
         border-radius: 5px;
@@ -490,10 +504,10 @@ a {
 
     .button-15 {
         transition: 0.3s;
-        background-image: linear-gradient(#0e69fb, #071b69);
+        background-image: linear-gradient(#0044ff, #0c0089);
         border-color: #214dfd;
         text-decoration: none;
-        border-radius: 7px;
+        border-radius: 6px;
         box-sizing: border-box;
         color: #ffffff;
         cursor: pointer;
@@ -527,7 +541,7 @@ a {
         border-color: #a17a00;
         color: black;
         text-decoration: none;
-        border-radius: 7px;
+        border-radius: 6px;
         box-sizing: border-box;
         cursor: pointer;
         direction: ltr;
@@ -561,7 +575,7 @@ a {
     }
 
     .actives-mobile-2 {
-        background-image: linear-gradient(#0744a5, #01104b);
+        background-image: linear-gradient(#0032fb, #031459);
         border-color: #214dfd;
         text-decoration: none;
         border-radius: 5px;
@@ -647,7 +661,7 @@ a {
     }
 
     .actives-mobile {
-        background-image: linear-gradient(#0744a5, #01104b);
+        background-image: linear-gradient(#0032fb, #031459);
         border-color: #214dfd;
         text-decoration: none;
         border-radius: 5px;

@@ -84,7 +84,7 @@
 </style>
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">⚜️ JEDERWD - PREDIKSI TOGEL
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ JEDERWD - PREDIKSI TOGEL
             <span style="text-transform:uppercase">{{ $pasaran }}</span> TERLENGKAP 2024 ⚜️
         </h6>
     </main>

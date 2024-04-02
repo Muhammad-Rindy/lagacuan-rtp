@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">⚜️ JEDERWD - PREDIKSI TOGEL
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ JEDERWD - PREDIKSI TOGEL
             HARI
             INI LENGKAP
             2024 ⚜️
@@ -34,7 +34,7 @@
 
                 $.each(limitedData, function(index, result) {
                     var resultCard = `
-                <div class="mb-2 card w-100" style="background-image: linear-gradient(#0e69fb, #071b69);border-radius: 10px;border: solid #214dfd 2px;">
+                <div class="mb-2 card w-100" style="background-image: linear-gradient(#193cff, #031d81);;border-radius: 10px;border: solid #214dfd 2px;">
                     <div class="row g-0">
                         <div class="col-md-4" style="display: flex; justify-content: center; align-items: center; text-align: center;">
                             <img src="${result.image}" class="img-fluid rounded-start" alt="Gambar">

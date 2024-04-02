@@ -2,7 +2,8 @@
 
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">⚜️ JEDERWD - LIVE DRAW PASARAN
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ JEDERWD - LIVE DRAW
+            PASARAN
             TOGEL ONLINE
             LENGKAP ⚜️</h6>
     </main>
