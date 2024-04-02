@@ -262,7 +262,7 @@
                 displayResults(data);
                 // Memulai otomatis sliding setiap 2 detik setelah data dimuat
                 $('#carouselExampleAutoplaying').carousel({
-                    interval: 2000
+                    interval: 2500
                 });
             },
             error: function(error) {
