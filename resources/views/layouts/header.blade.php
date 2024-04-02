@@ -238,7 +238,7 @@
                 <a target="_blank" href="${result.live_chat}"> LIVE CHAT </a>
             </div>
             <div class="row flex-nowrap justify-content-between align-items-center">
-                <div class="pt-1 col-4">
+                <div class="pt-1 col-4 mb-1 mt-1">
                     <img style="height: 50px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
@@ -260,6 +260,10 @@
             method: 'GET',
             success: function(data) {
                 displayResults(data);
+                // Memulai otomatis sliding setiap 2 detik setelah data dimuat
+                $('#carouselExampleAutoplaying').carousel({
+                    interval: 2000
+                });
             },
             error: function(error) {
                 console.error('Error fetching data:', error);
@@ -271,18 +275,15 @@
             var carouselInner = '';
 
             $.each(data, function(index, result) {
-                // var pathImage = 'storage/' + result.image;
-
                 carouselInner += `
-        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-            <img src="${result.image}" class="d-block w-100 img-fluid" alt="gambar">
-        </div>
-                `;
+                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                    <img src="${result.image}" class="d-block w-100 img-fluid" alt="gambar">
+                </div>
+            `;
             });
 
-
             var resultCard = `
-            <div id="carouselExampleAutoplaying" class="mb-2 carousel slide carousel-fade" data-bs-ride="carousel">
+            <div id="carouselExampleAutoplaying" class="mb-2 carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="false">
                 <div class="carousel-inner">
                     ${carouselInner}
                 </div>
