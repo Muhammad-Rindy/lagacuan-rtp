@@ -239,7 +239,7 @@
             </div>
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="pt-1 col-4 mb-1 mt-1">
-                    <img style="height: 50px" src="{{ asset('logo.png') }}" alt="logo">
+                    <img style="height: 53px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a href="https://jederwd.org/#/register" class="Btn" target="_blank"></a>
