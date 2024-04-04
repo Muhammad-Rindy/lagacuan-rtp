@@ -103,9 +103,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-data-shio/{id}', [ShioController::class, 'getData']);
     Route::post('/update-shio', [ShioController::class, 'updateData']);
     Route::post('/generate-shio', [ShioController::class, 'generateShio']);
-
-
-
 });
 
 

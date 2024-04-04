@@ -47,15 +47,18 @@ Route::get('/details', [PasaranController::class, 'show_bukti']);
 
 
 // Route::get('/testing', function () {
-//     $rtp = getRtp()->map(function($e) {
-//         if (stripos($e->url, "peler.com")) {
-//             $e->url = str_replace("peler.com", "jederwd.org", $e->url);
-//         }
-//         return $e;
-//     });
+//     // https://jederwd.net/office/game-oc/game/getNodeInfoList?l=id&parentId=512170
+//     $get = Http::get('https://jederwd.net/office/game-oc/game/getNodeInfoList?l=id&parentId=512170');
+//     $data = $get->object();
+//     return collect($data->result)->map(fn($e) => $e->nodeName);
+//     // if ($data->code == 200) {
+//     //     $data = collect($data->result)->where("nodeName", "POIPET12")->first();
+//     //     if ($data) {
+//     //         $number = Str::of($data->lotteryNodeFetchOutDto->volatility)->split('/,/');
+//     //         return $number;
+//     //     }
+//     //     return response()->json($data, 200);
+//     // }
 
-//     $data = json_encode($rtp, JSON_PRETTY_PRINT);
-//     Storage::put("json/data_rtp.json", $data);
-
-//     return getRtp();
+//     return [];
 // });
