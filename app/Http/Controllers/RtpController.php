@@ -168,14 +168,7 @@ class RtpController extends Controller
     }
 
     public function randomAll() {
-        $data = getRtp()->map(function($e) {
-            $e->persentase = rand(0, 85);
-            $e->pola = randomRtp();
-            return $e;
-        });
-
-        $data = json_encode($data, JSON_PRETTY_PRINT);
-        Storage::put("json/data_rtp.json", $data);
+        randomAll();
         return response()->json(["status" => true], 200);
     }
 }

@@ -222,3 +222,16 @@ if (!function_exists('randomRtp')) {
         return $randomVariable;
     }
 }
+
+if (!function_exists('randomAll')) {
+    function randomAll() {
+        $data = getRtp()->map(function($e) {
+            $e->persentase = rand(0, 85);
+            $e->pola = randomRtp();
+            return $e;
+        });
+
+        $data = json_encode($data, JSON_PRETTY_PRINT);
+        Storage::put("json/data_rtp.json", $data);
+    }
+}
