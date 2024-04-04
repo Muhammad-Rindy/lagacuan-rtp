@@ -37,7 +37,7 @@
                         <div style="text-align: left">
                             <label for="exampleInputEmail1" class="form-label" style="text-transform: capitalize;">Alias</label>
                         </div>
-                        <input type="text" class="form-control" name="name_pasaran" id="editAlias">
+                        <input type="text" class="form-control" name="alias" id="editAlias">
                     </div>
                 </form>
             </div>
