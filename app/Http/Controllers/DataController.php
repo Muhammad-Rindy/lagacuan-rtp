@@ -44,6 +44,7 @@ class DataController extends Controller
     {
         $request->validate([
             'name_pasaran' => 'required',
+            'alias' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
@@ -56,6 +57,7 @@ class DataController extends Controller
 
         $bukti = Pasaran::create([
             'name_pasaran' => $request->name_pasaran,
+            'alias' => $request->alias,
             'image' => $url
         ]);
 
@@ -96,6 +98,7 @@ class DataController extends Controller
         $product = Pasaran::findOrFail($request->id);
         $product->update([
             'name_pasaran' => $request->name_pasaran,
+            'alias' => $request->alias,
         ]);
         return response()->json(['success' => true]);
     }

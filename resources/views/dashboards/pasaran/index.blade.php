@@ -56,6 +56,11 @@
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                             </div>
                                             <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Alias</label>
+                                                <input type="text" name="alias" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Image</label>
                                                 <input type="file" name="image" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -82,6 +87,8 @@
                                         <tr class="text-gray-500 text-start fw-bold fs-6 gs-0">
                                             <th style="width:5%;text-align: center; text-transform:capitalize">No.</th>
                                             <th style="width:25%;text-align: center;text-transform:capitalize">Name Lottery
+                                            </th>
+                                            <th style="width:25%;text-align: center;text-transform:capitalize">Alias
                                             </th>
                                             <th style="text-align: center;text-transform:capitalize">Image</th>
                                             <th style="width:25%;text-align: center;text-transform:capitalize">Created at
@@ -152,6 +159,10 @@
                     {
                         data: 'name_pasaran',
                         name: 'name_pasaran'
+                    },
+                    {
+                        data: 'alias',
+                        name: 'alias'
                     },
                     {
                         className: "text-center",

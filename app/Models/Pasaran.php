@@ -15,6 +15,7 @@ class Pasaran extends Model
     protected $fillable = [
         'id',
         'name_pasaran',
+        'alias',
         'image',
         'created_at',
     ];
