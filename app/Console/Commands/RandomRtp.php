@@ -29,7 +29,7 @@ class RandomRtp extends Command
     public function handle()
     {
         randomAll();
-        Telegram::sendMessage(Carbon::now()."\nSuccess running command, [random:prediksi]");
+        Telegram::sendMessage(Carbon::now()."\nSuccess running command, [random:rtp]");
         return Command::SUCCESS;
     }
 }
