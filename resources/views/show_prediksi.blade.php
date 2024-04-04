@@ -84,12 +84,12 @@
 </style>
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">⚜️ JEDERWD - PREDIKSI TOGEL
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ JEDERWD - PREDIKSI TOGEL
             <span style="text-transform:uppercase">{{ $pasaran }}</span> TERLENGKAP 2024 ⚜️
         </h6>
     </main>
     <main class="container"
-        style="text-align: center;background-color: #8989894a;border-radius: 10px 10px 0px 0px;padding: 10px;">
+        style="text-align: center;background-color: #8989894a;border-radius: 7px 7px 0px 0px;padding: 10px;">
         <div class="card-red container-mobile">
             <div class="mt-4" style="text-align: center; text-transform:uppercase">
                 <h6 class="card-title"><span
@@ -153,11 +153,12 @@
         </div>
     </main>
     <main class="container" style="text-align: center;background-color: #8989894a;">
-        <div style="text-align: center; padding:5px 0px; color:white; font-weight:bold">PREDIKSI TANGGAL SEBELUMNYA
+        <div style="text-align: center; padding:5px 0px; color:#ffe200; font-weight:bold;text-decoration-line: underline;">
+            PREDIKSI TANGGAL SEBELUMNYA
         </div>
     </main>
     <main class="container mb-3"
-        style="text-align: center;background-color: #8989894a;border-radius: 0px 0px 10px 10px;padding: 10px;">
+        style="text-align: center;background-color: #8989894a;border-radius: 0px 0px 7px 7px;padding: 10px;">
         <div class="swiper-container new-content">
             <div class="swiper-wrapper" style="height:350px">
                 @foreach ($data as $index => $prediksi)
@@ -174,7 +175,7 @@
                                 <div class="card-body">
 
                                     <div class=""
-                                        style="text-align: left; font-weight:bolder; font-size:15px; color: white;font-family: ubuntu">
+                                        style="text-align: left; font-weight:bolder; font-size:16px; color: white;font-family: ubuntu">
                                         Prediksi <span
                                             style="color: #fff900; text-transform:capitalize">{{ $prediksi->name_pasaran }}</span>
                                         Tanggal

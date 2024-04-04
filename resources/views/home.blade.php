@@ -34,7 +34,7 @@
                 $.each(data, function(index, result) {
                     // var pathImage = 'storage/' + result.image;
                     var resultCard = `
-                        <div class="col" style="padding:8px">
+                        <div class="col" style="padding:5px 10px">
                             <div class="card h-100 card-red">
                                 <img style="padding: 25px 70px 0px 70px" src="${result.pasaran.image}" class="card-img-top" alt="...">
                                 <div class="card-body">

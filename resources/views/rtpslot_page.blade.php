@@ -1,11 +1,11 @@
 @extends('layouts.master')
 <style>
     .provider {
-        background-image: linear-gradient(132deg, #fbf370 0%, #998f11 85%);
-        border-radius: 8px;
+        background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
+        border-radius: 5px;
         padding: 20px;
         margin: 30px 0px;
-        border: solid #ffd800 2px;
+        border: solid #f5d000 2px;
         transition: transform .2s;
     }
 
@@ -19,10 +19,10 @@
     }
 
     .provider-game {
-        background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
-        padding: 8px;
+        background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
+        padding: 5px;
         border-radius: 3px;
-        border: solid #ffd800 2px;
+        border: solid #f5d000 2px;
         transition: transform .2s;
     }
 
@@ -55,9 +55,9 @@
         }
 
         .provider-game {
-            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
             padding: 8px;
-            border: solid #ffd800 2px;
+            border: solid #f5d000 2px;
             border-radius: 3px;
             transition: transform .2s;
         }
@@ -83,15 +83,22 @@
             padding-bottom: 3px;
         }
 
+        .height-card {
+            height: 150px;
+        }
 
     }
 
     @media screen and (max-width: 900px) {
 
+        .height-card {
+            height: 101px;
+        }
+
         .provider-game {
-            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
             padding: 1px;
-            border: solid #ffd800 1px;
+            border: solid #f5d000 1px;
             border-radius: 3px;
         }
 
@@ -128,9 +135,9 @@
         }
 
         .provider-game {
-            background-image: linear-gradient(132deg, #fbf475 0%, #c3b60c 85%);
+            background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
             padding: 1px;
-            border: solid #ffd800 1px;
+            border: solid #f5d000 1px;
             border-radius: 3px;
         }
 
@@ -156,7 +163,7 @@
 </style>
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">⚜️ JEDERWD - RTPSLOT ⚜️
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ JEDERWD - RTPSLOT ⚜️
         </h6>
     </main>
     <div class="container">
@@ -238,9 +245,9 @@
                             <div class="col-4 data_rtp" style="padding: 7px;">
                                 <div class="shadow card h-100 lazy-image card-rtp-new" style="color: white;border: solid #198cf5 3px">
                                     <a href="${e.url}" class="provider-game">
-                                        <img src="${e.image}" class="card-img-top img-new" alt="..." style="height: 101px;">
+                                        <img src="${e.image}" class="card-img-top img-new height-card" alt="Gambar">
                                     </a>
-                                    <div class="mt-2 progress bar-persen">
+                                    <div class="mt-2 progress bar-persen" style="border: solid #0ba1ff 2px;">
                                         <div class="progress-bar ${
                                             e.persentase >= 0 && e.persentase <= 40 ? 'bg-danger bg-animasi' :
                                             e.persentase >= 41 && e.persentase <= 60 ? 'bg-warning bg-animasi' :

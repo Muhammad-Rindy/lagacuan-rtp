@@ -37,7 +37,7 @@
                                     class="table align-middle table-row-dashed fs-6 gy-3" id="table-rtp">
                                     <thead>
                                         <tr class="text-gray-500 text-start fw-bold fs-6 gs-0">
-                                            <th style="width: 50px; text-align: center; text-transform:capitalize">Index
+                                            <th style="width: 100px; text-align: center; text-transform:capitalize">Index
                                             </th>
                                             <th style="text-align: center;text-transform:capitalize">Provider</th>
                                             <th style="text-align: center;text-transform:capitalize">Nama</th>

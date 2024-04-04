@@ -2,38 +2,45 @@
 
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#181818; padding:5px 0px; color:white">⚜️ JEDERWD - KELUHAN PLAYER ⚜️
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ JEDERWD - KELUHAN PLAYER
+            ⚜️
         </h6>
     </main>
     <main class="container mb-5" style="padding: 12px; border-radius:7px; background-color:#181818">
-        <div style="color: white; text-align:center"><i class="fa-solid fa-circle-info"></i> Ajukan Keluhan</div>
+        <div style="color: white; text-align:center"><i class="fa-solid fa-circle-info"></i> Ajukan
+            Keluhan</div>
         <form id="storeData">
             @csrf
             <div class="mb-3">
-                <label style="color: white" for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="text" class="form-control  text-white" name="username" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" required>
+                <label style="color: white;" for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" style="color: white; background-color:#212529" name="username"
+                    id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
-                <label style="color: white" for="exampleInputEmail1" class="form-label">Email Address</label>
-                <input type="email" class="form-control  text-white" name="email" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" required>
+                <label style="color: white;" for="exampleInputEmail1" class="form-label">Email
+                    Address</label>
+                <input type="email" class="form-control" style="color: white; background-color:#212529" name="email"
+                    id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
-                <label style="color: white" for="exampleInputEmail1" class="form-label">No. Whatsapp Active</label>
-                <input type="text" name="number_phone" class="form-control  text-white" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" required>
+                <label style="color: white;" for="exampleInputEmail1" class="form-label">No.
+                    Whatsapp Active</label>
+                <input type="text" name="number_phone" class="form-control"
+                    style="color: white; background-color:#212529" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    required>
             </div>
             <div class="mb-3">
-                <label style="color: white" for="exampleInputEmail1" class="form-label">Title Complaint</label>
-                <input type="text" name="title_keluhan" class="form-control  text-white" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" required>
+                <label style="color: white;" for="exampleInputEmail1" class="form-label">Title
+                    Complaint</label>
+                <input type="text" name="title_keluhan" class="form-control"
+                    style="color: white; background-color:#212529" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    required>
             </div>
             <div class="mb-5">
-                <label style="color: white" for="exampleInputEmail1" class="form-label">Description Complaint</label>
+                <label style="color: white;" for="exampleInputEmail1" class="form-label">Description Complaint</label>
                 <div class="form-floating">
                     <textarea class="form-control text-white" name="description_keluhan" placeholder="Leave a comment here"
-                        id="floatingTextarea2" style="height: 100px" maxlength="255"></textarea>
+                        id="floatingTextarea2" style="height: 100px;color: white; background-color:#212529" maxlength="255"></textarea>
                     <label for="floatingTextarea2">Max. 255 Characters</label>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-<header class="py-3 lh-1" style="padding: 20px 25px;background-color: #101010;border-bottom: solid #ffcf00 2px">
+<header class="py-3 lh-1" style="padding: 20px 25px;background-color: #101010eb;border-bottom: solid #ffcf00 2px">
     <div id="results-contact">
 
     </div>
@@ -61,7 +61,7 @@
 </div>
 <main class="container">
     <div class="mb-1 d-flex">
-        <i class="fa-solid fa-bullhorn" style="color:#ffee00;padding:5px 10px; background: #181818"></i>
+        <i class="fa-solid fa-bullhorn" style="color:#ffcf00;padding:5px 10px; background: #181818"></i>
         <div class="marquee ft-marquee">
             <span>SELAMAT DATANG DI JEDERWD BANDAR TOGEL, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA RAIH
                 KEMENANGAN TANPA BATAS BERSAMA KAMI.</span>
@@ -75,7 +75,7 @@
     </div>
 
     {{-- Mobile --}}
-    <div class="container mb-3 text-center nav-mobile">
+    <div class="container mb-2 text-center nav-mobile">
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
                 <a href="{{ route('index-pasaran-home') }}"><button
@@ -134,7 +134,7 @@
         </div>
     </div>
 
-    <div class="container mb-2 text-center">
+    <div class="container mb-1 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px;">
                 <a href="https://jederwd.org/#/index?category=home"><button class="button-15"
@@ -154,7 +154,7 @@
             </div>
         </div>
     </div>
-    <div class="mb-2">
+    <div class="mb-1">
         <div class="input-group">
             <span style="border: solid #214dfd 2px; color:white" class="input-group-text winner" style=""
                 id="basic-addon3"><i style="margin-right:5px" class="fa-solid fa-trophy"></i> Winner Togel</span>
@@ -162,7 +162,7 @@
                 class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" disabled>
         </div>
     </div>
-    <div class="container mb-2 text-center">
+    <div class="container mb-1 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:3px">
                 <a href="{{ route('index-pasaran-home') }}"><button
@@ -232,14 +232,14 @@
             </div>
             <div class="head-1"><a   href="${result.link_apk}"><img width="18px" src="{{ asset('icon-apk.webp') }}" alt="apk">
                     DOWNLOAD
-                    APLIKASI TOGEL </a> <span style="color: white"> | </span> <i style="color: white"
-                    class="fa-brands fa-telegram"></i> <a target="_blank" href="tg://resolve?domain=${result.number_tele}"> TELEGRAM </a> <span style="color: white"> |
+                    APLIKASI TOGEL </a> <span style="color: white"> || </span> <i style="color: white"
+                    class="fa-brands fa-telegram"></i> <a target="_blank" href="tg://resolve?domain=${result.number_tele}"> TELEGRAM </a> <span style="color: white"> ||
                 </span> <i style="color: white" class="fa-solid fa-comments"></i>
                 <a target="_blank" href="${result.live_chat}"> LIVE CHAT </a>
             </div>
             <div class="row flex-nowrap justify-content-between align-items-center">
-                <div class="pt-1 col-4">
-                    <img style="height: 50px" src="{{ asset('logo.png') }}" alt="logo">
+                <div class="pt-1 col-4 mb-1 mt-1">
+                    <img style="height: 53px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a href="https://jederwd.org/#/register" class="Btn" target="_blank"></a>
@@ -260,6 +260,10 @@
             method: 'GET',
             success: function(data) {
                 displayResults(data);
+                // Memulai otomatis sliding setiap 2 detik setelah data dimuat
+                $('#carouselExampleAutoplaying').carousel({
+                    interval: 2500
+                });
             },
             error: function(error) {
                 console.error('Error fetching data:', error);
@@ -271,18 +275,15 @@
             var carouselInner = '';
 
             $.each(data, function(index, result) {
-                // var pathImage = 'storage/' + result.image;
-
                 carouselInner += `
-        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-            <img src="${result.image}" class="d-block w-100 img-fluid" alt="gambar">
-        </div>
-                `;
+                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                    <img src="${result.image}" class="d-block w-100 img-fluid" alt="gambar">
+                </div>
+            `;
             });
 
-
             var resultCard = `
-            <div id="carouselExampleAutoplaying" class="mb-2 carousel slide carousel-fade" data-bs-ride="carousel">
+            <div id="carouselExampleAutoplaying" class="mb-2 carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="false">
                 <div class="carousel-inner">
                     ${carouselInner}
                 </div>
