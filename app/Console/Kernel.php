@@ -18,8 +18,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('random:prediksi')->daily();
-        // $schedule->command('random:rtp')->hourly();
-        $schedule->command('random:rtp')->everyMinute();
+        $schedule->command('random:rtp')->hourly();
+        // $schedule->command('random:rtp')->everyMinute();
 
         $jadwal = Jadwal::with('pasaran')->get();
         foreach ($jadwal as $item) {
