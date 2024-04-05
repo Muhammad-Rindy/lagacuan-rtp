@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel
             $lottery = $item->pasaran->alias;
             $pasaranid = $item->pasaran->id;
             $t = Carbon::parse($item->jadwal_undi)->addMinutes(15)->format("H:i");
-            // $schedule->command("random:result '$lottery' $pasaranid")->dailyAt($t);
-            $schedule->command("result '$lottery' $pasaranid")->everyMinute();
+            $schedule->command("result '$lottery' $pasaranid")->dailyAt($t);
+            // $schedule->command("result '$lottery' $pasaranid")->everyMinute();
         }
     }
 
