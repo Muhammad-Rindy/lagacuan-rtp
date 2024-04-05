@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use App\Models\Shio;
 use App\Models\Result as ResultModel;
+use App\Library\Telegram;
 
 class result extends Command
 {
@@ -34,7 +35,7 @@ class result extends Command
     {
         $lottery = $this->argument('lottery');
         $pasaranid = $this->argument('pasaranid');
-        $log = new ConsoleOutput();
+        // $log = new ConsoleOutput();
         $get = Http::get('https://jederwd.net/office/game-oc/game/getNodeInfoList?l=id&parentId=512170');
         $data = $get->object();
 
@@ -65,11 +66,13 @@ class result extends Command
                 $result->shio = $shio->name;
 
                 $result->save();
+
+                Telegram::sendMessage(Carbon::now()."\nSuccess running command, [pasaran:$lottery][number:$n1,$n2,$n3]");
             }
         }
 
         $body = json_encode($result);
-        $log->writeln("<info>Socket aktif => $body </info>");
+        // $log->writeln("<info>Socket aktif => $body </info>");
         return Command::SUCCESS;
     }
 }
