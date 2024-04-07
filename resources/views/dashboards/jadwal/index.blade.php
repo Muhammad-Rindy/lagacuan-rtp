@@ -160,7 +160,7 @@
                     <input type="hidden" id="editId" name="id">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Choose Lottery :</label>
-                        <select name="pasaran_id" id="pasaran_select" class="form-control">
+                        <select name="pasaran_id" id="pasaran_selectEdit" class="form-control">
                             <option selected disabled>Select your lottery</option>
                             @foreach ($pasarans as $pasaranId => $pasaranName)
                                 <option style="text-transform: uppercase"
@@ -309,7 +309,7 @@
                     $('#jadwal_tutup').val(response.jadwal_tutup);
                     $('#jadwal_undi').val(response.jadwal_undi);
                     $('#situs_resmi').val(response.situs_resmi);
-                    $("#pasaran_select").val(response.pasaran_id);
+                    $("#pasaran_selectEdit").val(response.pasaran_id);
                 },
                 error: function(error) {
                     console.log(error);
