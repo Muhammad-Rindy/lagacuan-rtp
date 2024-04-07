@@ -90,6 +90,7 @@ class JadwalController extends Controller
             'jadwal_tutup' => $request->jadwal_tutup,
             'jadwal_undi' => $request->jadwal_undi,
             'situs_resmi' => $request->situs_resmi,
+            'pasaran_id' => $request->pasaran_id,
         ]);
         return response()->json(['success' => true]);
     }
