@@ -204,55 +204,53 @@
 
     <script type="text/javascript">
         // Get data
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
 
-            let table = $('#table-pasaran').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '/index-jadwal',
-                columns: [{
-                        className: "text-center",
-                        data: "DT_RowIndex",
-                        name: "DT_RowIndex",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'pasaran_name',
-                        name: 'table_pasaran.name_pasaran' // Sesuaikan dengan nama kolom yang benar
-                    },
-                    {
-                        className: "text-center",
-                        data: 'jadwal_tutup',
-                        name: 'jadwal_tutup'
-                    },
-                    {
-                        className: "text-center",
-                        data: 'jadwal_undi',
-                        name: 'jadwal_undi'
-                    },
-                    {
-                        data: 'situs_resmi',
-                        name: 'situs_resmi'
-                    },
-                    {
-                        className: "text-center",
-                        data: 'action',
-                        name: 'action',
-                        orderable: false
-                    },
-                ],
-                order: [
-                    [0, 'asc']
-                ],
+        let table = $('#table-pasaran').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '/index-jadwal',
+            columns: [{
+                    className: "text-center",
+                    data: "DT_RowIndex",
+                    name: "DT_RowIndex",
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'pasaran_name',
+                    name: 'table_pasaran.name_pasaran' // Sesuaikan dengan nama kolom yang benar
+                },
+                {
+                    className: "text-center",
+                    data: 'jadwal_tutup',
+                    name: 'jadwal_tutup'
+                },
+                {
+                    className: "text-center",
+                    data: 'jadwal_undi',
+                    name: 'jadwal_undi'
+                },
+                {
+                    data: 'situs_resmi',
+                    name: 'situs_resmi'
+                },
+                {
+                    className: "text-center",
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
+                },
+            ],
+            order: [
+                [0, 'asc']
+            ],
 
-            });
         });
 
         // store data
