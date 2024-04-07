@@ -212,10 +212,10 @@
             });
 
 
-            $('#table-pasaran').DataTable({
+            let table = $('#table-pasaran').DataTable({
                 processing: true,
                 serverSide: true,
-                url: '/index-jadwal',
+                ajax: '/index-jadwal',
                 columns: [{
                         className: "text-center",
                         data: "DT_RowIndex",
@@ -280,7 +280,7 @@
                             timer: 700,
                             showConfirmButton: false,
                         });
-                        $('#table-pasaran').DataTable().ajax.reload();
+                        table.draw();
                     },
                     error: function(error) {
                         console.log(error);
@@ -334,7 +334,7 @@
                         timer: 700,
                         showConfirmButton: false,
                     });
-                    $('#table-pasaran').DataTable().ajax.reload();
+                    table.draw();
 
                 },
                 error: function(error) {
@@ -379,7 +379,7 @@
                                 timer: 700,
                                 showConfirmButton: false,
                             });
-                            $('#table-pasaran').DataTable().ajax.reload();
+                            table.draw();
                         },
                     });
                 }
