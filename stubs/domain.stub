@@ -1,0 +1,30 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    access_log /dev/null;
+    error_log off;
+
+    server_name domainName;
+
+    root "/home/jeder/Jeder-dash/public";
+    index index.php;
+
+
+    location ~ /\.well-known {
+        allow all;
+    }
+
+    location ~ /(\.svn|\.git|\.ht|\.env|\.ide|\.vs) {
+        deny all;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include /etc/nginx/snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    }
+}

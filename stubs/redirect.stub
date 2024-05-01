@@ -1,0 +1,11 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    access_log /dev/null;
+    error_log off;
+
+    server_name domainName;
+
+    return 301 $scheme://redirectDomain$request_uri;
+}

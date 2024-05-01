@@ -32,14 +32,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('api')->prefix('api')->group(base_path('routes/api.php'));
 
             if (env("APP_ENV") == "production") {
-
                 Route::domain(env("DOMAIN_JEDER_ADMIN1"))->middleware('web')->group(base_path('routes/admin.php'));
-                Route::domain(env("DOMAIN_JEDER_ADMIN2"))->middleware('web')->group(base_path('routes/admin.php'));
-                Route::domain(env("DOMAIN_JEDER_ADMIN3"))->middleware('web')->group(base_path('routes/admin.php'));
-
-                Route::domain(env("DOMAIN_JEDER1"))->middleware('web')->group(base_path('routes/web.php'));
-                Route::domain(env("DOMAIN_JEDER2"))->middleware('web')->group(base_path('routes/web.php'));
-                Route::domain(env("DOMAIN_JEDER3"))->middleware('web')->group(base_path('routes/web.php'));
+                Route::middleware('web')->group(base_path('routes/web.php'));
             }else{
                 Route::middleware('web')->group(base_path('routes/web.php'));
                 Route::middleware('web')->group(base_path('routes/admin.php'));

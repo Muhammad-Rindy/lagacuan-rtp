@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\KeluhanController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DomainController;
 
 Route::get('/dashboard', function () {
     return redirect()->route('index-data');
@@ -103,6 +104,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-data-shio/{id}', [ShioController::class, 'getData']);
     Route::post('/update-shio', [ShioController::class, 'updateData']);
     Route::post('/generate-shio', [ShioController::class, 'generateShio']);
+
+    // domain
+    Route::controller(DomainController::class)->prefix('domain')->group(function() {
+        Route::get('/', "index");
+        Route::get('/json', "json");
+        Route::post('/', "store");
+        Route::put('/{id}', "update");
+        Route::delete('/{id}', "destroy");
+    });
 });
 
 
