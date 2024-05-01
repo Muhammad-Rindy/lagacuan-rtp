@@ -15,39 +15,39 @@
             </span>
         </a>
         <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="{{ route('index-live-home') }}" style="">
+            href="/live-draw" style="">
             <span class="head-2">
                 LIVE DRAW 🔥
             </span>
         </a>
         <a @if (request()->is('prediksi-togel')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="{{ route('index-prediksi-home') }}" style="">
+            href="prediksi-togel" style="">
             <span class="head-2">
                 PREDIKSI TOGEL
             </span>
         </a>
 
         <a @if (request()->is('data-result')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="{{ route('index-result-home') }}" style="">
+            href="/data-result" style="">
             <span class="head-2">
                 DATA RESULT
             </span>
         </a>
         <a @if (request()->is('bukti-jackpot')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="{{ route('index-bukti-home') }}" style="">
+            href="/bukti-jackpot" style="">
             <span class="head-2">
                 BUKTI JACKPOT 🔥
             </span>
         </a>
         <a @if (request()->is('buku-mimpi')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="{{ route('index-buku-home') }}" style="">
+            href="/buku-mimpi" style="">
             <span class="head-2">
                 BUKU MIMPI
             </span>
         </a>
 
         <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="{{ route('index-keluhan-home') }}" style="">
+            href="/keluhan" style="">
             <span class="head-2">KELUHAN</span>
         </a>
         <a href="https://jederwd.org/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
@@ -78,13 +78,13 @@
     <div class="container mb-2 text-center nav-mobile">
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-pasaran-home') }}"><button
+                <a href="/"><button
                         @if (request()->is('/')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         HOME</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px"">
-                <a href="{{ route('index-live-home') }}"><button
+                <a href="/live-draw"><button
                         @if (request()->is('live-draw')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         LIVE DRAW</button></a>
@@ -92,13 +92,13 @@
         </div>
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-prediksi-home') }}"><button
+                <a href="/prediksi-togel"><button
                         @if (request()->is('prediksi-togel')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         PREDIKSI TOGEL</button></a>
             </div>
-            <div class="col" style="padding: 0px;margin-left:2px"">
-                <a href="{{ route('index-buku-home') }}"><button
+            <div class="col" style="padding: 0px;margin-left:2px">
+                <a href="/buku-mimpi"><button
                         @if (request()->is('buku-mimpi')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         BUKU MIMPI</button></a>
@@ -106,13 +106,13 @@
         </div>
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-result-home') }}"><button
+                <a href="/data-result"><button
                         @if (request()->is('data-result')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         DATA RESULT</button></a>
             </div>
-            <div class="col" style="padding: 0px;margin-left:2px"">
-                <a href="{{ route('index-bukti-home') }}"><button
+            <div class="col" style="padding: 0px;margin-left:2px">
+                <a href="/bukti-jackpot"><button
                         @if (request()->is('bukti-jackpot')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         BUKTI JACKPOT</button></a>
@@ -120,12 +120,12 @@
         </div>
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="{{ route('index-keluhan-home') }}"><button
+                <a href="/keluhan"><button
                         @if (request()->is('keluhan')) class="actives-mobile" @endif class="button-15"
                         role="button">
                         KELUHAN</button></a>
             </div>
-            <div class="col" style="padding: 0px;margin-left:2px"">
+            <div class="col" style="padding: 0px;margin-left:2px">
                 <a href="https://jederwd.org/#/gameRules"><button
                         @if (request()->is('cara-bermain')) target="_blank" class="actives-mobile" @endif
                         class="button-15" role="button">
@@ -147,7 +147,7 @@
                         Promo</button></a>
             </div>
             <div class="col" style="padding: 0px">
-                <a href="{{ route('index-rtp') }}"><button
+                <a href="/rtpslot"><button
                         @if (request()->is('rtpslot')) class="actives-mobile-2" @endif class="button-15"
                         style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-gamepad"></i> RTP slot
                     </button></a>
@@ -165,14 +165,14 @@
     <div class="container mb-1 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:3px">
-                <a href="{{ route('index-pasaran-home') }}"><button
+                <a href="/"><button
                         @if (request()->is('/')) class="actives-mobile-2" @endif class="button-15"
                         style="letter-spacing: 0.5px" role="button">
                         <i class="fa-solid fa-chart-column"></i> Result Togel</button></a>
             </div>
 
             <div class="col" style="padding: 0px;margin-left:3px">
-                <a href="{{ route('index-jadwal-home') }}"><button
+                <a href="/jadwal-togel"><button
                         @if (request()->is('jadwal-togel')) class="actives-mobile-2" @endif class="button-15"
                         style="letter-spacing: 0.5px" role="button"> <i class="fa-regular fa-calendar-days"></i>
                         Jadwal
@@ -238,7 +238,7 @@
                 <a target="_blank" href="${result.live_chat}"> LIVE CHAT </a>
             </div>
             <div class="row flex-nowrap justify-content-between align-items-center">
-                <div class="pt-1 col-4 mb-1 mt-1">
+                <div class="pt-1 mt-1 mb-1 col-4">
                     <img style="height: 53px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">

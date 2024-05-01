@@ -11,8 +11,6 @@
         $(document).ready(function() {
             // AJAX request to fetch data
 
-            var baseUrl = "{{ url('/') }}";
-
             $.ajax({
                 url: '/api/result',
                 method: 'GET',
@@ -64,17 +62,17 @@
                                         ${result.created_at}
                                     </p>
                                     <div style="text-decoration: none; font-weight:bold; cursor:context-menu">
-                                        <a style="color:white;" href="${baseUrl}/live-draw">
+                                        <a style="color:white;" href="/live-draw">
                                             <div class="button-1"><i class="fa-solid fa-circle-exclamation"></i> LIVE DRAW <span style="text-transform:uppercase">${result.pasaran.name_pasaran}</span></div>
                                         </a>
                                     </div>
                                     <div style="text-decoration: none; font-weight:bold; cursor:context-menu">
-                                        <a style="color:white;" href="${baseUrl}/prediksi-togel">
+                                        <a style="color:white;" href="/prediksi-togel">
                                             <div class="button-1"><i class="fa-solid fa-circle-exclamation"></i> PREDIKSI <span style="text-transform:uppercase">${result.pasaran.name_pasaran}</span></div>
                                         </a>
                                     </div>
                                     <div style="text-decoration: none; font-weight:bold; cursor:context-menu">
-                                        <a style="color:white;" href="${baseUrl}/data-result">
+                                        <a style="color:white;" href="/data-result">
                                             <div class="button-1"><i class="fa-solid fa-circle-exclamation"></i> RESULT <span style="text-transform:uppercase">${result.pasaran.name_pasaran}</span></div>
                                         </a>
                                     </div>
