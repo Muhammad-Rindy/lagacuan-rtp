@@ -15,39 +15,39 @@
             </span>
         </a>
         <a @if (request()->is('live-draw')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="/live-draw" style=">
+            href="/live-draw" style="">
             <span class="head-2">
                 LIVE DRAW 🔥
             </span>
         </a>
         <a @if (request()->is('prediksi-togel')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="prediksi-togel" style=">
+            href="prediksi-togel" style="">
             <span class="head-2">
                 PREDIKSI TOGEL
             </span>
         </a>
 
         <a @if (request()->is('data-result')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="/data-result" style=">
+            href="/data-result" style="">
             <span class="head-2">
                 DATA RESULT
             </span>
         </a>
         <a @if (request()->is('bukti-jackpot')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="/bukti-jackpot" style=">
+            href="/bukti-jackpot" style="">
             <span class="head-2">
                 BUKTI JACKPOT 🔥
             </span>
         </a>
         <a @if (request()->is('buku-mimpi')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="/buku-mimpi" style=">
+            href="/buku-mimpi" style="">
             <span class="head-2">
                 BUKU MIMPI
             </span>
         </a>
 
         <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="/keluhan" style=">
+            href="/keluhan" style="">
             <span class="head-2">KELUHAN</span>
         </a>
         <a href="https://jederwd.net/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
@@ -156,7 +156,7 @@
     </div>
     <div class="mb-1">
         <div class="input-group">
-            <span style="border: solid #214dfd 2px; color:white" class="input-group-text winner" style="
+            <span style="border: solid #214dfd 2px; color:white" class="input-group-text winner" style=""
                 id="basic-addon3"><i style="margin-right:5px" class="fa-solid fa-trophy"></i> Winner Togel</span>
             <input style="border: solid #214dfd 2px; background-color:#181818; color:white;" type="text"
                 class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" disabled>
