@@ -8,7 +8,7 @@
 <div class="py-1 mb-1 nav-scroller nav-desktop" style="border-bottom: solid #ffcf00 2px; background-color:#313131c2">
     <nav class="nav nav-underline justify-content-between">
         <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="{{ route('index-pasaran-home') }}" style="margin-left:15px;">
+            href="/" style="margin-left:15px;">
             <span class="head-2">
                 <i class="fa-solid fa-house"></i>
                 HOME
