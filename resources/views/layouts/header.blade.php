@@ -50,7 +50,7 @@
             href="/keluhan" style="">
             <span class="head-2">KELUHAN</span>
         </a>
-        <a href="https://jederwd.org/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
+        <a href="https://jederwd.net/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
             target="_blank" class="nav-item nav-link no-actived" style="margin-right:15px">
             <span class="head-2">
                 CARA BERMAIN
@@ -137,12 +137,12 @@
     <div class="container mb-1 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px;">
-                <a href="https://jederwd.org/#/index?category=home"><button class="button-15"
+                <a href="https://jederwd.net/#/index?category=home"><button class="button-15"
                         style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-right-to-bracket"></i>
                         Login</button></a>
             </div>
             <div class="col" style="padding: 0px 7px">
-                <a href="https://jederwd.org/#/activity"><button class="button-16" style="letter-spacing: 0.5px"
+                <a href="https://jederwd.net/#/activity"><button class="button-16" style="letter-spacing: 0.5px"
                         role="button"> <i class="fa-solid fa-hand-holding-dollar"></i>
                         Promo</button></a>
             </div>
@@ -242,7 +242,7 @@
                     <img style="height: 53px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="https://jederwd.org/#/register" class="Btn" target="_blank"></a>
+                    <a href="https://jederwd.net/#/register" class="Btn" target="_blank"></a>
                 </div>
             </div>
             `;
