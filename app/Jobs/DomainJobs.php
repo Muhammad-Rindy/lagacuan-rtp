@@ -76,9 +76,9 @@ class DomainJobs implements ShouldQueue
     public function getStubPath()
     {
         return match ($this->type) {
-            'domain' => base_path('stubs') .'\\'. 'domain.stub',
-            'redirect' => base_path('stubs') .'\\'. 'redirect.stub',
-            'delete' => base_path('stubs') .'\\'. 'redirect.stub',
+            'domain' => base_path('stubs') .'/'. 'domain.stub',
+            'redirect' => base_path('stubs') .'/'. 'redirect.stub',
+            'delete' => base_path('stubs') .'/'. 'redirect.stub',
             default => null,
         };
     }
