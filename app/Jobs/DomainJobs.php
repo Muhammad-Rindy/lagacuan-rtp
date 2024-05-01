@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Http;
 
 class DomainJobs implements ShouldQueue
 {
@@ -55,7 +56,8 @@ class DomainJobs implements ShouldQueue
             $this->files->put($path, $contents);
         }
 
-        shell_exec('node /home/jeder/Jeder-dash/restart-nginx.js');
+        // shell_exec('node /home/jeder/Jeder-dash/restart-nginx.js');
+        Http::get('http://localhost:9000');
     }
 
     /**
