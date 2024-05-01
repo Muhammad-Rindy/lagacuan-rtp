@@ -55,7 +55,7 @@ class DomainJobs implements ShouldQueue
             $this->files->put($path, $contents);
         }
 
-        shell_exec('sudo -S systemctl restart nginx');
+        shell_exec('node /home/jeder/Jeder-dash/restart-nginx.js');
     }
 
     /**
