@@ -67,7 +67,7 @@ class DomainJobs implements ShouldQueue
      */
     public function getSourceFilePath()
     {
-        return base_path('storage\\app\\server') .'\\' .$this->domain . '.conf';
+        return base_path("storage/app/server") .'/' .$this->domain . '.conf';
     }
 
     /**
