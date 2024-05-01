@@ -161,6 +161,8 @@
                                         My Contact
                                     @elseif(request()->is('index-shio'))
                                         Shio
+                                    @elseif(request()->is('domain'))
+                                        Domain
                                     @endif
                                 </li>
                                 <!--end::Item-->
@@ -512,6 +514,17 @@
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
                                                     <span class="menu-title">My Contact</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a @if (request()->is('domain')) class="menu-link active" style="background-color: #16438575;" @endif
+                                                    class="menu-link" href="/domain">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Domain</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
