@@ -50,7 +50,7 @@
             style="">
             <span class="head-2">KELUHAN</span>
         </a>
-        <a href="https://jederwd88.org/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
+        <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
             target="_blank" class="nav-item nav-link no-actived" style="margin-right:15px">
             <span class="head-2">
                 CARA BERMAIN
@@ -70,7 +70,7 @@
 </main>
 
 <main class="container">
-    <div id="results-banner">
+    <div id="results-banner" domain="{{ env('DOMAIN_UTAMA_ACTIVE') }}">
 
     </div>
 
@@ -119,7 +119,7 @@
                         KELUHAN</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px">
-                <a href="https://jederwd.org/#/gameRules"><button
+                <a href="{{ env("DOMAIN_UTAMA_ACTIVE") }}/#/gameRules"><button
                         @if (request()->is('cara-bermain')) target="_blank" class="actives-mobile" @endif
                         class="button-15" role="button">
                         CARA BERMAIN</button></a>
@@ -130,12 +130,12 @@
     <div class="container mb-1 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px;">
-                <a href="https://jederwd88.org/#/index?category=home"><button class="button-15"
+                <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/index?category=home"><button class="button-15"
                         style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-right-to-bracket"></i>
                         Login</button></a>
             </div>
             <div class="col" style="padding: 0px 7px">
-                <a href="https://jederwd88.org/#/activity"><button class="button-16" style="letter-spacing: 0.5px"
+                <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/activity"><button class="button-16" style="letter-spacing: 0.5px"
                         role="button"> <i class="fa-solid fa-hand-holding-dollar"></i>
                         Promo</button></a>
             </div>
@@ -215,6 +215,7 @@
 
         function displayResults(data) {
             var resultsContainer = $('#results-contact');
+            var domainUtama = $('#results-banner').attr('domain');
 
             $.each(data, function(index, result) {
 
@@ -234,7 +235,7 @@
                     <img style="height: 53px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="https://jederwd88.org/#/register" class="Btn" target="_blank"></a>
+                    <a href="${domainUtama}/#/register" class="Btn" target="_blank"></a>
                 </div>
             </div>
             `;
@@ -265,6 +266,7 @@
         function displayResults(data) {
             var resultsContainer = $('#results-banner');
             var carouselInner = '';
+
 
             $.each(data, function(index, result) {
                 carouselInner += `

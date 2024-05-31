@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
+    <meta name="domain" content="{{ env("DOMAIN_UTAMA_ACTIVE") }}">
     <title>JEDERWD - Link Alternatif Resmi Jeder WD, Official Login Jeder WD</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <link href="{{ asset('assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">

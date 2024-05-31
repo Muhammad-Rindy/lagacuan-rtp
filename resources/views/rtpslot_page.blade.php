@@ -232,6 +232,7 @@
         getData();
 
         function getData() {
+            let domainUtama = $('meta[name="domain"]').data("content");
             loading.show();
             rtpArea.hide();
             let url = `/rtpslot/${provider}?q=` + search;
@@ -240,6 +241,7 @@
                 url: url,
                 dataType: "json",
                 success: function(res) {
+
                     res = res.map(e => {
                         return `
                             <div class="col-4 data_rtp" style="padding: 7px;">
@@ -255,7 +257,7 @@
                                         }" role="progressbar" style="width: ${e.persentase < 10 ? '10' : e.persentase}%;" aria-valuenow="${e.persentase}" aria-valuemin="0" aria-valuemax="100">${e.persentase}%</div>
                                     </div>
                                     <hr style="border-top: 5px double white;">
-                                    <a href="${e.url}" style="color: white; text-decoration:none">
+                                    <a href="${domainUtama}${e.url}" style="color: white; text-decoration:none">
                                         <div class="box-pola" style=""><span class="box-pola-span">${e.name != '' ? e.name : 'Pola'}</span></div>
                                     </a>
                                     <div style="" class="text-center pola-set">${e.pola}</div>
