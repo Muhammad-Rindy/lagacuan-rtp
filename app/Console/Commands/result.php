@@ -36,7 +36,7 @@ class result extends Command
         $lottery = $this->argument('lottery');
         $pasaranid = $this->argument('pasaranid');
         // $log = new ConsoleOutput();
-        $get = Http::get('https://jederwd.net/office/game-oc/game/getNodeInfoList?l=id&parentId=512170');
+        $get = Http::get(env("DOMAIN_UTAMA_ACTIVE").'/office/game-oc/game/getNodeInfoList?l=id&parentId=512170');
         $data = $get->object();
 
         if ($data->code == 200) {
