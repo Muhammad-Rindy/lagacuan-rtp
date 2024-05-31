@@ -233,6 +233,7 @@
 
         function getData() {
             let domainUtama = $('meta[name="domain"]').data("content");
+            console.log(domainUtama);
             loading.show();
             rtpArea.hide();
             let url = `/rtpslot/${provider}?q=` + search;
