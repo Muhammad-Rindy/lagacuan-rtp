@@ -7,8 +7,8 @@
 {{-- Desktop --}}
 <div class="py-1 mb-1 nav-scroller nav-desktop" style="border-bottom: solid #ffcf00 2px; background-color:#313131c2">
     <nav class="nav nav-underline justify-content-between">
-        <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="/" style="margin-left:15px;">
+        <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived" href="/"
+            style="margin-left:15px;">
             <span class="head-2">
                 <i class="fa-solid fa-house"></i>
                 HOME
@@ -46,11 +46,11 @@
             </span>
         </a>
 
-        <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link no-actived"
-            href="/keluhan" style="">
+        <a @if (request()->is('keluhan')) class="actives" @endif class="nav-item nav-link no-actived" href="/keluhan"
+            style="">
             <span class="head-2">KELUHAN</span>
         </a>
-        <a href="https://jederwd.net/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
+        <a href="https://jederwd88.org/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
             target="_blank" class="nav-item nav-link no-actived" style="margin-right:15px">
             <span class="head-2">
                 CARA BERMAIN
@@ -78,51 +78,44 @@
     <div class="container mb-2 text-center nav-mobile">
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="/"><button
-                        @if (request()->is('/')) class="actives-mobile" @endif class="button-15"
-                        role="button">
+                <a href="/"><button @if (request()->is('/')) class="actives-mobile" @endif
+                        class="button-15" role="button">
                         HOME</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px">
-                <a href="/live-draw"><button
-                        @if (request()->is('live-draw')) class="actives-mobile" @endif class="button-15"
-                        role="button">
+                <a href="/live-draw"><button @if (request()->is('live-draw')) class="actives-mobile" @endif
+                        class="button-15" role="button">
                         LIVE DRAW</button></a>
             </div>
         </div>
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="/prediksi-togel"><button
-                        @if (request()->is('prediksi-togel')) class="actives-mobile" @endif class="button-15"
-                        role="button">
+                <a href="/prediksi-togel"><button @if (request()->is('prediksi-togel')) class="actives-mobile" @endif
+                        class="button-15" role="button">
                         PREDIKSI TOGEL</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px">
-                <a href="/buku-mimpi"><button
-                        @if (request()->is('buku-mimpi')) class="actives-mobile" @endif class="button-15"
-                        role="button">
+                <a href="/buku-mimpi"><button @if (request()->is('buku-mimpi')) class="actives-mobile" @endif
+                        class="button-15" role="button">
                         BUKU MIMPI</button></a>
             </div>
         </div>
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="/data-result"><button
-                        @if (request()->is('data-result')) class="actives-mobile" @endif class="button-15"
-                        role="button">
+                <a href="/data-result"><button @if (request()->is('data-result')) class="actives-mobile" @endif
+                        class="button-15" role="button">
                         DATA RESULT</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px">
-                <a href="/bukti-jackpot"><button
-                        @if (request()->is('bukti-jackpot')) class="actives-mobile" @endif class="button-15"
-                        role="button">
+                <a href="/bukti-jackpot"><button @if (request()->is('bukti-jackpot')) class="actives-mobile" @endif
+                        class="button-15" role="button">
                         BUKTI JACKPOT</button></a>
             </div>
         </div>
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="/keluhan"><button
-                        @if (request()->is('keluhan')) class="actives-mobile" @endif class="button-15"
-                        role="button">
+                <a href="/keluhan"><button @if (request()->is('keluhan')) class="actives-mobile" @endif
+                        class="button-15" role="button">
                         KELUHAN</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px">
@@ -137,19 +130,19 @@
     <div class="container mb-1 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px;">
-                <a href="https://jederwd.net/#/index?category=home"><button class="button-15"
+                <a href="https://jederwd88.org/#/index?category=home"><button class="button-15"
                         style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-right-to-bracket"></i>
                         Login</button></a>
             </div>
             <div class="col" style="padding: 0px 7px">
-                <a href="https://jederwd.net/#/activity"><button class="button-16" style="letter-spacing: 0.5px"
+                <a href="https://jederwd88.org/#/activity"><button class="button-16" style="letter-spacing: 0.5px"
                         role="button"> <i class="fa-solid fa-hand-holding-dollar"></i>
                         Promo</button></a>
             </div>
             <div class="col" style="padding: 0px">
-                <a href="/rtpslot"><button
-                        @if (request()->is('rtpslot')) class="actives-mobile-2" @endif class="button-15"
-                        style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-gamepad"></i> RTP slot
+                <a href="/rtpslot"><button @if (request()->is('rtpslot')) class="actives-mobile-2" @endif
+                        class="button-15" style="letter-spacing: 0.5px" role="button"> <i
+                            class="fa-solid fa-gamepad"></i> RTP slot
                     </button></a>
             </div>
         </div>
@@ -165,16 +158,15 @@
     <div class="container mb-1 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:3px">
-                <a href="/"><button
-                        @if (request()->is('/')) class="actives-mobile-2" @endif class="button-15"
-                        style="letter-spacing: 0.5px" role="button">
+                <a href="/"><button @if (request()->is('/')) class="actives-mobile-2" @endif
+                        class="button-15" style="letter-spacing: 0.5px" role="button">
                         <i class="fa-solid fa-chart-column"></i> Result Togel</button></a>
             </div>
 
             <div class="col" style="padding: 0px;margin-left:3px">
-                <a href="/jadwal-togel"><button
-                        @if (request()->is('jadwal-togel')) class="actives-mobile-2" @endif class="button-15"
-                        style="letter-spacing: 0.5px" role="button"> <i class="fa-regular fa-calendar-days"></i>
+                <a href="/jadwal-togel"><button @if (request()->is('jadwal-togel')) class="actives-mobile-2" @endif
+                        class="button-15" style="letter-spacing: 0.5px" role="button"> <i
+                            class="fa-regular fa-calendar-days"></i>
                         Jadwal
                         Togel
                     </button></a>
@@ -242,7 +234,7 @@
                     <img style="height: 53px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="https://jederwd.net/#/register" class="Btn" target="_blank"></a>
+                    <a href="https://jederwd88.org/#/register" class="Btn" target="_blank"></a>
                 </div>
             </div>
             `;
