@@ -232,7 +232,7 @@
         getData();
 
         function getData() {
-            let domainUtama = $('meta[name="domain"]').data("content");
+            let domainUtama = $('meta[name="domain"]').attr("content");
             console.log(domainUtama);
             loading.show();
             rtpArea.hide();
