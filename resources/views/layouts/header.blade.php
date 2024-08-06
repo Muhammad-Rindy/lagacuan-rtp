@@ -50,8 +50,9 @@
             style="">
             <span class="head-2">KELUHAN</span>
         </a>
-        <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/gameRules" @if (request()->is('cara-bermain')) class="actives" @endif
-            target="_blank" class="nav-item nav-link no-actived" style="margin-right:15px">
+        <a href="https://{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/gameRules"
+            @if (request()->is('cara-bermain')) class="actives" @endif target="_blank"
+            class="nav-item nav-link no-actived" style="margin-right:15px">
             <span class="head-2">
                 CARA BERMAIN
             </span>
@@ -70,7 +71,7 @@
 </main>
 
 <main class="container">
-    <div id="results-banner" domain="{{ env('DOMAIN_UTAMA_ACTIVE') }}">
+    <div id="results-banner" domain="https://{{ env('DOMAIN_UTAMA_ACTIVE') }}">
 
     </div>
 
@@ -135,7 +136,7 @@
                         Login</button></a>
             </div>
             <div class="col" style="padding: 0px 7px">
-                <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/activity"><button class="button-16"
+                <a href="https://{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/activity"><button class="button-16"
                         style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-hand-holding-dollar"></i>
                         Promo</button></a>
             </div>
@@ -235,7 +236,7 @@
                     <img style="height: 53px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="${domainUtama}/#/register" class="Btn" target="_blank"></a>
+                    <a href="https://${domainUtama}/#/register" class="Btn" target="_blank"></a>
                 </div>
             </div>
             `;
