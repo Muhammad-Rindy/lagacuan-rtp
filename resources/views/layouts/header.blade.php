@@ -119,7 +119,7 @@
                         KELUHAN</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px">
-                <a href="{{ env("DOMAIN_UTAMA_ACTIVE") }}/#/gameRules"><button
+                <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/gameRules"><button
                         @if (request()->is('cara-bermain')) target="_blank" class="actives-mobile" @endif
                         class="button-15" role="button">
                         CARA BERMAIN</button></a>
@@ -130,13 +130,13 @@
     <div class="container mb-1 text-center">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px;">
-                <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/index?category=home"><button class="button-15"
+                <a href="https://{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/index?category=home"><button class="button-15"
                         style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-right-to-bracket"></i>
                         Login</button></a>
             </div>
             <div class="col" style="padding: 0px 7px">
-                <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/activity"><button class="button-16" style="letter-spacing: 0.5px"
-                        role="button"> <i class="fa-solid fa-hand-holding-dollar"></i>
+                <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/activity"><button class="button-16"
+                        style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-hand-holding-dollar"></i>
                         Promo</button></a>
             </div>
             <div class="col" style="padding: 0px">
