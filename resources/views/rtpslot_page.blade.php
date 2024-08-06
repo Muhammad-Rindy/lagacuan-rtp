@@ -246,7 +246,7 @@
                         return `
                             <div class="col-4 data_rtp" style="padding: 7px;">
                                 <div class="shadow card h-100 lazy-image card-rtp-new" style="color: white;border: solid #198cf5 3px">
-                                    <a href="${e.url}" class="provider-game">
+                                    <a href="${domainUtama}${e.url}" class="provider-game">
                                         <img src="${e.image}" class="card-img-top img-new height-card" alt="Gambar">
                                     </a>
                                     <div class="mt-2 progress bar-persen" style="border: solid #0ba1ff 2px;">
