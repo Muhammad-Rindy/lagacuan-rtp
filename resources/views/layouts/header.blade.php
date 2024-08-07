@@ -236,7 +236,7 @@
                     <img style="height: 53px" src="{{ asset('logo.png') }}" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="https://${domainUtama}/#/register" class="Btn" target="_blank"></a>
+                    <a href="${domainUtama}/#/register" class="Btn" target="_blank"></a>
                 </div>
             </div>
             `;
