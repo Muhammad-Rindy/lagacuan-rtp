@@ -272,7 +272,7 @@
             $.each(data, function(index, result) {
                 carouselInner += `
                 <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                    <img src="${result.image}" class="d-block w-100 img-fluid" style="height:500px" alt="gambar">
+                    <img src="${result.image}" class="d-block w-100 img-fluid" alt="gambar">
                 </div>
             `;
             });
