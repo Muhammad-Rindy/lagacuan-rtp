@@ -34,6 +34,26 @@
     {
         "provider_name" : "jili",
         "img_url" : "/images/logo_provider/jili.png"
+    },
+    {
+        "provider_name" : "5G games",
+        "img_url" : "/images/logo_provider/5g-games.png"
+    },
+    {
+        "provider_name" : "Askmeslot",
+        "img_url" : "/images/logo_provider/askmeslot.webp"
+    },
+    {
+        "provider_name" : "Habanero",
+        "img_url" : "/images/logo_provider/habanero.png"
+    },
+    {
+        "provider_name" : "Hacksaw",
+        "img_url" : "/images/logo_provider/hacksaw.svg"
+    },
+    {
+        "provider_name" : "WMC Slot",
+        "img_url" : "/images/logo_provider/WMC slot.png"
     }
 
 ]
