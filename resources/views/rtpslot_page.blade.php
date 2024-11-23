@@ -7,6 +7,16 @@
         margin: 30px 0px;
         border: solid #f5d000 2px;
         transition: transform .2s;
+        max-width: 94px;
+        max-height: 94px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .provider img {
+        max-width: 50px;
+        width: -webkit-fill-available;
     }
 
     .provider:hover {
@@ -172,7 +182,7 @@
             <h4 class="text-center" style="color: white">
                 ⏱️ {{ now()->format('l, F j, Y') }}
             </h4>
-            <div class="align-item-center justify-content-around provider-img">
+            <div class="align-item-center justify-content-around provider-img" style="flex-wrap: wrap">
                 @foreach ($provider as $item)
                     <a class="provider" href="javascript:void(0);" data-name="{{ $item->provider_name }}">
                         <img src="{{ asset($item->img_url) }}" alt={{ $item->provider_name }}>
