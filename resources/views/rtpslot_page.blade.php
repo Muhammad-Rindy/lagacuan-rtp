@@ -51,7 +51,7 @@
         }
 
         .provider-img {
-            grid-template-columns: "auto auto auto auto auto auto auto auto auto"
+            grid-template-columns: auto auto auto auto auto auto auto auto auto;
         }
 
         .card-rtp-new {
