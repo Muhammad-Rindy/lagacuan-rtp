@@ -4,7 +4,6 @@
         background-image: linear-gradient(45deg, #763f07 0%, #f7e33f 52%, #763f07 90%);
         border-radius: 5px;
         padding: 20px;
-        margin: 30px 0px;
         border: solid #f5d000 2px;
         transition: transform .2s;
         max-width: 94px;
@@ -41,13 +40,18 @@
         /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
     }
 
+    .provider-img {
+        display: grid;
+        gap: 30px;
+    }
+
     @media screen and (min-width: 900px) {
         .img-rtp {
             height: 110px;
         }
 
         .provider-img {
-            display: flex;
+            grid-template-columns: "auto auto auto auto auto auto auto auto auto"
         }
 
         .card-rtp-new {
