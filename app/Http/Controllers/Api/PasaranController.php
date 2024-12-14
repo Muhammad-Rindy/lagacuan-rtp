@@ -88,7 +88,7 @@ class PasaranController extends Controller
 
     public function buktiJson()
     {
-        $data = Bukti::all();
+        $data = Bukti::orderByDesc("created_at")->get();
 
         $dataJson = $data->map(function ($item) {
             return [
