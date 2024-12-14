@@ -54,6 +54,14 @@
     {
         "provider_name" : "WMC Slot",
         "img_url" : "/images/logo_provider/WMC slot.png"
+    },
+    {
+        "provider_name" : "hongkong lotto",
+        "img_url" : "/images/logo_provider/hk-lotto.png"
+    },
+    {
+        "provider_name" : "sydney lotto",
+        "img_url" : "/images/logo_provider/sydney.png"
     }
 
 ]
