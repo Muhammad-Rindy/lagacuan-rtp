@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ JEDERWD - PREDIKSI TOGEL
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - PREDIKSI TOGEL
             HARI
             INI LENGKAP
             2024 ⚜️
@@ -41,8 +41,8 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h6 style="font-weight:bolder;color: white;" class="card-title">PREDIKSI TOGEL <span style="text-transform: uppercase; font-weight:bold">${result.name_pasaran}</span> POOLS JEDERWD</h6>
-                                <p class="card-text" style="color:white">Prediksi Togel <span style="text-transform: uppercase; font-weight:bold;">${result.name_pasaran}</span> ${result.created_at},  Bocoran & Info Akurat yang pasti JP Togel Online Dari Bandar JEDERWD.</p>
+                                <h6 style="font-weight:bolder;color: white;" class="card-title">PREDIKSI TOGEL <span style="text-transform: uppercase; font-weight:bold">${result.name_pasaran}</span> POOLS LAGACUAN</h6>
+                                <p class="card-text" style="color:white">Prediksi Togel <span style="text-transform: uppercase; font-weight:bold;">${result.name_pasaran}</span> ${result.created_at},  Bocoran & Info Akurat yang pasti JP Togel Online Dari Bandar LAGACUAN.</p>
 
                                 <div style="display: flex; justify-content: flex-end;">
                                     <button style="font-weight:bold; font-size:13px;border:none;color:white" type="button"

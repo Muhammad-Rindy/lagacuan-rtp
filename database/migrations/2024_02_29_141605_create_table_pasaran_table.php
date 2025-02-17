@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name_pasaran');
             $table->string('image');
+            $table->string('alias')->nullable();
             $table->timestamps();
         });
     }

@@ -1,11 +1,11 @@
 .card-red {
     background-image: linear-gradient(
         45deg,
-        #0c0089 0%,
-        #0044ff 52%,
-        #0226b3 90%
+        #7a0000 0%,
+        #ff1313 52%,
+        #a60000 90%
     );
-    border: solid #0079ff 2px;
+    border: solid #ff0000 2px;
     border-radius: 10px;
 }
 .card-blue {
@@ -204,7 +204,7 @@ a {
 }
 
 .winner {
-    background-image: linear-gradient(#0044ff, #0c0089);
+    background-image: linear-gradient(#ff0f0f, #610000);
     color: white;
     font-weight: bold;
     font-size: 13px;
@@ -318,7 +318,7 @@ a {
 }
 
 .button-15:hover {
-    background-image: linear-gradient(#0032fb, #031459);
+    background-image: linear-gradient(#c50101, #610000);
 }
 
 @media (min-width: 900px) {
@@ -332,28 +332,25 @@ a {
 
     .button-15 {
         transition: 0.3s;
-        background-image: linear-gradient(#0044ff, #0c0089);
-        border-color: #214dfd;
+        background-image: linear-gradient(#ff0f0f, #610000);
+        border-color: #b00000;
         text-decoration: none;
-        border-radius: 6px;
+        border-radius: 7px;
         box-sizing: border-box;
         color: #ffffff;
-        cursor: pointer;
         direction: ltr;
         display: block;
-        font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons",
-            "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: math;
         font-size: 15px;
         font-weight: bold;
-        letter-spacing: -0.022em;
+        letter-spacing: 2px !important;
         line-height: 1.7;
         min-width: 30px;
         overflow: visible;
         width: 100%;
-        padding: 4px 15px;
+        padding: 4.5px 15px;
         text-align: center;
         vertical-align: baseline;
-        user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
         white-space: nowrap;
@@ -363,23 +360,21 @@ a {
         transition: 0.3s;
         background-image: linear-gradient(
             45deg,
-            #9f5000 0%,
-            #fbe428 52%,
-            #9f5000 90%
+            #a37700 0%,
+            #fae768 52%,
+            #a37700 90%
         );
-        border-color: #ab9100;
+        border-color: #edd000;
         color: black;
         text-decoration: none;
-        border-radius: 6px;
+        border-radius: 7px;
         box-sizing: border-box;
-        cursor: pointer;
         direction: ltr;
         display: block;
-        font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons",
-            "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: math;
         font-size: 15px;
         font-weight: bold;
-        letter-spacing: -0.022em;
+        letter-spacing: 2px !important;
         line-height: 1.7;
         min-width: 30px;
         overflow: visible;
@@ -387,7 +382,6 @@ a {
         padding: 4px 15px;
         text-align: center;
         vertical-align: baseline;
-        user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
         white-space: nowrap;
@@ -757,11 +751,11 @@ a {
     text-align: center;
     font-size: 45px;
     width: 100%;
-    margin: 20px 0px;
+    margin: 15px 0px;
     font-family: serif;
     color: white;
     font-weight: bold;
-    border: dashed 2px #0da0f0;
+    border: outset 4px #e9c141;
     background-color: black;
 }
 
@@ -772,13 +766,13 @@ a {
     border-radius: 4px;
     background-image: linear-gradient(
         180deg,
-        #0714b1 12%,
-        #2f3efd 50%,
-        #0714b1 100%
+        #7b0000 12%,
+        #ff0a0a 50%,
+        #7b0000 100%
     );
     text-align: center;
 }
 
 .button-1:hover {
-    background-color: #0714b1;
+    background-color: #8a0000;
 }

@@ -32,7 +32,7 @@
                 $.each(data, function(index, result) {
                     // var pathImage = 'storage/' + result.image;
                     var resultCard = `
-                        <div class="col" style="padding:5px 10px">
+                        <div class="col" style="padding:5px 10px; margin-top: -10px">
                             <div class="card h-100 card-red">
                                 <img style="padding: 25px 70px 0px 70px" src="${result.pasaran.image}" class="card-img-top" alt="...">
                                 <div class="card-body">
@@ -43,17 +43,17 @@
 
                                     <div class="position-relative container-brunei">
                                         ${result.result_1}
-                                        <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                        <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #edd000 1px;letter-spacing:0.7px; margin-left:-20px;background-image: linear-gradient(45deg, #a37700 0%, #fae768 52%, #a37700 90%); color: black !important;">
                                             Prize 1
                                         </span>
                                     </div>
                                     <div class="position-relative container-brunei">
-                                        ${result.result_2 !== null ? result.result_2 : "-"}  <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                        ${result.result_2 !== null ? result.result_2 : "-"}  <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #edd000 1px;letter-spacing:0.7px; margin-left:-20px;background-image: linear-gradient(45deg, #a37700 0%, #fae768 52%, #a37700 90%); color: black !important;">
                                             Prize 2
                                         </span>
                                     </div>
                                     <div class="position-relative container-brunei">
-                                        ${result.result_3 !== null ? result.result_3 : "-"}  <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #ff2626 1px;letter-spacing:0.7px; margin-left:-20px; background-image: linear-gradient(225deg, #9f0000 0%, #ff3e42 46%, #9f0000 100%);">
+                                        ${result.result_3 !== null ? result.result_3 : "-"}  <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="font-size:14px;border: solid #edd000 1px;letter-spacing:0.7px; margin-left:-20px;background-image: linear-gradient(45deg, #a37700 0%, #fae768 52%, #a37700 90%); color: black !important;">
                                             Prize 3
                                         </span>
                                     </div>

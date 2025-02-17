@@ -84,7 +84,7 @@
 </style>
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ JEDERWD - PREDIKSI TOGEL
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - PREDIKSI TOGEL
             <span style="text-transform:uppercase">{{ $pasaran }}</span> TERLENGKAP 2024 ⚜️
         </h6>
     </main>
@@ -180,7 +180,7 @@
                                             style="color: #fff900; text-transform:capitalize">{{ $prediksi->name_pasaran }}</span>
                                         Tanggal
                                         <span style="color: #fff900">{{ $prediksi->created_at }}</span> di <span
-                                            style="color: #fff900">JederWD</span>.
+                                            style="color: #fff900">LAGACUAN</span>.
                                         <br>
 
                                     </div>
