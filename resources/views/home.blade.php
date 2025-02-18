@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <main class="container">
+    <main class="container" style="flex: 1;">
         <div id="results-container" class="mb-5 row row-cols-1 row-cols-md-4">
         </div>
     </main>
@@ -32,7 +32,8 @@
                 $.each(data, function(index, result) {
                     // var pathImage = 'storage/' + result.image;
                     var resultCard = `
-                        <div class="col" style="padding:5px 10px; margin-top: -10px">
+                        <div class="container-pasaran" style="margin-top:10px">
+                        <div class="col" style="padding:5px 10px; margin-top: -10px;">
                             <div class="card h-100 card-red">
                                 <img style="padding: 25px 70px 0px 70px" src="${result.pasaran.image}" class="card-img-top" alt="...">
                                 <div class="card-body">
@@ -78,6 +79,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     `;
 

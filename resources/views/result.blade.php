@@ -1,13 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-    <main class="container mb-2">
+    <main class="container">
         <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - KEMENANGAN
             PLAYER
             ⚜️
         </h6>
     </main>
-    <main class="container mb-5" style="padding: 12px; border-radius:7px; background-color:#181818">
+    <main class="container"
+        style="padding: 12px; border-bottom-left-radius:8px;border-bottom-right-radius:8px; background-color:#181818l;flex: 1;">
         <div class="table-responsive">
             <table class="table table-striped" id="jsonTable" style="padding: 12px 0px; width:100%">
                 <thead class="">

@@ -8,7 +8,7 @@
             2024 ⚜️
         </h6>
     </main>
-    <main class="container mb-5">
+    <main class="container" style="margin-top: -8px;flex: 1;">
         <div id="results-container">
 
         </div>
@@ -34,7 +34,7 @@
 
                 $.each(limitedData, function(index, result) {
                     var resultCard = `
-                <div class="mb-2 card w-100" style="background-image: linear-gradient(#193cff, #031d81);;border-radius: 10px;border: solid #214dfd 2px;">
+                <div class="mb-2 card w-100" style="background-image: linear-gradient(45deg, #7a0000 0%, #ff1313 52%, #a60000 90%);border-radius: 10px;border: solid #ff0000 2px;">
                     <div class="row g-0">
                         <div class="col-md-4" style="display: flex; justify-content: center; align-items: center; text-align: center;">
                             <img src="${result.image}" class="img-fluid rounded-start" alt="Gambar">

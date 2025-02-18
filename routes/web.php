@@ -4,16 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasaranController;
 use App\Http\Controllers\RtpController;
 use App\Http\Controllers\KeluhanController;
-use App\Http\Controllers\BannerController;
-use App\Http\Controllers\BuktiController;
-use App\Http\Controllers\BukuController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\DataController;
-use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\PredictionController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ResultController;
-use App\Http\Controllers\ShioController;
+
 
 /*
 |--------------------------------------------------------------------------

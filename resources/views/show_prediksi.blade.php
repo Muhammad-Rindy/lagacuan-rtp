@@ -88,8 +88,7 @@
             <span style="text-transform:uppercase">{{ $pasaran }}</span> TERLENGKAP 2024 ⚜️
         </h6>
     </main>
-    <main class="container"
-        style="text-align: center;background-color: #8989894a;border-radius: 7px 7px 0px 0px;padding: 10px;">
+    <main class="container mb-5" style="text-align: center;padding: 10px;margin-top: -8px;flex: 1;">
         <div class="card-red container-mobile">
             <div class="mt-4" style="text-align: center; text-transform:uppercase">
                 <h6 class="card-title"><span
@@ -152,109 +151,7 @@
             </div>
         </div>
     </main>
-    <main class="container" style="text-align: center;background-color: #8989894a;">
-        <div style="text-align: center; padding:5px 0px; color:#ffe200; font-weight:bold;text-decoration-line: underline;">
-            PREDIKSI TANGGAL SEBELUMNYA
-        </div>
-    </main>
-    <main class="container mb-3"
-        style="text-align: center;background-color: #8989894a;border-radius: 0px 0px 7px 7px;padding: 10px;">
-        <div class="swiper-container new-content">
-            <div class="swiper-wrapper" style="height:350px">
-                @foreach ($data as $index => $prediksi)
-                    <div class="swiper-slide">
-                        <div class="card">
-                            <div class="card card-red" style="border-radius:6px">
-                                <div class="mt-4" style="text-align: center; text-transform:uppercase">
-                                    <h6 class="card-title"><span
-                                            style="text-transform:uppercase;font-weight: bolder;color: #fff900;font-size: 19px;font-family: ubuntu, sans-serif">{{ $pasaran }}</span>
-                                    </h6>
-                                </div>
-                                <img style="padding: 10px 70px 0px 70px" src="{{ $prediksi->image }}" class="card-img-top"
-                                    alt="...">
-                                <div class="card-body">
-
-                                    <div class=""
-                                        style="text-align: left; font-weight:bolder; font-size:16px; color: white;font-family: ubuntu">
-                                        Prediksi <span
-                                            style="color: #fff900; text-transform:capitalize">{{ $prediksi->name_pasaran }}</span>
-                                        Tanggal
-                                        <span style="color: #fff900">{{ $prediksi->created_at }}</span> di <span
-                                            style="color: #fff900">LAGACUAN</span>.
-                                        <br>
-
-                                    </div>
-                                </div>
-                                <button style="margin: 5px; border-radius:100px; font-size:12px"
-                                    class="button-17 show-button" data-angka-main="{{ $prediksi->angka_main }}"
-                                    data-top-4d="{{ $prediksi->top_4d }}" data-colok_bebas="{{ $prediksi->colok_bebas }}"
-                                    data-top_2d="{{ $prediksi->top_2d }}" data-top_2d="{{ $prediksi->top_2d }}"
-                                    data-colok_2d="{{ $prediksi->colok_2d }}" data-shio_jitu="{{ $prediksi->shio_jitu }}"
-                                    data-top-3d="{{ $prediksi->top_3d }}" data-top-3d="{{ $prediksi->top_3d }}"
-                                    data-created_at="{{ $prediksi->created_at }}"><i class="fa-solid fa-eye"></i> Lihat
-                                    Prediksi
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="swiper-button-next button-swip-right"></div>
-            <div class="swiper-button-prev button-swip-left"></div>
-        </div>
 
 
-        <!-- Navigasi slider -->
-
-    </main>
     <!-- Sertakan Swiper.js -->
-
-    <script>
-        // Inisialisasi Swiper
-        var swiper = new Swiper('.swiper-container', {
-            // Konfigurasi tambahan jika diperlukan
-            slidesPerView: 4,
-            spaceBetween: 30,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-
-        // Mendengarkan perubahan ukuran layar
-        window.addEventListener('resize', function() {
-            if (window.innerWidth <= 768) {
-                swiper.params.slidesPerView = 1;
-            } else {
-                swiper.params.slidesPerView = 4;
-            }
-            swiper.update();
-        });
-
-
-
-        // Event untuk menampilkan data saat tombol diklik
-        var showButtons = document.querySelectorAll('.show-button');
-
-        showButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                var angkaMain = this.getAttribute('data-angka-main');
-                var top4d = this.getAttribute('data-top-4d');
-                var top3d = this.getAttribute('data-top-3d');
-                var colok_bebas = this.getAttribute('data-colok_bebas');
-                var top_2d = this.getAttribute('data-top_2d');
-                var colok_2d = this.getAttribute('data-colok_2d');
-                var shio_jitu = this.getAttribute('data-shio_jitu');
-                var created_at = this.getAttribute('data-created_at');
-
-                document.querySelector('#angka-main').innerText = angkaMain;
-                document.querySelector('#top_4d').innerText = top4d;
-                document.querySelector('#top_3d').innerText = top3d;
-                document.querySelector('#colok_bebas').innerText = colok_bebas;
-                document.querySelector('#top_2d').innerText = top_2d;
-                document.querySelector('#colok_2d').innerText = colok_2d;
-                document.querySelector('#created_at').innerText = created_at;
-            });
-        });
-    </script>
 @endsection

@@ -5,7 +5,7 @@
         <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - BUKU MIMPI ⚜️
         </h6>
     </main>
-    <main class="container mb-5">
+    <main class="container" style="margin-top: -8px;flex: 1;">
         <div id="results-container"></div>
     </main>
     <script>

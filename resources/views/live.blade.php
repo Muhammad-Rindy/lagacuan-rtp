@@ -7,7 +7,7 @@
             TOGEL ONLINE
             LENGKAP ⚜️</h6>
     </main>
-    <main class="container mb-5">
+    <main class="container" style="margin-top: -8px;flex: 1;">
         <div id="results-container">
 
     </main>
@@ -50,23 +50,22 @@
                             <div class="modal-header" style="background-color:#2c2c2c; color:white">
                                 <h1 class="modal-title fs-6" id="exampleModalLabel">LIVE DRAW <span style="text-transform:uppercase">${result.pasaran.name_pasaran}</span> POOLS
                                 </h1>
-                                <button type="button" style="color: white;font-size: 10px;border: solid white 1px;background-color: white;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" style="background-image: linear-gradient(#0e69fb, #071b69);">
-                                <div class="container text-center mb-3">
+                            <div class="modal-body" style="background-image: linear-gradient(45deg, #7a0000 0%, #ff1313 52%, #a60000 90%);">
+                                <div class="text-center mb-3">
                                     <img src="${result.pasaran.image}" class="img-fluid" alt="...">
                                 </div>
                                 <p class="mt-2" style="text-align: center; font-weight:bolder; font-size:18px; color: #fff900;font-family: ubuntu, sans-serif; text-transform:capitalize; margin-bottom:5px">
                                 SHIO ${result.shio}
                             </p>
-                                <div class="container text-center mb-3">
+                                <div class="text-center mb-3">
                                     <div class="row align-items-center">
                                         <div class="col" style="font-weight:bold; color:white">
                                             ${result.created_at}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="container text-center mb-3">
+                                <div class="text-center mb-3">
                                     <div class="row align-items-center">
                                         <div class="col" style="font-weight:bold;font-size:22px; color:white">
                                             Prize #1

@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <link href="{{ asset('assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="https://gemswin.sgp1.digitaloceanspaces.com/favicon.png">
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -35,15 +35,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 </head>
-<style>
-    .container {
-        max-width: 1350px;
-        background-color: #0000008c;
-        padding: 5px 15px;
-    }
-</style>
 
-<body style="background-image: url('{{ asset('bg-rtp.jpg') }}');">
+<body>
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="aperture" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

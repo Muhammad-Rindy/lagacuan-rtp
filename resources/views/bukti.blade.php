@@ -6,7 +6,7 @@
             KEMENANGAN PLAYER ⚜️
         </h6>
     </main>
-    <main class="container mb-5">
+    <main class="container" style="margin-top: -8px;flex: 1;">
         <div class="row row-cols-1 row-cols-md-4 g-4" id="results-container">
 
         </div>
@@ -50,7 +50,7 @@
                                 <div class="d-grid gap-2 mt-4">
                                     <button style="font-weight:bold; font-size:13px;border:none;color:white" type="button"
                                     class="mb-2 btn button-jp btn-sm btn-sm show-details" data-id="${result.id}">
-                                     <span style="margin-right:10px">Details</span><i class="fa-solid fa-circle-chevron-right"></i>
+                                     <span style="margin-right:10px">Read more</span><i class="fa-solid fa-circle-chevron-right"></i>
                                 </button>
                             </div>
                         </div>
