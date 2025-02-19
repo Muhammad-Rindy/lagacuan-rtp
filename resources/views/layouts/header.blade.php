@@ -61,7 +61,7 @@
 </div>
 </div>
 <main class="container">
-    <div class="mb-1 mt-1 d-flex">
+    <div class="mb-1 d-flex lagacuan-8">
         <i class="fa-solid fa-bullhorn" style="color:#ffe03b;padding:5px 10px; background: #181818"></i>
         <div class="marquee ft-marquee">
             <span>SELAMAT DATANG DI LAGACUAN BANDAR TOGEL, BOLA, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA
@@ -158,6 +158,16 @@
                 aria-describedby="basic-addon3 basic-addon4" disabled>
         </div>
     </div>
+    <main class="container-new">
+        <div class="mb-1 mt-1 d-flex">
+            <span style="" class="input-group-text winner winner-player-mobile" style=""
+                id="basic-addon3"><i style="margin-right:5px" class="fa-solid fa-trophy"></i> Winner
+                Player</span>
+            <div class="marquee-new ft-marquee-new">
+                <span id="new-text"></span>
+            </div>
+        </div>
+    </main>
 
     <div class="mb-1 text-center lagacuan-4">
         <div class="row align-items-center">
@@ -178,36 +188,78 @@
     </div>
 </main>
 
-
 <script>
-    var names = ['Hen*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
-        'Ran*** Jackpot GATES OF OLYMPUS Sebesar Rp.20.400.571',
-        'Boy*** Jackpot SWEET BONANZA Sebesar Rp.45.258.424',
-        'Raja*** Jackpot MAHJONG WINS 3 Sebesar Rp.71.150.105',
-        'Far*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
-        'Ratu*** Jackpot STARLIGHT PRINCESS Sebesar Rp.17.105.058',
-        'Lin** Jackpot SPACEMAN Sebesar Rp.55.405.825',
-        'Cah*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
-        'Sal*** Jackpot HUAHIN LOTTERY Sebesar Rp.20.400.571',
-        'Gun*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
-        'Der*** Jackpot POIPET LOTTERY Sebesar Rp.104.405.102',
-        'Yuri*** Jackpot GATOT OF KACA Sebesar Rp.10.473.102',
-        'Vio*** Jackpot POWER OF THE THOR Sebesar Rp.40.105.054',
-        'Erd*** Jackpot SPACEMAN Sebesar Rp.275.452.205',
-        'Wen*** Jackpot SUGAR RUSH Sebesar Rp.35.104.477',
-    ];
+    if (window.innerWidth <= 768) {
+        var names = [
+            'Raj*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
+            'Hen*** Jackpot GATES OF OLYMPUS Sebesar Rp.20.400.571',
+            'Boy*** Jackpot SWEET BONANZA Sebesar Rp.45.258.424',
+            'Raja*** Jackpot MAHJONG WINS 3 Sebesar Rp.71.150.105',
+            'Far*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
+            'Ratu*** Jackpot STARLIGHT PRINCESS Sebesar Rp.17.105.058',
+            'Lin** Jackpot SPACEMAN Sebesar Rp.55.405.825',
+            'Cah*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
+            'Sal*** Jackpot HUAHIN LOTTERY Sebesar Rp.20.400.571',
+            'Gun*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
+            'Der*** Jackpot POIPET LOTTERY Sebesar Rp.104.405.102',
+            'Yuri*** Jackpot GATOT OF KACA Sebesar Rp.10.473.102',
+            'Vio*** Jackpot POWER OF THE THOR Sebesar Rp.40.105.054',
+            'Erd*** Jackpot SPACEMAN Sebesar Rp.275.452.205',
+            'Wen*** Jackpot SUGAR RUSH Sebesar Rp.35.104.477'
+        ];
 
-    var index = 0;
+        var index = 0;
 
-    // Fungsi untuk mengubah nilai input
-    function updateInputValue() {
-        document.getElementById('basic-url').value = names[index];
-        index = (index + 1) % names.length; // Memastikan agar index tidak melebihi panjang array
+        function updateMarquee() {
+            var marqueeText = document.getElementById("new-text");
+
+            // Set teks baru
+            marqueeText.innerHTML = names[index];
+
+            // Restart animasi
+            marqueeText.style.animation = "none";
+            void marqueeText.offsetWidth; // Trigger reflow
+            marqueeText.style.animation = "marquee 5s linear infinite";
+
+            index = (index + 1) % names.length; // Loop kembali ke awal setelah semua teks ditampilkan
+        }
+
+        // Ubah teks setiap 10 detik (sesuai durasi animasi)
+        setInterval(updateMarquee, 5000);
+
+        // Set teks pertama kali
+        updateMarquee();
+    } else {
+        var names = ['Raj*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
+            'Hen*** Jackpot GATES OF OLYMPUS Sebesar Rp.20.400.571',
+            'Boy*** Jackpot SWEET BONANZA Sebesar Rp.45.258.424',
+            'Raja*** Jackpot MAHJONG WINS 3 Sebesar Rp.71.150.105',
+            'Far*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
+            'Ratu*** Jackpot STARLIGHT PRINCESS Sebesar Rp.17.105.058',
+            'Lin** Jackpot SPACEMAN Sebesar Rp.55.405.825',
+            'Cah*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
+            'Sal*** Jackpot HUAHIN LOTTERY Sebesar Rp.20.400.571',
+            'Gun*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
+            'Der*** Jackpot POIPET LOTTERY Sebesar Rp.104.405.102',
+            'Yuri*** Jackpot GATOT OF KACA Sebesar Rp.10.473.102',
+            'Vio*** Jackpot POWER OF THE THOR Sebesar Rp.40.105.054',
+            'Erd*** Jackpot SPACEMAN Sebesar Rp.275.452.205',
+            'Wen*** Jackpot SUGAR RUSH Sebesar Rp.35.104.477',
+        ];
+
+        var index = 0;
+
+        // Fungsi untuk mengubah nilai input
+        function updateInputValue() {
+            document.getElementById('basic-url').value = names[index];
+            index = (index + 1) % names.length; // Memastikan agar index tidak melebihi panjang array
+        }
+
+        // Memanggil fungsi updateInputValue setiap 2 detik
+        setInterval(updateInputValue, 3000);
     }
-
-    // Memanggil fungsi updateInputValue setiap 2 detik
-    setInterval(updateInputValue, 2000);
 </script>
+
 <script>
     $(document).ready(function() {
         $.ajax({
@@ -238,7 +290,7 @@
                 </span> <i style="color: white" class="fa-solid fa-comments"></i>
                 <a target="_blank" href="${result.live_chat}"> LIVE CHAT </a>
             </div>
-            <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="row flex-nowrap justify-content-between align-items-center lagacuan-7">
                 <div class="pt-1 mt-1 mb-1 col-4">
                     <img class="logo-lagacuan" src="https://gemswin.sgp1.digitaloceanspaces.com/logo-lagacuan.png" alt="logo">
                 </div>
