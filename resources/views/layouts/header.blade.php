@@ -191,12 +191,12 @@
 <script>
     if (window.innerWidth <= 768) {
         var names = [
-            'Raj*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
-            'Hen*** Jackpot GATES OF OLYMPUS Sebesar Rp.20.400.571',
-            'Boy*** Jackpot SWEET BONANZA Sebesar Rp.45.258.424',
-            'Raja*** Jackpot MAHJONG WINS 3 Sebesar Rp.71.150.105',
+            'Raj*** Jackpot MAHJONG WINS 3 Sebesar Rp.30.573.371',
+            'Pal*** Jackpot GATES OF OLYMPUS Sebesar Rp.25.400.571',
+            'Boy*** Jackpot SWEET BONANZA Sebesar Rp.15.258.424',
+            'Raja*** Jackpot MAHJONG WINS 3 Sebesar Rp.55.150.105',
             'Far*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
-            'Ratu*** Jackpot STARLIGHT PRINCESS Sebesar Rp.17.105.058',
+            'Ratu*** Jackpot STARLIGHT PRINCESS Sebesar Rp.18.105.058',
             'Lin** Jackpot SPACEMAN Sebesar Rp.55.405.825',
             'Cah*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
             'Sal*** Jackpot HUAHIN LOTTERY Sebesar Rp.20.400.571',
@@ -204,8 +204,8 @@
             'Der*** Jackpot POIPET LOTTERY Sebesar Rp.104.405.102',
             'Yuri*** Jackpot GATOT OF KACA Sebesar Rp.10.473.102',
             'Vio*** Jackpot POWER OF THE THOR Sebesar Rp.40.105.054',
-            'Erd*** Jackpot SPACEMAN Sebesar Rp.275.452.205',
-            'Wen*** Jackpot SUGAR RUSH Sebesar Rp.35.104.477'
+            'Erd*** Jackpot SPACEMAN Sebesar Rp.35.452.205',
+            'Wen*** Jackpot SUGAR RUSH Sebesar Rp.15.104.477'
         ];
 
         var index = 0;
@@ -230,12 +230,12 @@
         // Set teks pertama kali
         updateMarquee();
     } else {
-        var names = ['Raj*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
-            'Hen*** Jackpot GATES OF OLYMPUS Sebesar Rp.20.400.571',
-            'Boy*** Jackpot SWEET BONANZA Sebesar Rp.45.258.424',
-            'Raja*** Jackpot MAHJONG WINS 3 Sebesar Rp.71.150.105',
+        var names = ['Raj*** Jackpot MAHJONG WINS 3 Sebesar Rp.30.573.371',
+            'Pal*** Jackpot GATES OF OLYMPUS Sebesar Rp.25.400.571',
+            'Boy*** Jackpot SWEET BONANZA Sebesar Rp.15.258.424',
+            'Raja*** Jackpot MAHJONG WINS 3 Sebesar Rp.55.150.105',
             'Far*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
-            'Ratu*** Jackpot STARLIGHT PRINCESS Sebesar Rp.17.105.058',
+            'Ratu*** Jackpot STARLIGHT PRINCESS Sebesar Rp.18.105.058',
             'Lin** Jackpot SPACEMAN Sebesar Rp.55.405.825',
             'Cah*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
             'Sal*** Jackpot HUAHIN LOTTERY Sebesar Rp.20.400.571',
@@ -243,8 +243,8 @@
             'Der*** Jackpot POIPET LOTTERY Sebesar Rp.104.405.102',
             'Yuri*** Jackpot GATOT OF KACA Sebesar Rp.10.473.102',
             'Vio*** Jackpot POWER OF THE THOR Sebesar Rp.40.105.054',
-            'Erd*** Jackpot SPACEMAN Sebesar Rp.275.452.205',
-            'Wen*** Jackpot SUGAR RUSH Sebesar Rp.35.104.477',
+            'Erd*** Jackpot SPACEMAN Sebesar Rp.35.452.205',
+            'Wen*** Jackpot SUGAR RUSH Sebesar Rp.15.104.477',
         ];
 
         var index = 0;
