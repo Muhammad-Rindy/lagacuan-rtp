@@ -2,7 +2,8 @@
 
 @section('content')
     <main class="container">
-        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - JADWAL TOGEL
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white" class="judul-page">⚜️
+            LAGACUAN - JADWAL TOGEL
             ⚜️
         </h6>
     </main>

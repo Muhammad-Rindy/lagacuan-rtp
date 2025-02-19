@@ -2,12 +2,13 @@
 
 @section('content')
     <main class="container">
-        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - KEMENANGAN
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white" class="judul-page">⚜️
+            LAGACUAN - KEMENANGAN
             PLAYER
             ⚜️
         </h6>
     </main>
-    <main class="container"
+    <main class="container table-data"
         style="padding: 12px; border-bottom-left-radius:8px;border-bottom-right-radius:8px; background-color:#181818l;flex: 1;">
         <div class="table-responsive">
             <table class="table table-striped" id="jsonTable" style="padding: 12px 0px; width:100%">

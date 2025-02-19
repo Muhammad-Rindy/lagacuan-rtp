@@ -2,7 +2,8 @@
 
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - DETAIL BUKTI
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white" class="judul-page">⚜️
+            LAGACUAN - DETAIL BUKTI
             JACKPOT
             KEMENANGAN PLAYER ⚜️
         </h6>
@@ -11,8 +12,8 @@
         <div class="row">
             <div class="col-md-9"
                 style="color: white;border: solid #ff1b1b 3px;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;text-align: center;padding: 10px;">
-                <img id="main-data-image" class="data-image" style="background-color: white; width: 490px;"
-                    src="{{ $data->first()->image }}" class="card-img-top" alt="Gambar">
+                <img id="main-data-image" class="data-image image-details" src="{{ $data->first()->image }}"
+                    class="card-img-top" alt="Gambar">
 
                 <div class="card-body">
                     <div style="text-transform:uppercase" id="main-data-title" class="card-text h5 mt-2">
@@ -23,7 +24,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="card-title h5" id="main-data-tanggal">Tanggal Jackpot: {{ $data->first()->tanggal }}
+                <div class="card-title h5" id="main-data-tanggal">{{ $data->first()->tanggal }}
                 </div>
             </div>
             <div class="col-md-3">
@@ -42,7 +43,7 @@
                                                 data-title="{{ $item->title }}"><span
                                                     class="data-title">{{ $item->title }}</span></div>
                                             <div class="card-title h6" data-tanggal="{{ $item->tanggal }}">
-                                                <span class="data-tanggal">Tanggal Jackpot: {{ $item->tanggal }}</span>
+                                                <span class="data-tanggal">{{ $item->tanggal }}</span>
                                             </div>
                                             <hr>
                                             <div style="text-transform:capitalize"

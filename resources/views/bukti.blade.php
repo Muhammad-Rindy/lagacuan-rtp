@@ -2,7 +2,8 @@
 
 @section('content')
     <main class="container mb-2">
-        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - BUKTI JACKPOT
+        <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white" class="judul-page">⚜️
+            LAGACUAN - BUKTI JACKPOT
             KEMENANGAN PLAYER ⚜️
         </h6>
     </main>
@@ -45,8 +46,9 @@
                         <img style="background-color: white" src="${result.image}" class="card-img-top" alt="Gambar">
                         <div class="card-body">
                             <div style="text-transform:uppercase" class="card-desc card-text h5">${result.title}</div>
-                            <div class="card-title h6">${result.tanggal}</div>
                             <div style="text-transform:capitalize" class="card-desc card-text h5">${result.description}</div>
+                            <hr/>
+                            <div class="card-title h6">${result.tanggal}</div>
                                 <div class="d-grid gap-2 mt-4">
                                     <button style="font-weight:bold; font-size:13px;border:none;color:white" type="button"
                                     class="mb-2 btn button-jp btn-sm btn-sm show-details" data-id="${result.id}">

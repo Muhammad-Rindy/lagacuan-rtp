@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="container" style="flex: 1;">
-        <div id="results-container" class="mb-5 row row-cols-1 row-cols-md-4">
+        <div id="results-container" class="mb-5 row row-cols-1 row-cols-md-4 pasaran-lagacuan">
         </div>
     </main>
 
@@ -32,10 +32,9 @@
                 $.each(data, function(index, result) {
                     // var pathImage = 'storage/' + result.image;
                     var resultCard = `
-                        <div class="container-pasaran" style="margin-top:10px">
-                        <div class="col" style="padding:5px 10px; margin-top: -10px;">
+                        <div class="col mt-1" style="margin-bottom:10px !important">
                             <div class="card h-100 card-red">
-                                <img style="padding: 25px 70px 0px 70px" src="${result.pasaran.image}" class="card-img-top" alt="...">
+                                <img src="${result.pasaran.image}" class="card-img-top image-home" alt="...">
                                 <div class="card-body">
                                     <div style="text-align: center; text-transform:uppercase">
                                         <h6 class="card-title"><span style="text-transform:uppercase;font-weight: bolder;color: #fff900;font-size: 18px;font-family: ubuntu, sans-serif">${result.pasaran.name_pasaran}</span></h6>
@@ -79,7 +78,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                     `;
 

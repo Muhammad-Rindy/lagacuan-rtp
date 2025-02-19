@@ -61,7 +61,7 @@
 </div>
 </div>
 <main class="container">
-    <div class="mb-1 d-flex">
+    <div class="mb-1 mt-1 d-flex">
         <i class="fa-solid fa-bullhorn" style="color:#ffe03b;padding:5px 10px; background: #181818"></i>
         <div class="marquee ft-marquee">
             <span>SELAMAT DATANG DI LAGACUAN BANDAR TOGEL, BOLA, LIVE CASINO & SLOT TERBAIK DAN TERPERCAYA DI INDONESIA
@@ -151,14 +151,14 @@
     </div>
     <div class="mb-1">
         <div class="input-group lagacuan-3">
-            <span style="border: solid #b00000 2px; color:white" class="input-group-text winner" style=""
-                id="basic-addon3"><i style="margin-right:5px" class="fa-solid fa-trophy"></i> Winner Togel</span>
-            <input
-                style="border: solid #b00000 2px;background-color: #181818;color: white;font-size: 13px;font-family: serif;font-weight: bold;letter-spacing: 2px;"
-                type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4"
-                disabled>
+            <span style="" class="input-group-text winner winner-player" style="" id="basic-addon3"><i
+                    style="margin-right:5px" class="fa-solid fa-trophy"></i> Winner
+                Player</span>
+            <input type="text" class="form-control input-player" id="basic-url"
+                aria-describedby="basic-addon3 basic-addon4" disabled>
         </div>
     </div>
+
     <div class="mb-1 text-center lagacuan-4">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
@@ -177,19 +177,24 @@
         </div>
     </div>
 </main>
+
+
 <script>
-    var names = ['Hen*** Jackpot NEWYORK-MID Sebesar Rp.60.573.371', 'Ran*** Jackpot HUAHIN Sebesar Rp.20.400.571',
-        'Boy*** Jackpot CHELSEA Sebesar Rp.45.258.424', 'Raja*** Jackpot POIPET Sebesar Rp.71.150.105',
-        'Far*** Jackpot TOTOMACAU Sebesar Rp.25.457.205', 'Ratu*** Jackpot BRUNEI Sebesar Rp.17.105.058',
-        'Lin** Jackpot CAROLINA Sebesar Rp.55.405.825',
-        'Cah*** Jackpot NEWYORK-MID Sebesar Rp.60.573.371',
-        'Sal*** Jackpot HUAHIN Sebesar Rp.20.400.571',
+    var names = ['Hen*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
+        'Ran*** Jackpot GATES OF OLYMPUS Sebesar Rp.20.400.571',
+        'Boy*** Jackpot SWEET BONANZA Sebesar Rp.45.258.424',
+        'Raja*** Jackpot MAHJONG WINS 3 Sebesar Rp.71.150.105',
+        'Far*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
+        'Ratu*** Jackpot STARLIGHT PRINCESS Sebesar Rp.17.105.058',
+        'Lin** Jackpot SPACEMAN Sebesar Rp.55.405.825',
+        'Cah*** Jackpot MAHJONG WINS 3 Sebesar Rp.60.573.371',
+        'Sal*** Jackpot HUAHIN LOTTERY Sebesar Rp.20.400.571',
         'Gun*** Jackpot TOTOMACAU Sebesar Rp.25.457.205',
-        'Der*** Jackpot POIPET Sebesar Rp.104.405.102',
-        'Yuri*** Jackpot HUAHIN Sebesar Rp.10.473.102',
-        'Vio*** Jackpot NEWYORK-MID Sebesar Rp.40.105.054',
-        'Erd*** Jackpot CHELSEA Sebesar Rp.275.452.205',
-        'Wen*** Jackpot OREGON Sebesar Rp.35.104.477',
+        'Der*** Jackpot POIPET LOTTERY Sebesar Rp.104.405.102',
+        'Yuri*** Jackpot GATOT OF KACA Sebesar Rp.10.473.102',
+        'Vio*** Jackpot POWER OF THE THOR Sebesar Rp.40.105.054',
+        'Erd*** Jackpot SPACEMAN Sebesar Rp.275.452.205',
+        'Wen*** Jackpot SUGAR RUSH Sebesar Rp.35.104.477',
     ];
 
     var index = 0;
