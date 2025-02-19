@@ -315,7 +315,7 @@
                 displayResults(data);
                 // Memulai otomatis sliding setiap 2 detik setelah data dimuat
                 $('#carouselExampleAutoplaying').carousel({
-                    interval: 2500
+                    interval: 3000
                 });
             },
             error: function(error) {
