@@ -443,7 +443,7 @@ a {
         background-image: url(https://gemswin.sgp1.digitaloceanspaces.com/background-rtp.png);
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
+        background-repeat: repeat;
         height: 165vh;
         display: flex;
         flex-direction: column;
