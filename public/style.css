@@ -440,9 +440,9 @@ a {
     }
 
     .container-rtp {
-        max-width: 1350px;
-        background-color: #0000008c;
-        padding: 5px 15px;
+        background-color: #0000008c !important;
+        padding: 5px 15px !important;
+        margin: -8px 45px 0px 45px !important;
     }
 
     body {
