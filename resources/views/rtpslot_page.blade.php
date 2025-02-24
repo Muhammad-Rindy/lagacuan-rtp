@@ -183,9 +183,9 @@
     <div class="container" style="margin-top: -8px; flex: 1;">
         <div class="container pt-3 pb-3 mb-2" style="background: #4f4f4fb8;border-radius: 10px;">
 
-            <h4 class="text-center" style="color: white">
+            <h5 class="text-center" style="color: white; margin-bottom:5px">
                 ⏱️ {{ now()->format('l, F j, Y') }}
-            </h4>
+            </h5>
             <div class="align-item-center justify-content-around provider-img" style="flex-wrap: wrap">
                 @foreach ($provider as $item)
                     <a class="provider" href="javascript:void(0);" data-name="{{ $item->provider_name }}">
