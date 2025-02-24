@@ -8,7 +8,7 @@
     </main>
     <main class="container mb-5" style="background-color:#181818; padding:20px 0px; border-radius:10px">
         <section class="container-soon">
-            <header>- We're Coming Soon -</header>
+            <header>-- We're Coming Soon --</header>
             <p>
                 We are excited to announce that we will be launching soon and can't wait to share our new platform with you.
             </p>
