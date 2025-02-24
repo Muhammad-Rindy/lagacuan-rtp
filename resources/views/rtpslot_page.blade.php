@@ -180,7 +180,8 @@
         <h6 style="text-align: center; background-color:#101010eb; padding:5px 0px; color:white">⚜️ LAGACUAN - RTPSLOT ⚜️
         </h6>
     </main>
-    <div class="container-rtp">
+    <div class="container-rtp"
+        style="background-color: #0000008c !important;padding: 5px 15px !important;margin: -8px 45px 0px 45px !important;">
         <div class="container pt-3 pb-3 mb-2" style="background: #4f4f4fb8;border-radius: 10px;">
 
             <h4 class="text-center" style="color: white">
