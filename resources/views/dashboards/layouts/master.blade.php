@@ -6,17 +6,17 @@
     <base href="../" />
     <meta charset="UTF-8">
     <title>
-        JEDERWD - Dashboard
+        LAGACUAN - Dashboard
     </title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta name="description" content="JEDERWD - Link Alternatif Resmi Jeder WD, Official Login Jeder WD" />
-    <meta name="keywords" content="JEDERWD - Link Alternatif Resmi Jeder WD, Official Login Jeder WD" />
+    <meta name="description" content="LAGACUAN - Link Alternatif Resmi Jeder WD, Official Login Jeder WD" />
+    <meta name="keywords" content="LAGACUAN - Link Alternatif Resmi Jeder WD, Official Login Jeder WD" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="JEDERWD - Link Alternatif Resmi Jeder WD, Official Login Jeder WD" />
+    <meta property="og:title" content="LAGACUAN - Link Alternatif Resmi Jeder WD, Official Login Jeder WD" />
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Jeder WD" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
