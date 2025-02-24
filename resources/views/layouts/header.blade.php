@@ -7,7 +7,7 @@
 {{-- Desktop --}}
 <div class="py-1 mb-1 nav-scroller nav-desktop" style="border-bottom: solid #ff0000 2px; background-color:#313131c2">
     <nav class="nav nav-underline justify-content-between">
-        <a @if (request()->is('/')) class="actives" @endif class="nav-item nav-link no-actived" href="/"
+        <a @if (request()->is('/home')) class="actives" @endif class="nav-item nav-link no-actived" href="/"
             style="margin-left:15px;font-family:system-ui; letter-spacing: 2px; font-size: 13px;">
             <span class="head-2">
                 <i class="fa-solid fa-house"></i>
@@ -80,7 +80,7 @@
     <div class="container mb-2 text-center nav-mobile">
         <div class="mb-1 row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="/"><button @if (request()->is('/')) class="actives-mobile" @endif
+                <a href="/home"><button @if (request()->is('/home')) class="actives-mobile" @endif
                         class="button-15" role="button">
                         HOME</button></a>
             </div>
@@ -172,7 +172,7 @@
     <div class="mb-1 text-center lagacuan-4">
         <div class="row align-items-center">
             <div class="col" style="padding: 0px; margin-right:2px">
-                <a href="/"><button @if (request()->is('/')) class="actives-mobile-2" @endif
+                <a href="/home"><button @if (request()->is('/home')) class="actives-mobile-2" @endif
                         class="button-15" style="letter-spacing: 0.5px" role="button">
                         <i class="fa-solid fa-chart-column"></i> Result Togel</button></a>
             </div>
