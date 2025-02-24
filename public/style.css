@@ -439,11 +439,18 @@ a {
         padding: 5px 15px;
     }
 
+    .container-rtp {
+        max-width: 1350px;
+        background-color: #0000008c;
+        padding: 5px 15px;
+    }
+
     body {
         background-image: url(https://gemswin.sgp1.digitaloceanspaces.com/background-rtp.png);
         background-size: cover;
         background-position: center;
         background-repeat: repeat;
+        /* repeat */
         height: 165vh;
         display: flex;
         flex-direction: column;
