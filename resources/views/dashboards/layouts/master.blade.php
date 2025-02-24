@@ -21,7 +21,7 @@
     <meta property="og:site_name" content="Jeder WD" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="https://gemswin.sgp1.digitaloceanspaces.com/favicon.png">
 
     <link href="{{ asset('assets/plugins/custom/vis-timeline/vis-timeline.bundle.css') }}" rel="stylesheet"
         type="text/css" />
@@ -323,7 +323,8 @@
                     <!--begin::Header-->
                     <div class="px-6 pt-6 pb-6 d-none d-lg-flex flex-center" id="kt_app_sidebar_header">
                         <a href="index.html">
-                            <img alt="Logo" src="assets/media/logos/logo-dash.png" class="h-50px" />
+                            <img alt="Logo" src="https://gemswin.sgp1.digitaloceanspaces.com/logo-lagacuan.png"
+                                class="h-50px" />
                         </a>
                     </div>
                     <!--end::Header-->
