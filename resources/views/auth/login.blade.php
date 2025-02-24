@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="https://gemswin.sgp1.digitaloceanspaces.com/favicon.png">
 </head>
 
 <body>
     <x-guest-layout>
+        <h4 style="text-align: center; color: white; font-size: 20px;font-weight:bolder;margin-bottom:15px">Admin
+            RTP
+            Lagacuan</h4>
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
