@@ -121,7 +121,7 @@
                         KELUHAN</button></a>
             </div>
             <div class="col" style="padding: 0px;margin-left:2px">
-                <a href="{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/gameRules"><button
+                <a href="https://rebrand.ly/cara-bermain-lagacuan"><button
                         @if (request()->is('cara-bermain')) target="_blank" class="actives-mobile" @endif
                         class="button-15" role="button">
                         CARA BERMAIN</button></a>
@@ -132,13 +132,13 @@
     <div class="mb-1 text-center lagacuan-1">
         <div class="row align-items-center lagacuan-2">
             <div class="col" style="padding: 0px;">
-                <a href="https://{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/index?category=home"><button class="button-15"
-                        style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-right-to-bracket"></i>
+                <a href="https://rebrand.ly/lagacuan-k1"><button class="button-15" style="letter-spacing: 0.5px"
+                        role="button"> <i class="fa-solid fa-right-to-bracket"></i>
                         LOGIN</button></a>
             </div>
             <div class="col" style="padding: 0px 5px">
-                <a href="https://{{ env('DOMAIN_UTAMA_ACTIVE') }}/#/activity"><button class="button-16"
-                        style="letter-spacing: 0.5px" role="button"> <i class="fa-solid fa-hand-holding-dollar"></i>
+                <a href="https://rebrand.ly/promosi-lagacuan"><button class="button-16" style="letter-spacing: 0.5px"
+                        role="button"> <i class="fa-solid fa-hand-holding-dollar"></i>
                         PROMO</button></a>
             </div>
             <div class="col" style="padding: 0px">
@@ -295,7 +295,7 @@
                     <img class="logo-lagacuan" src="https://gemswin.sgp1.digitaloceanspaces.com/logo-lagacuan.png" alt="logo">
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="${domainUtama}/#/register" class="Btn" target="_blank"></a>
+                    <a href="https://rebrand.ly/register-k1" class="Btn" target="_blank"></a>
                 </div>
             </div>
             `;
