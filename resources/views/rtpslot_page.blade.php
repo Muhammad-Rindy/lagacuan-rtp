@@ -15,7 +15,8 @@
 
     .provider img {
         max-width: 90px;
-        height: 35px;
+        padding-bottom: 20px;
+        height: 64px;
     }
 
     .provider:hover {
